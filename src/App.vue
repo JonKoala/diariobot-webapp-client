@@ -5,13 +5,7 @@
 </template>
 
 <script>
-import getConfig from './common/appconfig'
-
-import Vue from 'vue'
-import axios from 'axios'
-import VueAxios from 'vue-axios'
-
-Vue.use(VueAxios, axios)
+import apiService from './common/api.service'
 
 export default {
   name: 'app',
@@ -21,12 +15,9 @@ export default {
     }
   },
   mounted() {
-    getConfig.then(config => {
-      Vue.axios.get(`${config['api']['url']}/publicacoes/rand`)
-        .then(response => {
-          this.msg = response.data.texto;
-        });
-    })
+    apiService.get('publicacoes/rand').then(publicaca => {
+      this.msg = publicaca.texto;
+    });
   }
 }
 </script>
