@@ -1,22 +1,24 @@
 <template>
   <div id="app">
-    <pre>{{msg}}</pre>
+      <publicacao-viewer v-bind:publicacao="publicacao"></publicacao-viewer>
   </div>
 </template>
 
 <script>
-import apiService from './common/api.service'
+import ApiService from './common/api.service'
+import PublicacaoViewer from './components/publicacaoViewer'
 
 export default {
   name: 'app',
+  components: {PublicacaoViewer},
   data () {
     return {
-      msg: ''
+      publicacao: {}
     }
   },
   mounted() {
-    apiService.get('publicacoes/rand').then(publicaca => {
-      this.msg = publicaca.texto;
+    ApiService.get('publicacoes/rand').then(publicacao => {
+      this.publicacao = publicacao;
     });
   }
 }
@@ -25,15 +27,5 @@ export default {
 <style>
 #app {
   margin: 10px;
-}
-
-pre {
-  margin: unset;
-
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: justify;
-  color: #2c3e50;
-  white-space: pre-wrap;
 }
 </style>
