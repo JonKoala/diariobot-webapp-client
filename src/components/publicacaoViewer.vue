@@ -9,9 +9,9 @@
         orgão: <span class="entry">{{publicacao.orgao}}</span>
         subórgão: <span class="entry">{{publicacao.suborgao}}</span>
       </p>
-      <p class="materia-line">{{publicacao.materia}}</p>
+      <p class="materia-line"><a v-bind:href="publicacaoLink" target="_blank">{{publicacao.materia}}</a></p>
     </div>
-    <div class="content-block" >
+    <div class="content-block">
       <div class="centered">
         <pre>{{publicacao.texto}}</pre>
       </div>
@@ -30,6 +30,9 @@ export default {
   computed: {
     dataString () {
       return moment(this.publicacao.data).format('DD/MM/YYYY');
+    },
+    publicacaoLink () {
+      return `http://ioes.dio.es.gov.br/apifront/portal/edicoes/publicacoes_ver_conteudo/${this.publicacao.identificador}`
     }
   }
 }
