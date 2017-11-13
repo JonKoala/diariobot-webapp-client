@@ -29,7 +29,7 @@ export default {
   },
   computed: {
     dataString () {
-      return moment(this.publicacao.data).format('DD/MM/YYYY');
+      return (this.publicacao.data) ? moment(this.publicacao.data).format('DD/MM/YYYY') : null;
     },
     publicacaoLink () {
       return `http://ioes.dio.es.gov.br/apifront/portal/edicoes/publicacoes_ver_conteudo/${this.publicacao.identificador}`
