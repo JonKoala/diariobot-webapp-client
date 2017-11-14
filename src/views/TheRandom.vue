@@ -4,7 +4,7 @@
 
 <script>
 import ApiService from '../common/api.service'
-import PublicacaoViewer from '../components/publicacaoViewer'
+import PublicacaoViewer from '../components/PublicacaoViewer'
 
 export default {
   name: 'TheRandom',
