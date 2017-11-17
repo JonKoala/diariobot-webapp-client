@@ -1,5 +1,4 @@
 <template>
-    <p>nada</p>
 </template>
 
 <script>
