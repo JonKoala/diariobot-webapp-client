@@ -23,7 +23,7 @@
 import moment from 'moment'
 
 export default {
-  name: 'PublicacaoViewer',
+  name: 'VPublicacaoViewer',
   props: {
     publicacao: { type: Object, required: true }
   },
