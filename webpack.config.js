@@ -1,6 +1,10 @@
 var path = require('path')
 var webpack = require('webpack')
 
+var yaml = require('js-yaml');
+var fs = require('fs');
+var appconfig = yaml.safeLoad(fs.readFileSync('appconfig.yml'));
+
 module.exports = {
   entry: './src/main.js',
   output: {
@@ -48,7 +52,8 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     noInfo: true,
-    overlay: true
+    overlay: true,
+	port: appconfig.server.port
   },
   performance: {
     hints: false
