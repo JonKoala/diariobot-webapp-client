@@ -4,4 +4,4 @@ dist/
 npm-debug.log
 yarn-error.log
 
-appconfig.yaml
+appconfig.yml

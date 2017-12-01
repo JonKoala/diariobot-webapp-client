@@ -7,9 +7,11 @@
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --port 8085 --open --hot",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
+    "start": "node app.js"
   },
   "dependencies": {
+    "express": "^4.15.2",
     "axios": "^0.17.0",
     "js-yaml": "^3.10.0",
     "moment": "^2.19.1",
