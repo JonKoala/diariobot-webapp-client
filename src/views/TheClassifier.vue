@@ -1,23 +1,21 @@
 <template>
   <div>
-    <div>
-      <v-publicacao-viewer v-bind:publicacao="publicacao"></v-publicacao-viewer>
-    </div>
-    <div class="buttons-area" >
-      <button class="button green" v-on:click="classify(true)">É TI</button>
-      <button class="button red" v-on:click="classify(false)">Não é TI</button>
-      <button class="button orange" v-on:click="classify(null)">Não sei</button>
-    </div>
+    <v-publicacao-viewer v-bind:publicacao="publicacao"></v-publicacao-viewer>
+    <v-publicacao-class-buttons-area v-on:classify="classify" ></v-publicacao-class-buttons-area>
   </div>
 </template>
 
 <script>
 import ApiService from '../common/api.service'
 import VPublicacaoViewer from '../components/VPublicacaoViewer'
+import VPublicacaoClassButtonsArea from '../components/VPublicacaoClassButtonsArea'
 
 export default {
   name: 'TheClassifier',
-  components: { VPublicacaoViewer },
+  components: {
+    VPublicacaoViewer,
+    VPublicacaoClassButtonsArea
+  },
   data () {
     return {
       publicacao: {}
@@ -29,8 +27,9 @@ export default {
     });
   },
   methods: {
-    classify(isTi) {
-      ApiService.post(`classificacoes`, { publicacao: this.publicacao, isTi: isTi })
+    classify(classe) {
+      console.log('hello!!')
+      ApiService.post(`classificacoes`, { publicacao: this.publicacao, classe: classe })
         .then(() => {
           //jump to next
           window.location.href = "/";
@@ -39,32 +38,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-  .buttons-area {
-    display: flex;
-    justify-content: center;
-    height: 200px
-  }
-
-  .buttons-area .button {
-    margin: 40px;
-    flex-grow: 1;
-  }
-
-  .button {
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 2vw;
-  }
-
-  .green { background-color: #4CAF50; }
-  .red { background-color: #F44336; }
-  .orange { background-color: #FF9800; }
-
-</style>
