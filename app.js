@@ -3,7 +3,7 @@ var app = express();
 
 var yaml = require('js-yaml');
 var fs = require('fs');
-var appconfig = yaml.safeLoad(fs.readFileSync('appconfig.yaml'));
+var appconfig = yaml.safeLoad(fs.readFileSync('appconfig.yml'));
 
 app.use(express.static(__dirname));
 
