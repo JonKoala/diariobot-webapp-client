@@ -1,23 +1,23 @@
 <template>
+  <div>
     <div>
       <v-publicacao-viewer v-bind:publicacao="publicacao"></v-publicacao-viewer>
-      <v-publicacao-button-big v-bind:text="'É TI'" v-on:click="classifyAsTi"></v-publicacao-button-big>
-      <v-publicacao-button-big v-bind:text="'Não é TI'" v-on:click="classifyAsNotTi"></v-publicacao-button-big>
-      <v-publicacao-button-big v-bind:text="'Não sei'" v-on:click="jumpToNext"></v-publicacao-button-big>
     </div>
+    <div class="buttons-area" >
+      <button class="button green" v-on:click="classify(true)">É TI</button>
+      <button class="button red" v-on:click="classify(false)">Não é TI</button>
+      <button class="button orange" v-on:click="classify(null)">Não sei</button>
+    </div>
+  </div>
 </template>
 
 <script>
 import ApiService from '../common/api.service'
 import VPublicacaoViewer from '../components/VPublicacaoViewer'
-import VPublicacaoButtonBig from '../components/VPublicacaoButtonBig'
 
 export default {
   name: 'TheClassifier',
-  components: {
-    VPublicacaoViewer,
-    VPublicacaoButtonBig
-  },
+  components: { VPublicacaoViewer },
   data () {
     return {
       publicacao: {}
@@ -29,17 +29,42 @@ export default {
     });
   },
   methods: {
-    classifyAsTi() {
-      console.log('é TI');
-      this.jumpToNext()
-    },
-    classifyAsNotTi() {
-      console.log('Não é TI');
-      this.jumpToNext()
-    },
-    jumpToNext() {
-      console.log('redireciona para proxima');
+    classify(isTi) {
+      ApiService.post(`classificacoes`, { publicacao: this.publicacao, isTi: isTi })
+        .then(() => {
+          //jump to next
+          window.location.href = "/";
+        });
     }
   }
 }
 </script>
+
+<style scoped>
+
+  .buttons-area {
+    display: flex;
+    justify-content: center;
+    height: 200px
+  }
+
+  .buttons-area .button {
+    margin: 40px;
+    flex-grow: 1;
+  }
+
+  .button {
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 2vw;
+  }
+
+  .green { background-color: #4CAF50; }
+  .red { background-color: #F44336; }
+  .orange { background-color: #FF9800; }
+
+</style>

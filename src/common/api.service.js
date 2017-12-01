@@ -14,13 +14,22 @@ export default {
   get(service) {
     service = formatUrl(service);
     return getConfig.then(config => {
-      return Vue.axios.get(`${config['api']['url']}/${service}`)
+      return Vue.axios.get(`${config['url']['api']}/${service}`)
         .then(response => {
           return response.data;
         })
         .catch(err => {
           throw new Error(`ApiService error: ${err}`);
         });
+    });
+  },
+  post(service, data) {
+    service = formatUrl(service);
+    return getConfig.then(config => {
+      return Vue.axios.post(`${config['url']['api']}/${service}`, data)
+        .then(() => {
+          console.log('ok');
+        })
     });
   }
 };
