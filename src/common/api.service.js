@@ -17,8 +17,7 @@ export default {
       return Vue.axios.get(`${config['url']['api']}/${service}`)
         .then(response => {
           return response.data;
-        })
-        .catch(err => {
+        }).catch(err => {
           throw new Error(`ApiService error: ${err}`);
         });
     });
@@ -26,10 +25,7 @@ export default {
   post(service, data) {
     service = formatUrl(service);
     return getConfig.then(config => {
-      return Vue.axios.post(`${config['url']['api']}/${service}`, data)
-        .then(() => {
-          console.log('ok');
-        })
+      return Vue.axios.post(`${config['url']['api']}/${service}`, data);
     });
   }
 };

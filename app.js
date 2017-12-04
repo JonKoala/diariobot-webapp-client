@@ -18,5 +18,5 @@ app.get('*', function(req, res) {
 
 var port = appconfig.server.port;
 app.listen(port, () => {
-  console.log('Client up! Listening on ' + port + '...')
+  console.log('Client up and running! Listening on ' + port + '...')
 })

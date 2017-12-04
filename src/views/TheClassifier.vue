@@ -28,7 +28,6 @@ export default {
   },
   methods: {
     classify(classe) {
-      console.log('hello!!')
       ApiService.post(`classificacoes`, { publicacao: this.publicacao, classe: classe })
         .then(() => {
           //jump to next
