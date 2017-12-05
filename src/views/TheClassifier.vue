@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-publicacao-viewer v-bind:publicacao="publicacao"></v-publicacao-viewer>
-    <v-publicacao-class-buttons-area v-on:classify="classify" ></v-publicacao-class-buttons-area>
+    <v-publicacao-class-buttons-area v-bind:entries="computedClasses" v-on:classify="classify" ></v-publicacao-class-buttons-area>
   </div>
 </template>
 
@@ -18,13 +18,29 @@ export default {
   },
   data () {
     return {
-      publicacao: {}
+      publicacao: {},
+      classes: [],
+
     }
   },
   mounted() {
     ApiService.get(`publicacoes/${this.$route.params.id}`).then(publicacao => {
       this.publicacao = publicacao;
     });
+    ApiService.get(`classes`).then(classes => {
+      this.classes = classes;
+    });
+  },
+  computed: {
+    computedClasses() {
+
+      var compClasses = this.classes.map(classe => {
+        return {identity: classe.id, text: classe.nome};
+      });
+      compClasses.push({identity: null, text: 'NÃO SEI'});
+
+      return compClasses;
+    }
   },
   methods: {
     classify(classe) {
