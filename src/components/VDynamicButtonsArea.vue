@@ -1,6 +1,6 @@
 <template>
   <div class="buttons-area" >
-    <button v-for="(entry, index) in entries" :class="colors[index]" v-on:click="classify(entry.identity)" >{{entry.text}}</button>
+    <button v-for="(entry, index) in entries" :class="colors[index]" v-on:click="buttonClicked(entry.identity)" >{{entry.text}}</button>
   </div>
 </template>
 
@@ -8,7 +8,7 @@
 import ApiService from '../common/api.service'
 
 export default {
-  name: 'VPublicacaoClassButtonsArea',
+  name: 'VDynamicButtonsArea',
   data() {
     return {
       colors: [
@@ -21,8 +21,8 @@ export default {
     entries: { type: Array, required: true }
   },
   methods: {
-    classify(classe) {
-      this.$emit('classify', classe);
+    buttonClicked(classe) {
+      this.$emit('click', classe);
     }
   }
 }
@@ -30,7 +30,7 @@ export default {
 
 <style scoped>
 
-  /* source: https://www.fourkitchens.com/blog/article/responsive-multi-column-lists-flexbox/ */
+  /* source for the dynamic positioning behaviour: https://www.fourkitchens.com/blog/article/responsive-multi-column-lists-flexbox/ */
 
   .buttons-area {
     display: flex;
