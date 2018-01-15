@@ -1,22 +1,22 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import TheRandom from '../views/TheRandom'
-import TheClassifier from '../views/TheClassifier'
+import ViewCrowdsourcerRandom from '../views/ViewCrowdsourcerRandom'
+import ViewCrowdsourcer from '../views/ViewCrowdsourcer'
 
 Vue.use(VueRouter)
 
 export default new VueRouter({
   routes: [
     {
-      name: 'random',
-      path: '/',
-      component: TheRandom
+      name: 'crowdsourcerRandom',
+      path: '/crowdsourcer',
+      component: ViewCrowdsourcerRandom
     },
     {
-      name: 'classifier',
-      path: '/:id',
-      component: TheClassifier,
+      name: 'crowdsourcer',
+      path: '/crowdsourcer/:id',
+      component: ViewCrowdsourcer
     }
   ],
   mode: 'history'

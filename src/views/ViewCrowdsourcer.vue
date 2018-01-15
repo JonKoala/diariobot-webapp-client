@@ -11,7 +11,7 @@ import VPublicacaoViewer from '../components/VPublicacaoViewer'
 import VDynamicButtonsArea from '../components/VDynamicButtonsArea'
 
 export default {
-  name: 'TheClassifier',
+  name: 'ViewCrowdsourcer',
   components: {
     VPublicacaoViewer,
     VDynamicButtonsArea
@@ -20,7 +20,7 @@ export default {
     return {
       publicacao: {},
       classes: []
-    }
+    };
   },
   mounted() {
     ApiService.get(`publicacoes/${this.$route.params.id}`).then(publicacao => {
@@ -50,7 +50,7 @@ export default {
         .then(() => {
 
           //jump to next publicacao
-          window.location.href = "/";
+          window.location.href = "/crowdsourcer";
         });
     }
   }

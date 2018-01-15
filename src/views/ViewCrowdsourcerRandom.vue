@@ -5,10 +5,10 @@
 import ApiService from '../common/api.service'
 
 export default {
-  name: 'TheRandom',
+  name: 'ViewCrowdsourcerRandom',
   mounted() {
     ApiService.get('publicacoes/rand').then(publicacao => {
-      this.$router.replace({name: 'classifier', params: {id: publicacao.id}});
+      this.$router.replace({name: 'crowdsourcer', params: {id: publicacao.id}});
     });
   }
 }
