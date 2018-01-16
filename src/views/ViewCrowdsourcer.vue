@@ -27,7 +27,7 @@ export default {
       this.publicacao = publicacao;
     });
     ApiService.get(`classes`).then(classes => {
-      this.classes = classes;
+      this.classes = classes.sort((a, b) => { return a.ordem - b.ordem });
     });
   },
   computed: {

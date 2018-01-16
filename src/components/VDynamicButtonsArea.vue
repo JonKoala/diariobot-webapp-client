@@ -1,20 +1,18 @@
 <template>
   <div class="buttons-area" >
-    <button v-for="(entry, index) in entries" :class="colors[index]" v-on:click="buttonClicked(entry.identity)" >{{entry.text}}</button>
+    <button v-for="(entry, index) in entries" v-bind:style="{backgroundColor: colors[index]}" v-on:click="buttonClicked(entry.identity)" >{{entry.text}}</button>
   </div>
 </template>
 
 <script>
 import ApiService from '../common/api.service'
+import ColorScheme from '../common/color.scheme'
 
 export default {
   name: 'VDynamicButtonsArea',
   data() {
     return {
-      colors: [
-        'green', 'orange', 'purple', 'red', 'brown', 'teal',
-        'blue', 'gray', 'lime', 'indigo', 'white', 'ember'
-      ]
+      colors: ColorScheme.classes
     };
   },
   props: {
@@ -88,19 +86,6 @@ export default {
       min-width: calc(14.28571% - 10px);
     }
   }
-
-  .green { background-color: #4CAF50; }
-  .orange { background-color: #FF9800; }
-  .purple { background-color: #9C27B0; }
-  .red { background-color: #F44336; }
-  .brown { background-color: #795548; }
-  .teal { background-color: #009688; }
-  .blue { background-color: #2196F3; }
-  .gray { background-color: #424242; }
-  .lime { background-color: #827717; }
-  .indigo { background-color: #3f51b5; }
-  .white { background-color: #ffffff; color: black; border-width: thin; border-style: solid; }
-  .ember { background-color: #ff6f00; }
 
   button:active {
     border-width: medium;

@@ -9,21 +9,19 @@
 
 <script>
 import ApiService from '../common/api.service'
+import ColorScheme from '../common/color.scheme'
 
 export default {
   name: 'ViewKeywords',
   data() {
     return {
       classes: [],
-      colors: [
-        '#4CAF50', '#FF9800', '#9C27B0', '#F44336', '#795548', '#009688',
-        '#2196F3', '#424242', '#827717', '#3f51b5'
-      ]
+      colors: ColorScheme.classes
     };
   },
   mounted() {
     ApiService.get(`classes/keywords`).then(classes => {
-      this.classes = classes.filter(classe => classe.keywords.length > 0)
+      this.classes = classes.filter(classe => classe.keywords.length > 0).sort((a, b) => { return a.ordem - b.ordem });
     });
   },
 }

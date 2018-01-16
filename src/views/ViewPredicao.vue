@@ -1,14 +1,16 @@
 <template>
   <div>
     <v-publicacao-viewer v-if="isReady" v-bind:publicacao="publicacao"></v-publicacao-viewer>
-    <p v-if="isReady">
-      classe: <span>{{publicacao.predicao.classe.nome}}</span>
-    </p>
+    <span v-if="isReady" v-bind:style="{backgroundColor: colors[publicacao.predicao.classe.ordem]}">
+      {{publicacao.predicao.classe.nome}}
+    </span>
   </div>
 </template>
 
 <script>
 import ApiService from '../common/api.service'
+import ColorScheme from '../common/color.scheme'
+
 import VPublicacaoViewer from '../components/VPublicacaoViewer'
 
 export default {
@@ -18,6 +20,7 @@ export default {
   },
   data () {
     return {
+      colors: ColorScheme.classes,
       publicacao: null
     };
   },
@@ -42,19 +45,14 @@ export default {
 
 <style scoped>
 
-  p {
+  span {
+    display: inline-block;
+    padding: 15px;
+    margin-top: 40px;
+
     font-family: 'Roboto', 'Noto', sans-serif;
     text-transform: uppercase;
-    color: #757575;
-    line-height: 20px;
-
-    margin-top: 40px;
-  }
-
-  span {
-    font-weight: bold;
-    text-decoration: underline;
-    margin-right: 20px
+    color: white;
   }
 
 </style>
