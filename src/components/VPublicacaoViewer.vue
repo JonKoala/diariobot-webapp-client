@@ -13,7 +13,7 @@
     </div>
     <div class="content-block">
       <div class="centered">
-        <pre>{{publicacao.corpo}}</pre>
+        <pre v-html="publicacao.corpo"></pre>
       </div>
     </div>
   </div>

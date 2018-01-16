@@ -2,7 +2,7 @@
   <div id="container">
     <div class="classe" v-for="(classe, index) in classes">
       <p class="classe-header" v-bind:style="{backgroundColor: colors[index]}">{{ classe.nome }}</p>
-      <p v-bind:style="{color: colors[index]}" v-for="keyword in classe.keywords">{{ keyword.palavra }}</p>
+      <p class="classe-keyword" v-bind:style="{color: colors[index]}" v-for="keyword in classe.keywords">{{ keyword.palavra }}</p>
     </div>
   </div>
 </template>
@@ -41,16 +41,21 @@ export default {
     display: flex;
   	flex-wrap: wrap;
     flex-direction: column;
-
-    margin: 2px;
+    flex-grow: 1;
+    margin: 0px 2px;
   }
 
   .classe-header {
     padding: 10px 0px 10px;
 
     text-align: center;
-    font-size: 15px;
     color: white;
+  }
+
+  .classe-keyword {
+    padding-left: 5px;
+    border-bottom-style: solid;
+    border-bottom-width: thin;
   }
 
 </style>
