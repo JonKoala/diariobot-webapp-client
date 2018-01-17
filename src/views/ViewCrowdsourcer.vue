@@ -46,7 +46,7 @@ export default {
     classClicked(classe) {
 
       //post new classificacao
-      ApiService.post(`classificacoes`, { publicacao: this.publicacao, classe: classe })
+      ApiService.post(`classificacoes`, { publicacao: this.publicacao.id, classe: classe })
         .then(() => {
 
           //jump to next publicacao
