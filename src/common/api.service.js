@@ -11,10 +11,10 @@ function formatUrl(url) {
 }
 
 export default {
-  get(service) {
+  get(service, config) {
     service = formatUrl(service);
-    return getConfig.then(config => {
-      return Vue.axios.get(`${config['url']['api']}/${service}`)
+    return getConfig.then(appconfig => {
+      return Vue.axios.get(`${appconfig['url']['api']}/${service}`, config)
         .then(response => {
           return response.data;
         }).catch(err => {
@@ -24,8 +24,8 @@ export default {
   },
   post(service, data) {
     service = formatUrl(service);
-    return getConfig.then(config => {
-      return Vue.axios.post(`${config['url']['api']}/${service}`, data);
+    return getConfig.then(appconfig => {
+      return Vue.axios.post(`${appconfig['url']['api']}/${service}`, data);
     });
   }
 };
