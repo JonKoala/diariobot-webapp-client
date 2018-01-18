@@ -1,16 +1,7 @@
 <template>
   <div>
-    <div class="header-block" >
-      <p>
-        tipo: <span class="entry">{{publicacao.tipo}}</span>
-        data: <span class="entry">{{dataString}}</span>
-      </p>
-      <p>
-        orgão: <span class="entry">{{publicacao.orgao}}</span>
-        subórgão: <span class="entry">{{publicacao.suborgao}}</span>
-      </p>
-      <p class="materia-line"><a v-bind:href="publicacaoLink" target="_blank">{{publicacao.materia}}</a></p>
-    </div>
+    <v-publicacao-viewer-header v-bind:publicacao="publicacao"></v-publicacao-viewer-header>
+    <p class="materia-line"><a v-bind:href="publicacaoLink" target="_blank">{{publicacao.materia}}</a></p>
     <div class="content-block">
       <div class="centered">
         <pre v-html="publicacao.corpo"></pre>
@@ -22,15 +13,17 @@
 <script>
 import moment from 'moment'
 
+import VPublicacaoViewerHeader from './VPublicacaoViewerHeader'
+
 export default {
   name: 'VPublicacaoViewer',
+  components: {
+    VPublicacaoViewerHeader
+  },
   props: {
     publicacao: { type: Object, required: true }
   },
   computed: {
-    dataString () {
-      return (this.publicacao.data) ? moment(this.publicacao.data).format('DD/MM/YYYY') : null;
-    },
     publicacaoLink () {
       return `http://ioes.dio.es.gov.br/apifront/portal/edicoes/publicacoes_ver_conteudo/${this.publicacao.identificador}`
     }
@@ -52,25 +45,14 @@ pre {
   white-space: pre-wrap;
 }
 
-.header-block {
-  font-family: 'Roboto', 'Noto', sans-serif;
-  text-transform: uppercase;
-  color: #757575;
-  line-height: 20px;
-}
-
-.entry {
-  font-weight: bold;
-  text-decoration: underline;
-  margin-right: 20px
-}
-
 .materia-line {
-  margin-top: 40px;
+  margin-top: 30px;
   margin-bottom: 0px;
 
+  font-family: 'Roboto', 'Noto', sans-serif;
   font-weight: bold;
-  color: #455a64;
+  text-transform: uppercase;
+  line-height: 20px;
 }
 
 .content-block {
