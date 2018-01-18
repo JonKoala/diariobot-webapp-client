@@ -5,6 +5,7 @@ import ViewCrowdsourcerRandom from '../views/ViewCrowdsourcerRandom'
 import ViewCrowdsourcer from '../views/ViewCrowdsourcer'
 import ViewKeywords from '../views/ViewKeywords'
 import ViewPredicao from '../views/ViewPredicao'
+import ViewBusca from '../views/ViewBusca'
 
 Vue.use(VueRouter)
 
@@ -29,6 +30,11 @@ export default new VueRouter({
       name: 'predicao',
       path: '/predicao/:id',
       component: ViewPredicao
+    },
+    {
+      name: 'busca',
+      path: '/busca',
+      component: ViewBusca
     }
   ],
   mode: 'history'
