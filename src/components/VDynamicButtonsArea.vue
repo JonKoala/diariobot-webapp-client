@@ -1,7 +1,11 @@
 <template>
-  <div class="buttons-area" >
-    <button v-for="(entry, index) in entries" v-bind:style="{backgroundColor: colors[index]}" v-on:click="buttonClicked(entry.identity)" >{{entry.text}}</button>
-  </div>
+  <v-container fluid grid-list-md>
+    <v-layout row wrap>
+      <v-flex xs2 v-for="(entry, index) in entries" v-bind:key="entry.identity" >
+        <v-btn block v-on:click="buttonClicked(entry.identity)" class="button" v-bind:style="{backgroundColor: colors[index]}" >{{ entry.text }}</v-btn>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
@@ -19,8 +23,8 @@ export default {
     entries: { type: Array, required: true }
   },
   methods: {
-    buttonClicked(classe) {
-      this.$emit('click', classe);
+    buttonClicked(entity) {
+      this.$emit('click', entity);
     }
   }
 }
@@ -28,68 +32,13 @@ export default {
 
 <style scoped>
 
-  /* source for the dynamic positioning behaviour: https://www.fourkitchens.com/blog/article/responsive-multi-column-lists-flexbox/ */
-
-  .buttons-area {
-    display: flex;
-  	flex-wrap: wrap;
-    margin-left: -10px;
-  }
-
-  button {
-    /* positioning */
-    flex: 1 0 300px;
-    box-sizing: border-box;
-    margin-left: 10px;
-
-    /* styling */
-    margin-top: 10px;
+  .button {
     height: 80px;
-    outline: none;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 15px;
   }
 
-  @media (min-width: 410px) {
-    button {
-      max-width: calc(50% - 10px);
-    }
-  }
-  @media (min-width: 620px) {
-    button {
-      max-width: calc(33.33333% - 10px);
-    }
-  }
-  @media (min-width: 830px) {
-    button {
-      max-width: calc(25% - 10px);
-    }
-  }
-  @media (min-width: 1040px) {
-    button {
-      max-width: calc(20% - 10px);
-    }
-  }
-  @media (min-width: 1250px) {
-    button {
-      max-width: calc(16.66667% - 10px);
-    }
-  }
-  @media (min-width: 1460px) {
-    button {
-      min-width: calc(14.28571% - 10px);
-    }
-  }
-
-  button:active {
-    border-width: medium;
-    border-style: solid;
+  .button >>> .btn__content {
+    width: fit-content;
+    white-space: normal;
   }
 
 </style>

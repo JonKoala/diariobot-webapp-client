@@ -23,12 +23,39 @@ export default {
     };
   },
   mounted() {
-    ApiService.get(`publicacoes/${this.$route.params.id}`).then(publicacao => {
-      this.publicacao = publicacao;
-    });
     ApiService.get(`classes`).then(classes => {
       this.classes = classes.sort((a, b) => { return a.ordem - b.ordem });
     });
+
+    this.managePublicacao();
+  },
+  methods: {
+    managePublicacao () {
+      if (this.$route.params.id)
+        this.getPublicacao();
+      else
+        this.getRandomPublicacao();
+    },
+    getPublicacao () {
+      ApiService.get(`publicacoes/${this.$route.params.id}`).then(publicacao => {
+        this.publicacao = publicacao;
+      });
+    },
+    getRandomPublicacao (isFirst) {
+      ApiService.get('publicacoes/rand').then(publicacao => {
+        if (this.$route.params.id)
+          this.$router.push({name: 'crowdsourcer', params: {id: publicacao.id}});
+        else
+          this.$router.replace({name: 'crowdsourcer', params: {id: publicacao.id}});
+      });
+    },
+
+    classClicked(classe) {
+      ApiService.post(`classificacoes`, { publicacao: this.publicacao.id, classe: classe }).then(this.getRandomPublicacao);
+    }
+  },
+  watch: {
+    '$route': 'managePublicacao'
   },
   computed: {
     computedClasses() {
@@ -40,18 +67,6 @@ export default {
       compClasses.push({identity: null, text: 'NÃO SEI'});
 
       return compClasses;
-    }
-  },
-  methods: {
-    classClicked(classe) {
-
-      //post new classificacao
-      ApiService.post(`classificacoes`, { publicacao: this.publicacao.id, classe: classe })
-        .then(() => {
-
-          //jump to next publicacao
-          window.location.href = "/crowdsourcer";
-        });
     }
   }
 }

@@ -1,13 +1,20 @@
 <template>
-  <div>
-    <v-publicacao-viewer-header v-bind:publicacao="publicacao"></v-publicacao-viewer-header>
-    <p class="materia-line"><a v-bind:href="publicacaoLink" target="_blank">{{publicacao.materia}}</a></p>
-    <div class="content-block">
-      <div class="centered">
-        <pre v-html="publicacao.corpo"></pre>
-      </div>
-    </div>
-  </div>
+  <v-container fluid grid-list-md>
+    <v-layout row wrap>
+      <v-flex xs6>
+        <v-card class="pa-1" color="white">
+          <v-publicacao-viewer-header v-bind:publicacao="publicacao"></v-publicacao-viewer-header>
+        </v-card>
+      </v-flex>
+      <v-flex xs12>
+        <div class="content-block white blue-grey--text text--darken-3">
+          <div class="centered">
+            <pre v-html="publicacao.corpo"></pre>
+          </div>
+        </div>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
@@ -22,11 +29,6 @@ export default {
   },
   props: {
     publicacao: { type: Object, required: true }
-  },
-  computed: {
-    publicacaoLink () {
-      return `http://ioes.dio.es.gov.br/apifront/portal/edicoes/publicacoes_ver_conteudo/${this.publicacao.identificador}`
-    }
   }
 }
 </script>
@@ -40,19 +42,8 @@ pre {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: justify;
-  color: #455a64;
   line-height: 18px;
   white-space: pre-wrap;
-}
-
-.materia-line {
-  margin-top: 30px;
-  margin-bottom: 0px;
-
-  font-family: 'Roboto', 'Noto', sans-serif;
-  font-weight: bold;
-  text-transform: uppercase;
-  line-height: 20px;
 }
 
 .content-block {
@@ -60,8 +51,7 @@ pre {
   width: 100%;
   overflow: auto;
 
-  border-radius: 10px;
-  background-color: #eff0f1;
+  border-radius: 2px;
 }
 
 .content-block:before {
