@@ -1,5 +1,5 @@
 <template>
-  <v-app id="app" dark>
+  <v-app id="app" light>
     <v-toolbar app fixed clipped-left>
       <v-toolbar-side-icon></v-toolbar-side-icon>
       <v-toolbar-title>DIOES</v-toolbar-title>

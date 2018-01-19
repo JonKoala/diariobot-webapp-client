@@ -7,11 +7,7 @@
       <v-flex xs12>
         <span>tipo: <span class="content-text">{{publicacao.tipo}}</span></span>
         <span>data: <span class="content-text">{{dataString}}</span></span>
-      </v-flex>
-      <v-flex xs12>
         <span>orgão: <span class="content-text">{{publicacao.orgao}}</span></span>
-      </v-flex>
-      <v-flex xs12>
         <span>subórgão: <span class="content-text">{{publicacao.suborgao}}</span></span>
       </v-flex>
     </v-layout>
@@ -39,19 +35,23 @@ export default {
 
 <style scoped>
 
-a {
-  font-weight: bold;
-}
+  a {
+    font-weight: bold;
+  }
 
-.container {
-  font-family: 'Roboto', 'Noto', sans-serif;
-  text-transform: uppercase;
-}
+  span {
+    white-space:nowrap;
+  }
 
-.content-text {
-  font-weight: bold;
-  text-decoration: underline;
-  margin-right: 20px
-}
+  .container {
+    font-family: 'Roboto', 'Noto', sans-serif;
+    text-transform: uppercase;
+  }
+
+  .content-text {
+    font-weight: bold;
+    text-decoration: underline;
+    margin-right: 20px
+  }
 
 </style>

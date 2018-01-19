@@ -1,17 +1,25 @@
 <template>
   <v-container fluid grid-list-md>
     <v-layout row wrap>
-      <v-flex xs6>
+      <v-flex xs12>
+        <v-toolbar color="pink" height="48px" card>
+          <v-toolbar-title class="white--text">[SUGESTÃO DE TEXTO]</v-toolbar-title>
+        </v-toolbar>
         <v-card class="pa-1" color="white">
           <v-publicacao-viewer-header v-bind:publicacao="publicacao"></v-publicacao-viewer-header>
         </v-card>
       </v-flex>
       <v-flex xs12>
-        <div class="content-block white blue-grey--text text--darken-3">
-          <div class="centered">
-            <pre v-html="publicacao.corpo"></pre>
+        <v-card>
+          <v-toolbar color="pink" height="48px" card>
+            <v-toolbar-title class="white--text">[SUGESTÃO DE TEXTO]</v-toolbar-title>
+          </v-toolbar>
+          <div class="content-block white blue-grey--text text--darken-3">
+            <div class="centered">
+              <pre v-html="publicacao.corpo"></pre>
+            </div>
           </div>
-        </div>
+        </v-card>
       </v-flex>
     </v-layout>
   </v-container>
@@ -35,36 +43,36 @@ export default {
 
 <style scoped>
 
-pre {
-  margin: unset;
-  padding: 10px;
+  pre {
+    margin: unset;
+    padding: 10px;
 
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: justify;
-  line-height: 18px;
-  white-space: pre-wrap;
-}
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: justify;
+    line-height: 18px;
+    white-space: pre-wrap;
+  }
 
-.content-block {
-  height: 300px;
-  width: 100%;
-  overflow: auto;
+  .content-block {
+    height: 300px;
+    width: 100%;
+    overflow: auto;
 
-  border-radius: 2px;
-}
+    border-radius: 2px;
+  }
 
-.content-block:before {
-  content: '';
+  .content-block:before {
+    content: '';
 
-  height: 100%;
-  display: inline-block;
-  vertical-align: middle;
-}
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+  }
 
-.centered {
-  display: inline-block;
-  vertical-align: middle;
-}
+  .centered {
+    display: inline-block;
+    vertical-align: middle;
+  }
 
 </style>
