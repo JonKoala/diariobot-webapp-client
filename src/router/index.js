@@ -5,7 +5,7 @@ import Home from '../views/Home'
 import Crowdsourcer from '../views/Crowdsourcer'
 import Keywords from '../views/Keywords'
 import Predicao from '../views/Predicao'
-import ViewBusca from '../views/ViewBusca'
+import Busca from '../views/Busca'
 
 Vue.use(VueRouter)
 
@@ -39,7 +39,7 @@ export default new VueRouter({
     {
       name: 'busca',
       path: '/busca',
-      component: ViewBusca
+      component: Busca
     }
   ],
   mode: 'history'

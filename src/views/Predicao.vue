@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <v-publicacao-viewer v-if="isReady" v-bind:publicacao="publicacao"></v-publicacao-viewer>
+  <div v-if="isReady">
+    <v-publicacao-viewer v-bind:publicacao="publicacao"></v-publicacao-viewer>
     <v-flex xs2 class="ml-2">
       <v-card class="pa-1" v-bind:style="{backgroundColor: colors[publicacao.predicao.classe.ordem]}" style="height:80px">
         <v-card-text class="white--text card-text">{{ publicacao.predicao.classe.nome }}</v-card-text>
