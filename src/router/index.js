@@ -4,7 +4,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home'
 import Crowdsourcer from '../views/Crowdsourcer'
 import Keywords from '../views/Keywords'
-import ViewPredicao from '../views/ViewPredicao'
+import Predicao from '../views/Predicao'
 import ViewBusca from '../views/ViewBusca'
 
 Vue.use(VueRouter)
@@ -34,7 +34,7 @@ export default new VueRouter({
     {
       name: 'predicao',
       path: '/predicao/:id',
-      component: ViewPredicao
+      component: Predicao
     },
     {
       name: 'busca',

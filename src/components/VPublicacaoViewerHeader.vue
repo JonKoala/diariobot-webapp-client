@@ -2,13 +2,10 @@
   <v-container class="container" fluid grid-list>
     <v-layout row wrap class="grey--text text--darken-2">
       <v-flex xs12>
-        <a v-bind:href="publicacaoLink" target="_blank">{{publicacao.materia}}</a>
-      </v-flex>
-      <v-flex xs12>
-        <span>tipo: <span class="content-text">{{publicacao.tipo}}</span></span>
-        <span>data: <span class="content-text">{{dataString}}</span></span>
-        <span>orgão: <span class="content-text">{{publicacao.orgao}}</span></span>
-        <span>subórgão: <span class="content-text">{{publicacao.suborgao}}</span></span>
+        <span>tipo: <span class="content">{{publicacao.tipo}}</span></span>
+        <span class="ml-3">data: <span class="content">{{dataString}}</span></span>
+        <span class="ml-3">orgão: <span class="content">{{publicacao.orgao}}</span></span>
+        <span class="ml-3">subórgão: <span class="content">{{publicacao.suborgao}}</span></span>
       </v-flex>
     </v-layout>
   </v-container>
@@ -25,19 +22,12 @@ export default {
   computed: {
     dataString () {
       return (this.publicacao.data) ? moment(this.publicacao.data).format('DD/MM/YYYY') : null;
-    },
-    publicacaoLink () {
-      return `http://ioes.dio.es.gov.br/apifront/portal/edicoes/publicacoes_ver_conteudo/${this.publicacao.identificador}`
     }
   }
 }
 </script>
 
 <style scoped>
-
-  a {
-    font-weight: bold;
-  }
 
   span {
     white-space:nowrap;
@@ -48,10 +38,9 @@ export default {
     text-transform: uppercase;
   }
 
-  .content-text {
+  .content {
     font-weight: bold;
     text-decoration: underline;
-    margin-right: 20px
   }
 
 </style>

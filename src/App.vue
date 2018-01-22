@@ -7,7 +7,7 @@
     <the-navigation-bar></the-navigation-bar>
     <v-content>
       <v-container fluid fill-height>
-        <v-layout justify-center align-center>
+        <v-layout justify-center align-start>
           <v-fade-transition mode="out-in">
             <router-view></router-view>
           </v-fade-transition>

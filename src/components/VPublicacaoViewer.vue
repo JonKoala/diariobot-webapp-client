@@ -3,7 +3,9 @@
     <v-layout row wrap>
       <v-flex xs12>
         <v-toolbar color="pink" height="48px" card>
-          <v-toolbar-title class="white--text">[SUGESTÃO DE TEXTO]</v-toolbar-title>
+          <v-toolbar-title class="white--text">
+            <v-btn icon v-bind:href="publicacaoLink" target="_blank" @click="" class="mt-1"><v-icon color="white">link</v-icon></v-btn>{{ publicacao.materia }}
+          </v-toolbar-title>
         </v-toolbar>
         <v-card class="pa-1" color="white">
           <v-publicacao-viewer-header v-bind:publicacao="publicacao"></v-publicacao-viewer-header>
@@ -12,7 +14,7 @@
       <v-flex xs12>
         <v-card>
           <v-toolbar color="pink" height="48px" card>
-            <v-toolbar-title class="white--text">[SUGESTÃO DE TEXTO]</v-toolbar-title>
+            <v-toolbar-title class="white--text">CORPO DA PUBLICAÇÃO</v-toolbar-title>
           </v-toolbar>
           <div class="content-block white blue-grey--text text--darken-3">
             <div class="centered">
@@ -37,6 +39,11 @@ export default {
   },
   props: {
     publicacao: { type: Object, required: true }
+  },
+  computed: {
+    publicacaoLink () {
+      return `http://ioes.dio.es.gov.br/apifront/portal/edicoes/publicacoes_ver_conteudo/${this.publicacao.identificador}`
+    }
   }
 }
 </script>

@@ -37,29 +37,7 @@
 
 <style scoped>
 
-  #container {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-  }
-
-  .classe {
-    width: 23vw;
-    display: flex;
-  	flex-wrap: wrap;
-    flex-direction: column;
-    flex-grow: 1;
-    margin: 0px 2px;
-  }
-
-  .classe-header {
-    padding: 10px 0px 10px;
-
-    text-align: center;
-    color: white;
-  }
-
-  .classe-keyword {
+  p {
     padding-left: 5px;
     border-bottom-style: solid;
     border-bottom-width: thin;

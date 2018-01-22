@@ -1,9 +1,11 @@
 <template>
   <div>
     <v-publicacao-viewer v-if="isReady" v-bind:publicacao="publicacao"></v-publicacao-viewer>
-    <span v-if="isReady" v-bind:style="{backgroundColor: colors[publicacao.predicao.classe.ordem]}">
-      {{publicacao.predicao.classe.nome}}
-    </span>
+    <v-flex xs2 class="ml-2">
+      <v-card class="pa-1" v-bind:style="{backgroundColor: colors[publicacao.predicao.classe.ordem]}" style="height:80px">
+        <v-card-text class="white--text card-text">{{ publicacao.predicao.classe.nome }}</v-card-text>
+      </v-card>
+    </v-flex>
   </div>
 </template>
 
@@ -14,7 +16,7 @@ import ColorScheme from '../common/color.scheme'
 import VPublicacaoViewer from '../components/VPublicacaoViewer'
 
 export default {
-  name: 'ViewPredicao',
+  name: 'Predicao',
   components: {
     VPublicacaoViewer
   },
@@ -45,14 +47,10 @@ export default {
 
 <style scoped>
 
-  span {
-    display: inline-block;
-    padding: 15px;
-    margin-top: 40px;
-
-    font-family: 'Roboto', 'Noto', sans-serif;
+  .card-text {
+    text-align: center;
     text-transform: uppercase;
-    color: white;
+    font-weight: 500;
   }
 
 </style>
