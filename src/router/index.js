@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import Home from '../views/Home'
-import ViewCrowdsourcer from '../views/ViewCrowdsourcer'
+import Crowdsourcer from '../views/Crowdsourcer'
 import ViewKeywords from '../views/ViewKeywords'
 import ViewPredicao from '../views/ViewPredicao'
 import ViewBusca from '../views/ViewBusca'
@@ -19,12 +19,12 @@ export default new VueRouter({
     {
       name: 'crowdsourcerRandom',
       path: '/crowdsourcer',
-      component: ViewCrowdsourcer
+      component: Crowdsourcer
     },
     {
       name: 'crowdsourcer',
       path: '/crowdsourcer/:id',
-      component: ViewCrowdsourcer
+      component: Crowdsourcer
     },
     {
       name: 'keywords',

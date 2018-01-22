@@ -11,7 +11,7 @@ import VPublicacaoViewer from '../components/VPublicacaoViewer'
 import VDynamicButtonsArea from '../components/VDynamicButtonsArea'
 
 export default {
-  name: 'ViewCrowdsourcer',
+  name: 'Crowdsourcer',
   components: {
     VPublicacaoViewer,
     VDynamicButtonsArea
