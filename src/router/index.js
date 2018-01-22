@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 
 import Home from '../views/Home'
 import Crowdsourcer from '../views/Crowdsourcer'
-import ViewKeywords from '../views/ViewKeywords'
+import Keywords from '../views/Keywords'
 import ViewPredicao from '../views/ViewPredicao'
 import ViewBusca from '../views/ViewBusca'
 
@@ -29,7 +29,7 @@ export default new VueRouter({
     {
       name: 'keywords',
       path: '/keywords',
-      component: ViewKeywords
+      component: Keywords
     },
     {
       name: 'predicao',
