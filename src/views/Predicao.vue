@@ -28,12 +28,6 @@ export default {
   },
   mounted() {
     ApiService.get(`predicoes/${this.$route.params.id}`).then(publicacao => {
-
-      // highlighting monetary values
-      publicacao.corpo = publicacao.corpo.replace(/(?:[1-9]\d{0,2}(?:\.\d{3})*|0),\d{2}/g, function(match) {
-        return '<b style="color:black;text-decoration:underline;">' + match + '</b>'
-      });
-
       this.publicacao = publicacao;
     });
   },

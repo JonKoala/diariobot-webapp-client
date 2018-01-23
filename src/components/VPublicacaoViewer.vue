@@ -16,11 +16,7 @@
           <v-toolbar color="pink" height="48px" card>
             <v-toolbar-title class="white--text">CORPO DA PUBLICAÇÃO</v-toolbar-title>
           </v-toolbar>
-          <div class="content-block white blue-grey--text text--darken-3">
-            <div class="centered">
-              <pre v-html="publicacao.corpo"></pre>
-            </div>
-          </div>
+          <v-publicacao-viewer-body v-bind:publicacao="publicacao.corpo"></v-publicacao-viewer-body>
         </v-card>
       </v-flex>
     </v-layout>
@@ -31,11 +27,13 @@
 import moment from 'moment'
 
 import VPublicacaoViewerHeader from './VPublicacaoViewerHeader'
+import VPublicacaoViewerBody from './VPublicacaoViewerBody'
 
 export default {
   name: 'VPublicacaoViewer',
   components: {
-    VPublicacaoViewerHeader
+    VPublicacaoViewerHeader,
+    VPublicacaoViewerBody
   },
   props: {
     publicacao: { type: Object, required: true }
@@ -47,39 +45,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-  pre {
-    margin: unset;
-    padding: 10px;
-
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: justify;
-    line-height: 18px;
-    white-space: pre-wrap;
-  }
-
-  .content-block {
-    height: 300px;
-    width: 100%;
-    overflow: auto;
-
-    border-radius: 2px;
-  }
-
-  .content-block:before {
-    content: '';
-
-    height: 100%;
-    display: inline-block;
-    vertical-align: middle;
-  }
-
-  .centered {
-    display: inline-block;
-    vertical-align: middle;
-  }
-
-</style>
