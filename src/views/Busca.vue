@@ -9,6 +9,7 @@
             <td class="text-xs-right">{{ props.item.categoria }}</td>
             <td class="text-xs-right">{{ props.item.orgao }}</td>
             <td class="text-xs-right">{{ props.item.suborgao }}</td>
+            <td class="text-xs-right">{{ props.item.valor }}</td>
             <td class="text-xs-center white--text" v-bind:style="{backgroundColor: colors[props.item.predicao.classe.ordem]}">{{ props.item.predicao.classe.nome }}</td>
           </tr>
         </template>
@@ -48,6 +49,7 @@ export default {
         {text: 'CATEGORIA', value: 'categoria'},
         {text: 'ORGÃO', value: 'orgao'},
         {text: 'SUBÓRGÃO/JURISDICIONADO', value: 'suborgao'},
+        {text: 'VALOR', value: 'predicao.valor'},
         {text: 'PREDIÇÃO', value: 'predicao.classe.nome'}
       ],
       publicacoes: [],
@@ -57,6 +59,11 @@ export default {
   },
   mounted () {
     ApiService.get('predicoes', {params: {data: moment().format('YYYY-MM-DD')}}).then(publicacoes => {
+
+      publicacoes.forEach(publicacao => {
+        publicacao.valor = publicacao.corpo.match(/(?:[1-9]\d{0,2}(?:\.\d{3})*|0),\d{2}/i);
+        publicacao.valor = (publicacao.valor) ? publicacao.valor[0] : null
+      })
       this.publicacoes = publicacoes;
     });
   },
