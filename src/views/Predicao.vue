@@ -3,7 +3,7 @@
     <v-publicacao-viewer v-bind:publicacao="publicacao"></v-publicacao-viewer>
     <v-flex xs2 class="ml-2">
       <v-card class="pa-1" v-bind:style="{backgroundColor: colors[publicacao.predicao.classe.ordem]}" style="height:80px">
-        <v-card-text class="white--text card-text">{{ publicacao.predicao.classe.nome }}</v-card-text>
+        <v-card-text class="white--text card-text btn__content">{{ publicacao.predicao.classe.nome }}</v-card-text>
       </v-card>
     </v-flex>
   </div>
@@ -45,6 +45,9 @@ export default {
     text-align: center;
     text-transform: uppercase;
     font-weight: 500;
+
+    width: fit-content;
+    white-space: normal;
   }
 
 </style>
