@@ -21,7 +21,7 @@ export default {
   },
   computed: {
     dataString () {
-      return (this.publicacao.data) ? moment(this.publicacao.data).format('DD/MM/YYYY') : null;
+      return (this.publicacao.data) ? moment.utc(this.publicacao.data).format('DD/MM/YYYY') : null;
     }
   }
 }
