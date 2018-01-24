@@ -60,6 +60,12 @@ export default {
   watch: {
     date (date) {
       ApiService.get('predicoes', {params: {data: date}}).then(predicoes => {
+
+        predicoes.forEach(publicacao => {
+          publicacao.valor = publicacao.corpo.match(/(?:[1-9]\d{0,2}(?:\.\d{3})*|0),\d{2}/i);
+          publicacao.valor = (publicacao.valor) ? parseInt(publicacao.valor[0].replace(/\./g, '').replace(/,/g, '')) : null;
+        });
+
         this.predicoes = predicoes;
       });
     }

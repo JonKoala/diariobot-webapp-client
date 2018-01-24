@@ -51,7 +51,7 @@ export default {
         {text: 'CATEGORIA', value: 'categoria'},
         {text: 'ORGÃO', value: 'orgao'},
         {text: 'SUBÓRGÃO/JURISDICIONADO', value: 'suborgao'},
-        {text: 'VALOR', value: 'getValor(predicao.corpo)'},
+        {text: 'VALOR', value: 'valor'},
         {text: 'PREDIÇÃO', value: 'predicao.classe.nome'}
       ],
       isShowingDetail: false,
