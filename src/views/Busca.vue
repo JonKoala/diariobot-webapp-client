@@ -1,94 +1,67 @@
 <template>
-    <v-container fluid grid-list-md class="mt-0">
-      <v-card class="pa-1" color="white">
-        <v-layout row justify-end class="pb-4">
-          <v-flex xs4>
-            <v-text-field append-icon="search" label="Busca" single-line hide-details v-model="search"></v-text-field>
-          </v-flex>
-        </v-layout>
-        <v-layout row wrap>
-          <v-data-table v-if="publicacoes.length > 0" v-bind:items="publicacoes" v-bind:headers="headers" v-bind:search="search" hide-actions>
-            <template slot="items" slot-scope="props">
-              <tr @click="showDetails(props.item)">
-                <td class="text-xs-right">{{ props.item.materia }}</td>
-                <td class="text-xs-right">{{ props.item.tipo }}</td>
-                <td class="text-xs-right">{{ props.item.categoria }}</td>
-                <td class="text-xs-right">{{ props.item.orgao }}</td>
-                <td class="text-xs-right">{{ props.item.suborgao }}</td>
-                <td class="text-xs-right">{{ props.item.valor }}</td>
-                <td class="text-xs-center white--text" v-bind:style="{backgroundColor: colors[props.item.predicao.classe.ordem]}">{{ props.item.predicao.classe.nome }}</td>
-              </tr>
-            </template>
-          </v-data-table>
-        </v-layout>
-      </v-card>
-      <v-dialog v-model="isShowingDetail" width="1235px" scrollable>
-        <v-card>
-          <v-toolbar color="pink" height="48px" card>
-            <v-toolbar-title class="white--text">
-              <v-btn icon v-bind:href="linkToPredicao(detailed.id)" target="_blank" @click="" class="mt-1"><v-icon color="white">link</v-icon></v-btn>{{ detailed.materia }}
-            </v-toolbar-title>
-          </v-toolbar>
-          <v-publicacao-viewer-body v-bind:publicacao="detailed.corpo"></v-publicacao-viewer-body>
+  <v-container fluid grid-list-md class="mt-0">
+    <v-layout row wrap>
+      <v-flex xs12>
+        <v-card class="pa-1" color="white">
+          <v-layout row justify-start>
+            <v-flex xs2>
+              <v-menu lazy v-model="menu" transition="scale-transition" offset-y full-width v-bind:nudge-right="40" max-width="290px" min-width="290px">
+                <v-text-field slot="activator" label="Data" v-model="formattedDate" prepend-icon="event" readonly></v-text-field>
+                <v-date-picker v-model="date" locale="pt-br" no-title scrollable actions></v-date-picker>
+              </v-menu>
+            </v-flex>
+          </v-layout>
         </v-card>
-      </v-dialog>
-    </v-container>
+      </v-flex>
+      <v-flex xs12 class="mt-1">
+        <v-card class="pa-0" color="white">
+          <v-layout row justify-end class="pb-4">
+            <v-flex xs4>
+              <v-text-field append-icon="search" label="Busca" single-line hide-details v-model="search"></v-text-field>
+            </v-flex>
+          </v-layout>
+          <v-layout v-if="predicoes.length > 0" row wrap>
+            <v-predicoes-table v-bind:predicoes="predicoes" v-bind:search="search"></v-predicoes-table>
+          </v-layout>
+        </v-card>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
 import moment from 'moment'
 
 import ApiService from '../common/api.service'
-import ColorScheme from '../common/color.scheme'
-import VPublicacaoViewerBody from '../components/VPublicacaoViewerBody'
+import VPredicoesTable from '../components/VPredicoesTable'
 
 export default {
   name: 'Busca',
   components: {
-    VPublicacaoViewerBody
+    VPredicoesTable
   },
   data () {
     return {
-      colors: ColorScheme.classes,
-      headers: [
-        {text: 'MATÉRIA', value: 'materia'},
-        {text: 'TIPO', value: 'tipo'},
-        {text: 'CATEGORIA', value: 'categoria'},
-        {text: 'ORGÃO', value: 'orgao'},
-        {text: 'SUBÓRGÃO/JURISDICIONADO', value: 'suborgao'},
-        {text: 'VALOR', value: 'predicao.valor'},
-        {text: 'PREDIÇÃO', value: 'predicao.classe.nome'}
-      ],
+      predicoes: [],
+      date: null,
       search: null,
-      publicacoes: [],
-      isShowingDetail: false,
-      detailed: {}
+
+      menu: false
     };
   },
-  mounted () {
-    ApiService.get('predicoes', {params: {data: moment().format('YYYY-MM-DD')}}).then(publicacoes => {
-
-      publicacoes.forEach(publicacao => {
-        publicacao.valor = publicacao.corpo.match(/(?:[1-9]\d{0,2}(?:\.\d{3})*|0),\d{2}/i);
-        publicacao.valor = (publicacao.valor) ? publicacao.valor[0] : null;
-      });
-
-      this.publicacoes = publicacoes;
-    });
+  created () {
+    this.date = moment().format('YYYY-MM-DD');
   },
-  methods: {
-    linkToPredicao(id) {
-      return `predicao/${id}`
-    },
-    showDetails(detailed) {
-      this.detailed = detailed;
-
-      // highlighting monetary values
-      this.detailed.corpo = this.detailed.corpo.replace(/(?:[1-9]\d{0,2}(?:\.\d{3})*|0),\d{2}/g, function(match) {
-        return '<b style="color:black;text-decoration:underline;">' + match + '</b>'
+  computed: {
+    formattedDate () {
+      return moment.utc(this.date).format('DD/MM/YYYY')
+    }
+  },
+  watch: {
+    date (date) {
+      ApiService.get('predicoes', {params: {data: date}}).then(predicoes => {
+        this.predicoes = predicoes;
       });
-
-      this.isShowingDetail = true;
     }
   }
 }
