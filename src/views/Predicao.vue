@@ -26,7 +26,7 @@ export default {
       publicacao: null
     };
   },
-  mounted() {
+  created() {
     ApiService.get(`predicoes/${this.$route.params.id}`).then(publicacao => {
       this.publicacao = publicacao;
     });

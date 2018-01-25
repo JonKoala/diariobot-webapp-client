@@ -1,6 +1,6 @@
 <template>
   <div>
-    Nothing
+    DIOES
   </div>
 </template>
 

@@ -13,7 +13,7 @@
         </tr>
       </template>
     </v-data-table>
-    <v-dialog v-model="isShowingDetail" width="1235px" scrollable>
+    <v-dialog v-model="isShowingDetail" width="75vw" scrollable>
       <v-card>
         <v-toolbar color="pink" height="48px" card>
           <v-toolbar-title class="white--text">

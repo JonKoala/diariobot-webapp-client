@@ -22,7 +22,7 @@ export default {
       classes: []
     };
   },
-  mounted() {
+  created() {
     ApiService.get(`classes`).then(classes => {
       this.classes = classes.sort((a, b) => { return a.ordem - b.ordem });
     });

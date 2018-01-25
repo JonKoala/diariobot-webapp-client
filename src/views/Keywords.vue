@@ -2,7 +2,7 @@
   <v-container fluid grid-list-md>
     <v-layout row wrap>
       <v-flex xs4 v-for="(classe, index) in classes" v-bind:key="classe.id">
-        <v-toolbar v-bind:style="{backgroundColor: colors[index]}" height="48px" card>
+        <v-toolbar v-bind:style="{backgroundColor: colors[index]}" dense card>
           <v-toolbar-title style="margin:auto" class="white--text">{{ classe.nome }}</v-toolbar-title>
         </v-toolbar>
         <v-card class="pt-3 px-1" color="white" transition="slide-y-transition">

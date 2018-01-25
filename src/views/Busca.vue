@@ -1,7 +1,10 @@
 <template>
-  <v-container fluid grid-list-md class="mt-0">
+  <v-container fluid grid-list-md>
     <v-layout row wrap>
       <v-flex xs12>
+        <v-toolbar color="pink" dense card>
+          <v-toolbar-title class="white--text">FILTROS</v-toolbar-title>
+        </v-toolbar>
         <v-card class="pa-1" color="white">
           <v-layout row justify-start>
             <v-flex xs2>
@@ -13,7 +16,10 @@
           </v-layout>
         </v-card>
       </v-flex>
-      <v-flex xs12 class="mt-1">
+      <v-flex xs12>
+        <v-toolbar color="pink" dense card>
+          <v-toolbar-title class="white--text">RESULTADOS</v-toolbar-title>
+        </v-toolbar>
         <v-card class="pa-0" color="white">
           <v-layout row justify-end class="pb-4">
             <v-flex xs4>

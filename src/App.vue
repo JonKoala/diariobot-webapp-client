@@ -9,7 +9,7 @@
       <v-container fluid fill-height>
         <v-layout justify-center align-start>
           <v-fade-transition mode="out-in">
-            <router-view></router-view>
+            <router-view class="mt-0" ></router-view>
           </v-fade-transition>
         </v-layout>
       </v-container>
