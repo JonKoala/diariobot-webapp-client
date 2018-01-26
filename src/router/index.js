@@ -5,7 +5,6 @@ import Home from '../views/Home'
 import Crowdsourcer from '../views/Crowdsourcer'
 import Keywords from '../views/Keywords'
 import Predicao from '../views/Predicao'
-import Busca from '../views/Busca'
 
 Vue.use(VueRouter)
 
@@ -35,11 +34,6 @@ export default new VueRouter({
       name: 'predicao',
       path: '/predicao/:id',
       component: Predicao
-    },
-    {
-      name: 'busca',
-      path: '/busca',
-      component: Busca
     }
   ],
   mode: 'history'
