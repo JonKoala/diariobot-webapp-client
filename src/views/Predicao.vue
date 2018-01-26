@@ -1,9 +1,9 @@
 <template>
   <div v-if="isReady">
-    <v-publicacao-viewer v-bind:publicacao="publicacao"></v-publicacao-viewer>
+    <v-publicacao-viewer v-bind:publicacao="predicao"></v-publicacao-viewer>
     <v-flex xs2 class="ml-2">
-      <v-card class="pa-1" v-bind:style="{backgroundColor: colors[publicacao.predicao.classe.ordem]}" style="height:80px">
-        <v-card-text class="white--text card-text btn__content">{{ publicacao.predicao.classe.nome }}</v-card-text>
+      <v-card class="pa-1" v-bind:style="{backgroundColor: colors[predicao.classe_ordem]}" style="height:80px">
+        <v-card-text class="white--text card-text btn__content">{{ predicao.classe }}</v-card-text>
       </v-card>
     </v-flex>
   </div>
@@ -23,17 +23,17 @@ export default {
   data () {
     return {
       colors: ColorScheme.classes,
-      publicacao: null
+      predicao: null
     };
   },
   created() {
-    ApiService.get(`predicoes/${this.$route.params.id}`).then(publicacao => {
-      this.publicacao = publicacao;
+    ApiService.get(`predicoes/${this.$route.params.id}`).then(predicao => {
+      this.predicao = predicao;
     });
   },
   computed: {
     isReady () {
-      return this.publicacao !== null;
+      return this.predicao !== null;
     }
   }
 }

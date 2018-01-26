@@ -9,7 +9,7 @@
           <td class="text-xs-right">{{ props.item.orgao }}</td>
           <td class="text-xs-right">{{ props.item.suborgao }}</td>
           <td class="text-xs-right">{{ getValor(props.item.corpo) }}</td>
-          <td class="text-xs-center white--text" v-bind:style="{backgroundColor: colors[props.item.predicao.classe.ordem]}">{{ props.item.predicao.classe.nome }}</td>
+          <td class="text-xs-center white--text" v-bind:style="{backgroundColor: colors[props.item.classe_ordem]}">{{ props.item.classe }}</td>
         </tr>
       </template>
     </v-data-table>
@@ -52,7 +52,7 @@ export default {
         {text: 'ORGÃO', value: 'orgao'},
         {text: 'SUBÓRGÃO/JURISDICIONADO', value: 'suborgao'},
         {text: 'VALOR', value: 'valor'},
-        {text: 'PREDIÇÃO', value: 'predicao.classe.nome'}
+        {text: 'PREDIÇÃO', value: 'classe'}
       ],
       isShowingDetail: false,
       detailed: {}

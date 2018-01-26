@@ -42,7 +42,7 @@
         items: [
           { text: 'Crowdsourcer', icon: 'people', href: '/crowdsourcer' },
           { text: 'Resultados', icon: 'dashboard', items: [
-            { text: 'Predicoes', href: '/busca' },
+            { text: 'Busca', href: '/busca' },
             { text: 'Keywords', href: '/keywords' }
           ]}
         ]
