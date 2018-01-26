@@ -33,7 +33,7 @@ import ApiService from '../common/api.service'
 import VPredicoesTable from '../components/VPredicoesTable'
 
 export default {
-  name: 'Busca',
+  name: 'Home',
   components: {
     VPredicoesTable
   },
