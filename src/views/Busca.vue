@@ -3,7 +3,7 @@
     <v-layout row wrap>
       <v-flex xs12>
         <v-card color="white">
-          <v-toolbar color="pink" dense card>
+          <v-toolbar color="blue-grey" dense card>
             <v-toolbar-title class="white--text">FILTROS</v-toolbar-title>
           </v-toolbar>
           <v-predicoes-table-filter class="mt-3 ml-4"
@@ -18,7 +18,7 @@
       </v-flex>
       <v-flex xs12>
         <v-card class="pa-0" color="white">
-          <v-toolbar color="pink" dense card>
+          <v-toolbar color="blue-grey" dense card>
             <v-toolbar-title class="white--text">PREDIÇÕES</v-toolbar-title>
           </v-toolbar>
           <v-predicoes-table-advanced

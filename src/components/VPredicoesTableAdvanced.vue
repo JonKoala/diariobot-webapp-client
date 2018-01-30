@@ -23,7 +23,7 @@
     </v-data-table>
     <v-dialog v-model="isShowingDetail" width="75vw" scrollable>
       <v-card>
-        <v-toolbar color="pink" height="48px" card>
+        <v-toolbar color="blue-grey" height="48px" card>
           <v-toolbar-title class="white--text">
             <v-btn icon v-bind:href="linkToPredicao(detailed.id)" target="_blank" @click="" class="mt-1"><v-icon color="white">link</v-icon></v-btn>{{ detailed.materia }}
           </v-toolbar-title>

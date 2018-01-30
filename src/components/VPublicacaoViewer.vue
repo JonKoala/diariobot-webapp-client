@@ -2,7 +2,7 @@
   <v-container fluid grid-list-md>
     <v-layout row wrap>
       <v-flex xs12>
-        <v-toolbar color="pink" dense card>
+        <v-toolbar color="blue-grey" dense card>
           <v-toolbar-title class="white--text">
             <v-btn icon v-bind:href="publicacaoLink" target="_blank" @click="" class="mt-1"><v-icon color="white">link</v-icon></v-btn>{{ publicacao.materia }}
           </v-toolbar-title>
@@ -12,7 +12,7 @@
         </v-card>
       </v-flex>
       <v-flex xs12>
-        <v-toolbar color="pink" dense card>
+        <v-toolbar color="blue-grey" dense card>
           <v-toolbar-title class="white--text">CORPO DA PUBLICAÇÃO</v-toolbar-title>
         </v-toolbar>
         <v-card>

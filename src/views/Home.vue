@@ -2,7 +2,7 @@
   <v-container fluid grid-list-md>
     <v-layout row wrap>
       <v-flex xs12>
-        <v-toolbar color="pink" dense card>
+        <v-toolbar color="blue-grey" dense card>
           <v-toolbar-title class="white--text">PREDIÇÕES</v-toolbar-title>
         </v-toolbar>
         <v-card class="pa-0" color="white">
