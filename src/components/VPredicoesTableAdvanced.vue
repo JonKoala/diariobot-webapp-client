@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid grid-list-md class="py-0">
+  <v-container fluid grid-list-md class="pa-0">
     <v-data-table
       v-bind:items="predicoes"
       v-bind:headers="headers"
@@ -15,6 +15,7 @@
           <td class="text-xs-right">{{ props.item.categoria }}</td>
           <td class="text-xs-right">{{ props.item.orgao }}</td>
           <td class="text-xs-right">{{ props.item.suborgao }}</td>
+          <td class="text-xs-right">{{ props.item.formattedData }}</td>
           <td class="text-xs-right">{{ getValor(props.item.corpo) }}</td>
           <td class="text-xs-center white--text" v-bind:style="{backgroundColor: colors[props.item.classe_ordem]}">{{ props.item.classe }}</td>
         </tr>
@@ -59,6 +60,7 @@ export default {
         {text: 'CATEGORIA', value: 'categoria'},
         {text: 'ORGÃO', value: 'orgao'},
         {text: 'SUBÓRGÃO/JURISDICIONADO', value: 'suborgao'},
+        {text: 'DATA', value: 'data'},
         {text: 'VALOR', value: 'valor'},
         {text: 'PREDIÇÃO', value: 'classe'}
       ],
