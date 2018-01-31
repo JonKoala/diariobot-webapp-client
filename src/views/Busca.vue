@@ -109,7 +109,9 @@ export default {
         filterCategoria: this.filter.categoria,
         filterOrgao: this.filter.orgao,
         filterSuborgao: this.filter.suborgao,
-        filterClasse: this.filter.classe
+        filterClasse: this.filter.classe,
+        filterMinValor: this.filter.valorMinimo,
+        filterMaxValor: this.filter.valorMaximo
       };
     }
   },

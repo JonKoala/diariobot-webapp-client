@@ -47,6 +47,14 @@
         <v-select v-bind:items="classes" v-model="classe" item-text="nome" item-value="id" label="Classe" autocomplete clearable class="select"></v-select>
       </v-flex>
     </v-layout>
+    <v-layout row wrap>
+      <v-flex xs2>
+        <v-text-field v-model="valorMinimo" v-bind:mask="mask" return-masked-value clearable label="Valor Mínimo"></v-text-field>
+      </v-flex>
+      <v-flex xs2 class="ml-4">
+        <v-text-field v-model="valorMaximo" v-bind:mask="mask" return-masked-value clearable label="Valor Máximo"></v-text-field>
+      </v-flex>
+    </v-layout>
   </v-container>
 </template>
 
@@ -64,6 +72,7 @@ export default {
   },
   data () {
     return {
+      mask: '###.###.###.###',
       menuStartingDate: false,
       menuEndingDate: false,
 
@@ -73,12 +82,19 @@ export default {
       categoria: null,
       orgao: null,
       suborgao: null,
-      classe: null
+      classe: null,
+      valorMinimo: null,
+      valorMaximo: null
     };
   },
   methods: {
     formatDate (date) {
       return (date) ? moment.utc(date).format('DD/MM/YYYY') : null;
+    },
+    unformatNumber (value) {
+      if (value)
+        return parseInt(value.replace(/\./g, ''));
+      return null;
     }
   },
   computed: {
@@ -90,7 +106,9 @@ export default {
         categoria: this.categoria,
         orgao: this.orgao,
         suborgao: this.suborgao,
-        classe: this.classe
+        classe: this.classe,
+        valorMinimo: this.unformatNumber(this.valorMinimo),
+        valorMaximo: this.unformatNumber(this.valorMaximo)
       }
     },
     formattedStartingDate () {
