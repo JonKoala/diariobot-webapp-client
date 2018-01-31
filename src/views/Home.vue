@@ -58,9 +58,8 @@ export default {
     date (date) {
       ApiService.get(`predicoes/data/${date}`).then(predicoes => {
 
-        predicoes.forEach(publicacao => {
-          publicacao.valor = publicacao.corpo.match(/(?:[1-9]\d{0,2}(?:\.\d{3})*|0),\d{2}/i);
-          publicacao.valor = (publicacao.valor) ? parseInt(publicacao.valor[0].replace(/[\.,]/g, '')) : null;
+        predicoes.forEach(predicao => {
+          predicao.formattedValor = (predicao.valor) ? predicao.valor.toLocaleString('pt-br', { style: 'currency', currency: 'BRL'}).substr(2) : null;
         });
 
         this.predicoes = predicoes;

@@ -1,6 +1,6 @@
 <template>
   <div v-if="isReady">
-    <v-publicacao-viewer v-bind:publicacao="predicao"></v-publicacao-viewer>
+    <v-publicacao-viewer v-bind:publicacao="predicao" highlight-monetary-value></v-publicacao-viewer>
     <v-flex xs2 class="ml-2">
       <v-card class="pa-1" v-bind:style="{backgroundColor: colors[predicao.classe_ordem]}" style="height:80px">
         <v-card-text class="white--text card-text btn__content">{{ predicao.classe }}</v-card-text>
@@ -12,6 +12,7 @@
 <script>
 import ApiService from '../common/api.service'
 import ColorScheme from '../common/color.scheme'
+import RegexCollection from '../common/regex.collection'
 
 import VPublicacaoViewer from '../components/VPublicacaoViewer'
 
@@ -27,9 +28,7 @@ export default {
     };
   },
   created() {
-    ApiService.get(`predicoes/${this.$route.params.id}`).then(predicao => {
-      this.predicao = predicao;
-    });
+    ApiService.get(`predicoes/${this.$route.params.id}`).then(predicao => this.predicao = predicao);
   },
   computed: {
     isReady () {

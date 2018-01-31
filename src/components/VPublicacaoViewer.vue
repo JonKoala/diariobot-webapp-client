@@ -16,7 +16,7 @@
           <v-toolbar-title class="white--text">CORPO DA PUBLICAÇÃO</v-toolbar-title>
         </v-toolbar>
         <v-card>
-          <v-publicacao-viewer-body v-bind:publicacao="publicacao.corpo"></v-publicacao-viewer-body>
+          <v-publicacao-viewer-body v-bind:publicacao="publicacao.corpo" v-bind:highlight-monetary-value="highlightMonetaryValue"></v-publicacao-viewer-body>
         </v-card>
       </v-flex>
     </v-layout>
@@ -36,7 +36,8 @@ export default {
     VPublicacaoViewerBody
   },
   props: {
-    publicacao: { type: Object, required: true }
+    publicacao: { type: Object, required: true },
+    highlightMonetaryValue: { type: Boolean }
   },
   computed: {
     publicacaoLink () {

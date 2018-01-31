@@ -86,10 +86,9 @@ export default {
         this.totalItems = result.count;
         var predicoes = result.rows;
 
-        predicoes.forEach(publicacao => {
-          publicacao.valor = publicacao.corpo.match(/(?:[1-9]\d{0,2}(?:\.\d{3})*|0),\d{2}/i);
-          publicacao.valor = (publicacao.valor) ? parseInt(publicacao.valor[0].replace(/[\.,]/g, '')) : null;
-          publicacao.formattedData = moment.utc(publicacao.data).format('DD/MM/YYYY');
+        predicoes.forEach(predicao => {
+          predicao.formattedValor = (predicao.valor) ? predicao.valor.toLocaleString('pt-br', { style: 'currency', currency: 'BRL'}).substr(2) : null;
+          predicao.formattedData = moment.utc(predicao.data).format('DD/MM/YYYY');
         });
 
         this.predicoes = predicoes;

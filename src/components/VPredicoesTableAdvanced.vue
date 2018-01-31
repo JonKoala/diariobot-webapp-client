@@ -16,7 +16,7 @@
           <td class="text-xs-right">{{ props.item.orgao }}</td>
           <td class="text-xs-right">{{ props.item.suborgao }}</td>
           <td class="text-xs-right">{{ props.item.formattedData }}</td>
-          <td class="text-xs-right">{{ getValor(props.item.corpo) }}</td>
+          <td class="text-xs-right">{{ props.item.formattedValor }}</td>
           <td class="text-xs-center white--text" v-bind:style="{backgroundColor: colors[props.item.classe_ordem]}">{{ props.item.classe }}</td>
         </tr>
       </template>
@@ -28,7 +28,7 @@
             <v-btn icon v-bind:href="linkToPredicao(detailed.id)" target="_blank" @click="" class="mt-1"><v-icon color="white">link</v-icon></v-btn>{{ detailed.materia }}
           </v-toolbar-title>
         </v-toolbar>
-        <v-publicacao-viewer-body v-bind:publicacao="detailed.corpo"></v-publicacao-viewer-body>
+        <v-publicacao-viewer-body v-bind:publicacao="detailed.corpo" highlight-monetary-value></v-publicacao-viewer-body>
       </v-card>
     </v-dialog>
   </v-container>
@@ -39,6 +39,7 @@ import moment from 'moment'
 
 import ApiService from '../common/api.service'
 import ColorScheme from '../common/color.scheme'
+import RegexCollection from '../common/regex.collection'
 import VPublicacaoViewerBody from '../components/VPublicacaoViewerBody'
 
 export default {
@@ -72,16 +73,7 @@ export default {
       pagination: {}
     };
   },
-  computed: {
-    formattedDate () {
-      return moment.utc(this.date).format('DD/MM/YYYY')
-    }
-  },
   methods: {
-    getValor(corpo) {
-      var valores = corpo.match(/(?:[1-9]\d{0,2}(?:\.\d{3})*|0),\d{2}/i);
-      return (valores) ? valores[0] : null;
-    },
     linkToPredicao(id) {
       return `predicao/${id}`
     },
@@ -89,7 +81,7 @@ export default {
       this.detailed = detailed;
 
       // highlighting monetary values
-      this.detailed.corpo = this.detailed.corpo.replace(/(?:[1-9]\d{0,2}(?:\.\d{3})*|0),\d{2}/g, function(match) {
+      this.detailed.corpo = this.detailed.corpo.replace(RegexCollection.monetaryGlobal, function(match) {
         return '<b style="color:black;text-decoration:underline;">' + match + '</b>'
       });
 
