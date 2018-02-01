@@ -49,10 +49,10 @@
     </v-layout>
     <v-layout row wrap>
       <v-flex xs2>
-        <v-text-field v-model="valorMinimo" v-bind:mask="mask" return-masked-value clearable label="Valor Mínimo"></v-text-field>
+        <v-text-field v-model="inputValorMinimo" v-bind:mask="mask" return-masked-value clearable label="Valor Mínimo"></v-text-field>
       </v-flex>
       <v-flex xs2 class="ml-4">
-        <v-text-field v-model="valorMaximo" v-bind:mask="mask" return-masked-value clearable label="Valor Máximo"></v-text-field>
+        <v-text-field v-model="inputValorMaximo" v-bind:mask="mask" return-masked-value clearable label="Valor Máximo"></v-text-field>
       </v-flex>
     </v-layout>
   </v-container>
@@ -72,9 +72,15 @@ export default {
   },
   data () {
     return {
-      mask: '###.###.###.###',
+      mask: '############',
       menuStartingDate: false,
       menuEndingDate: false,
+
+      // used for debounce logic
+      timeoutValorMinimo: null,
+      timeoutValorMaximo: null,
+      inputValorMinimo: null,
+      inputValorMaximo: null,
 
       startingDate: null,
       endingDate: null,
@@ -92,9 +98,7 @@ export default {
       return (date) ? moment.utc(date).format('DD/MM/YYYY') : null;
     },
     unformatNumber (value) {
-      if (value)
-        return parseInt(value.replace(/\./g, ''));
-      return null;
+      return (value) ? Number(value) : null;
     }
   },
   computed: {
@@ -119,8 +123,18 @@ export default {
     }
   },
   watch: {
-    filterArguments (args) {
+    filterArguments (newValue) {
       this.$emit('filterChanged', this.filterArguments);
+    },
+
+    // debounce logic
+    inputValorMinimo (newValue) {
+      window.clearTimeout(this.timeoutValorMinimo);
+      this.timeoutValorMinimo = window.setTimeout(() => {this.valorMinimo = newValue}, 500);
+    },
+    inputValorMaximo (newValue) {
+      window.clearTimeout(this.timeoutValorMaximo);
+      this.timeoutValorMaximo = window.setTimeout(() => {this.valorMaximo = newValue}, 500);
     }
   }
 }
