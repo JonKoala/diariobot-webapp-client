@@ -23,9 +23,21 @@
     </v-data-table>
     <v-dialog v-model="isShowingDetail" width="75vw" scrollable>
       <v-card>
-        <v-toolbar color="blue-grey" height="48px" card>
+        <v-toolbar color="blue-grey" dense card>
           <v-toolbar-title class="white--text">
-            <v-btn icon v-bind:href="linkToPredicao(detailed.id)" target="_blank" @click="" class="mt-1"><v-icon color="white">link</v-icon></v-btn>{{ detailed.materia }}
+            <v-tooltip top>
+              <v-btn v-bind:href="linkToPredicao(detailed.id)" target="_blank" @click="" slot="activator" class="mx-0" icon>
+                <v-icon color="white">link</v-icon>
+              </v-btn>
+              <span>Detalhes</span>
+            </v-tooltip>
+            <v-tooltip top>
+              <v-btn v-bind:href="linkToCrowdsourcer(detailed.id)" target="_blank" @click="" slot="activator" class="ml-0" icon>
+                <v-icon color="white">edit</v-icon>
+              </v-btn>
+              <span>Corrigir</span>
+            </v-tooltip>
+            <span class="ml-4">{{ detailed.materia }}</span>
           </v-toolbar-title>
         </v-toolbar>
         <v-publicacao-viewer-body v-bind:publicacao="detailed.corpo" highlight-monetary-value></v-publicacao-viewer-body>
@@ -77,14 +89,11 @@ export default {
     linkToPredicao(id) {
       return `predicao/${id}`
     },
+    linkToCrowdsourcer(id) {
+      return `crowdsourcer/${id}`
+    },
     showDetails(detailed) {
       this.detailed = detailed;
-
-      // highlighting monetary values
-      this.detailed.corpo = this.detailed.corpo.replace(RegexCollection.monetaryGlobal, function(match) {
-        return '<b style="color:black;text-decoration:underline;">' + match + '</b>'
-      });
-
       this.isShowingDetail = true;
     }
   },

@@ -5,7 +5,7 @@
         <v-toolbar color="blue-grey" dense card>
           <v-toolbar-title class="white--text">PREDIÇÕES</v-toolbar-title>
         </v-toolbar>
-        <v-card class="pa-0" color="white">
+        <v-card class="px-0 pb-0 pt-1" color="white">
           <v-layout row justify-space-between class="pt-2 pb-4">
             <v-flex xs2 class="ml-4">
               <v-menu lazy v-model="menu" transition="scale-transition" offset-y full-width v-bind:nudge-right="40" max-width="290px" min-width="290px">

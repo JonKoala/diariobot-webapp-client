@@ -1,8 +1,8 @@
 <template>
-  <v-container fluid grid-list-md>
+  <v-container fluid grid-list-md class="pa-0">
     <v-layout row wrap>
       <v-flex xs2 v-for="(entry, index) in entries" v-bind:key="entry.identity">
-        <v-btn block v-on:click="buttonClicked(entry.identity)" class="button white--text" v-bind:style="{backgroundColor: colors[index]}" >{{ entry.text }}</v-btn>
+        <v-btn block v-on:click="buttonClicked(entry.identity)" class="ma-0 button white--text" v-bind:style="{backgroundColor: colors[index]}" >{{ entry.text }}</v-btn>
       </v-flex>
     </v-layout>
   </v-container>
