@@ -29,7 +29,7 @@
               </v-btn>
               <span>Corrigir</span>
             </v-tooltip>
-            <span class="ml-4">{{ detailed.materia }}</span>
+            <span class="ml-4" v-bind:title="detailed.materia">{{ detailed.materia }}</span>
           </v-toolbar-title>
         </v-toolbar>
         <v-publicacao-viewer-body v-bind:publicacao="detailed.corpo" highlight-monetary-value></v-publicacao-viewer-body>

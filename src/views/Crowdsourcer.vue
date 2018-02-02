@@ -17,7 +17,7 @@
                 </v-btn>
                 <span>Predição</span>
               </v-tooltip>
-              <span class="ml-4">{{ publicacao.materia }}</span>
+              <span class="ml-4" v-bind:title="publicacao.materia">{{ publicacao.materia }}</span>
             </v-toolbar-title>
           </v-toolbar>
           <v-card class="pa-1" color="white">

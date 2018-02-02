@@ -12,7 +12,7 @@
     <the-navigation-bar></the-navigation-bar>
     <v-content>
       <v-container fluid fill-height>
-        <v-layout justify-center align-start>
+        <v-layout justify-center align-start style="width:100%">
           <v-slide-x-transition mode="out-in">
             <router-view class="mt-0"></router-view>
           </v-slide-x-transition>
