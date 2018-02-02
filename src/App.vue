@@ -13,9 +13,9 @@
     <v-content>
       <v-container fluid fill-height>
         <v-layout justify-center align-start>
-          <v-fade-transition mode="out-in">
+          <v-slide-x-transition mode="out-in">
             <router-view class="mt-0"></router-view>
-          </v-fade-transition>
+          </v-slide-x-transition>
         </v-layout>
       </v-container>
     </v-content>
