@@ -29,30 +29,28 @@
           </v-date-picker>
         </v-menu>
       </v-flex>
-    </v-layout>
-    <v-layout row wrap>
-      <v-flex xs2>
-        <v-select v-bind:items="tipos" v-model="tipo" label="Tipo" autocomplete clearable class="select"></v-select>
+      <v-flex xs2 class="ml-4">
+        <v-text-field v-model="inputValorMinimo" v-bind:mask="mask" return-masked-value clearable label="Valor Mínimo" prepend-icon="attach_money"></v-text-field>
       </v-flex>
       <v-flex xs2 class="ml-4">
-        <v-select v-bind:items="categorias" v-model="categoria" label="Categoria" autocomplete clearable class="select"></v-select>
-      </v-flex>
-      <v-flex xs2 class="ml-4">
-        <v-select v-bind:items="orgaos" v-model="orgao" label="Orgão" autocomplete clearable class="select"></v-select>
-      </v-flex>
-      <v-flex xs2 class="ml-4">
-        <v-select v-bind:items="suborgaos" v-model="suborgao" label="Suborgão" autocomplete clearable class="select"></v-select>
-      </v-flex>
-      <v-flex xs2 class="ml-4">
-        <v-select v-bind:items="classes" v-model="classe" item-text="nome" item-value="id" label="Classe" autocomplete clearable class="select"></v-select>
+        <v-text-field v-model="inputValorMaximo" v-bind:mask="mask" return-masked-value clearable label="Valor Máximo" prepend-icon="attach_money"></v-text-field>
       </v-flex>
     </v-layout>
     <v-layout row wrap>
       <v-flex xs2>
-        <v-text-field v-model="inputValorMinimo" v-bind:mask="mask" return-masked-value clearable label="Valor Mínimo"></v-text-field>
+        <v-select v-bind:items="tipos" v-model="tipo" label="Tipo" autocomplete clearable class="select" prepend-icon="tune"></v-select>
       </v-flex>
       <v-flex xs2 class="ml-4">
-        <v-text-field v-model="inputValorMaximo" v-bind:mask="mask" return-masked-value clearable label="Valor Máximo"></v-text-field>
+        <v-select v-bind:items="categorias" v-model="categoria" label="Categoria" autocomplete clearable class="select" prepend-icon="tune"></v-select>
+      </v-flex>
+      <v-flex xs2 class="ml-4">
+        <v-select v-bind:items="orgaos" v-model="orgao" label="Orgão" autocomplete clearable class="select" prepend-icon="tune"></v-select>
+      </v-flex>
+      <v-flex xs2 class="ml-4">
+        <v-select v-bind:items="suborgaos" v-model="suborgao" label="Suborgão" autocomplete clearable class="select" prepend-icon="tune"></v-select>
+      </v-flex>
+      <v-flex xs2 class="ml-4">
+        <v-select v-bind:items="classes" v-model="classe" item-text="nome" item-value="id" label="Classe" autocomplete clearable class="select" prepend-icon="tune"></v-select>
       </v-flex>
     </v-layout>
   </v-container>
