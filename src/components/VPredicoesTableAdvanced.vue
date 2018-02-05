@@ -5,6 +5,8 @@
       v-bind:headers="headers"
       v-bind:pagination.sync="pagination"
       v-bind:loading="isLoading"
+      v-bind:no-data-text="noDataText"
+      v-bind:no-results-text="noDataText"
       v-bind:total-items="totalItems"
       v-bind:rows-per-page-items="itemsPerPageOptions"
       v-bind:rows-per-page-text="'Linhas por página'">
@@ -84,6 +86,13 @@ export default {
       page: 0,
       pagination: {}
     };
+  },
+  computed: {
+    noDataText() {
+      if (this.isLoading)
+        return 'Carregando...';
+      return 'Nenhum dado encontrado'
+    }
   },
   methods: {
     linkToPredicao(id) {

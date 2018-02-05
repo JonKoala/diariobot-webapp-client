@@ -17,8 +17,8 @@
               <v-text-field append-icon="search" label="Busca" single-line hide-details v-model="search"></v-text-field>
             </v-flex>
           </v-layout>
-          <v-layout v-if="predicoes.length > 0" row wrap>
-            <v-predicoes-table v-bind:predicoes="predicoes" v-bind:search="search"></v-predicoes-table>
+          <v-layout row wrap>
+            <v-predicoes-table v-bind:predicoes="predicoes" v-bind:search="search" v-bind:isLoading="!isReady"></v-predicoes-table>
           </v-layout>
         </v-card>
       </v-flex>
@@ -42,6 +42,7 @@ export default {
       predicoes: [],
       date: null,
       search: null,
+      isReady: false,
 
       menu: false
     };
@@ -56,6 +57,7 @@ export default {
   },
   watch: {
     date (date) {
+      this.isReady = false;
       ApiService.get(`predicoes/data/${date}`).then(predicoes => {
 
         predicoes.forEach(predicao => {
@@ -63,6 +65,7 @@ export default {
         });
 
         this.predicoes = predicoes;
+        this.isReady = true;
       });
     }
   }

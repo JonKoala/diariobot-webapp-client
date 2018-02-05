@@ -1,6 +1,13 @@
 <template>
   <v-container fluid grid-list-md class="py-0">
-    <v-data-table v-bind:items="predicoes" v-bind:headers="headers" v-bind:search="search" hide-actions>
+    <v-data-table
+      v-bind:items="predicoes"
+      v-bind:headers="headers"
+      v-bind:search="search"
+      v-bind:loading="isLoading"
+      v-bind:no-data-text="noDataText"
+      v-bind:no-results-text="noDataText"
+      hide-actions>
       <template slot="items" slot-scope="props">
         <tr @click="showDetails(props.item)">
           <td class="text-xs-right">{{ props.item.materia }}</td>
@@ -53,7 +60,8 @@ export default {
   },
   props: {
     predicoes: { type: Array, required: true },
-    search: { type: String }
+    search: { type: String },
+    isLoading: { type: Boolean }
   },
   data () {
     return {
@@ -70,6 +78,13 @@ export default {
       isShowingDetail: false,
       detailed: {}
     };
+  },
+  computed: {
+    noDataText() {
+      if (this.isLoading)
+        return 'Carregando...';
+      return 'Nenhum dado encontrado'
+    }
   },
   methods: {
     linkToPredicao(id) {
