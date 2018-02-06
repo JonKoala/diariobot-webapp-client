@@ -27,5 +27,11 @@ export default {
     return getConfig.then(appconfig => {
       return Vue.axios.post(`${appconfig['url']['api']}/${service}`, data);
     });
+  },
+  delete(service, config) {
+    service = formatUrl(service);
+    return getConfig.then(appconfig => {
+      return Vue.axios.delete(`${appconfig['url']['api']}/${service}`, config);
+    });
   }
 };
