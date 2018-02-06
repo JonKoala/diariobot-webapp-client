@@ -50,7 +50,7 @@
         <v-select v-bind:items="suborgaos" v-model="suborgao" label="Suborgão" autocomplete clearable class="select" prepend-icon="tune"></v-select>
       </v-flex>
       <v-flex xs2 class="ml-4">
-        <v-select v-bind:items="classes" v-model="classe" item-text="nome" item-value="id" label="Classe" autocomplete clearable class="select" prepend-icon="tune"></v-select>
+        <v-select v-bind:items="classes" v-model="classe" item-text="nome" item-value="id" label="Tema" autocomplete clearable class="select" prepend-icon="tune"></v-select>
       </v-flex>
     </v-layout>
   </v-container>
