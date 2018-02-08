@@ -40,11 +40,10 @@
     data () {
       return {
         items: [
+          { text: 'Busca', 'icon': 'search', href: '/busca' },
           { text: 'Crowdsourcer', icon: 'people', href: '/crowdsourcer' },
-          { text: 'Resultados', icon: 'dashboard', items: [
-            { text: 'Busca', href: '/busca' },
-            { text: 'Keywords', href: '/keywords' }
-          ]}
+          { text: 'Keywords', icon: 'stars', href: '/keywords' },
+          { text: 'Blacklist', icon: 'cancel', href: '/blacklist' }
         ]
       }
     }
