@@ -1,25 +1,27 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Home from '../views/Home'
+import Blacklist from '../views/Blacklist'
+import Busca from '../views/Busca'
 import Crowdsourcer from '../views/Crowdsourcer'
+import Home from '../views/Home'
 import Keywords from '../views/Keywords'
 import Predicao from '../views/Predicao'
-import Busca from '../views/busca'
+
 
 Vue.use(VueRouter)
 
 export default new VueRouter({
   routes: [
     {
-      name: 'home',
-      path: '/',
-      component: Home
+      name: 'blacklist',
+      path: '/blacklist',
+      component: Blacklist
     },
     {
-      name: 'crowdsourcerRandom',
-      path: '/crowdsourcer',
-      component: Crowdsourcer
+      name: 'busca',
+      path: '/busca',
+      component: Busca
     },
     {
       name: 'crowdsourcer',
@@ -27,9 +29,14 @@ export default new VueRouter({
       component: Crowdsourcer
     },
     {
-      name: 'busca',
-      path: '/busca',
-      component: Busca
+      name: 'crowdsourcerRandom',
+      path: '/crowdsourcer',
+      component: Crowdsourcer
+    },
+    {
+      name: 'home',
+      path: '/',
+      component: Home
     },
     {
       name: 'keywords',

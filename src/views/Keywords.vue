@@ -43,7 +43,7 @@
         colors: ColorScheme.classes,
 
         snackbar: false,
-        snackbarMessage: 'teste'
+        snackbarMessage: ''
       };
     },
     created() {
