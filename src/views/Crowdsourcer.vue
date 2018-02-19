@@ -3,32 +3,32 @@
     <v-slide-x-transition mode="out-in">
       <v-layout row wrap v-show="show">
         <v-flex xs12>
-          <v-toolbar color="blue-grey" dense card>
-            <v-toolbar-title class="white--text">
-              <v-tooltip top>
-                <v-btn v-bind:href="linkToOriginal" target="_blank" @click="" slot="activator" class="mx-0" icon>
-                  <v-icon color="white">link</v-icon>
-                </v-btn>
-                <span>Original</span>
-              </v-tooltip>
-              <v-tooltip top>
-                <v-btn v-bind:to="linkToPredicao" target="_blank" @click="" slot="activator" class="ml-0" icon>
-                  <v-icon color="white">developer_board</v-icon>
-                </v-btn>
-                <span>Predição</span>
-              </v-tooltip>
-              <span class="ml-4" v-bind:title="publicacao.materia">{{ publicacao.materia }}</span>
-            </v-toolbar-title>
-          </v-toolbar>
-          <v-card class="pa-1" color="white">
-            <v-publicacao-viewer-header v-bind:publicacao="publicacao"></v-publicacao-viewer-header>
+          <v-card color="white">
+            <v-toolbar color="blue-grey" dense card>
+              <v-toolbar-title class="white--text">
+                <v-tooltip top>
+                  <v-btn v-bind:href="linkToOriginal" target="_blank" @click="" slot="activator" class="mx-0" icon>
+                    <v-icon color="white">link</v-icon>
+                  </v-btn>
+                  <span>Original</span>
+                </v-tooltip>
+                <v-tooltip top>
+                  <v-btn v-bind:to="linkToPredicao" target="_blank" @click="" slot="activator" class="ml-0" icon>
+                    <v-icon color="white">developer_board</v-icon>
+                  </v-btn>
+                  <span>Predição</span>
+                </v-tooltip>
+                <span class="ml-4" v-bind:title="publicacao.materia">{{ publicacao.materia }}</span>
+              </v-toolbar-title>
+            </v-toolbar>
+            <v-publicacao-viewer-header class="fluid" v-bind:publicacao="publicacao"></v-publicacao-viewer-header>
           </v-card>
         </v-flex>
         <v-flex xs12>
-          <v-toolbar color="blue-grey" dense card>
-            <v-toolbar-title class="white--text">CORPO DA PUBLICAÇÃO</v-toolbar-title>
-          </v-toolbar>
           <v-card>
+            <v-toolbar color="blue-grey" dense card>
+              <v-toolbar-title class="white--text">CORPO DA PUBLICAÇÃO</v-toolbar-title>
+            </v-toolbar>
             <v-publicacao-viewer-body v-bind:publicacao="publicacao.corpo"></v-publicacao-viewer-body>
           </v-card>
         </v-flex>

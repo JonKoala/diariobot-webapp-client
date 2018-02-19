@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid grid-list-md class="pa-0">
+  <v-container>
     <v-data-table
       v-bind:items="predicoes"
       v-bind:headers="headers"

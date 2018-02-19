@@ -2,24 +2,24 @@
   <v-container fluid grid-list-md>
     <v-layout row wrap>
       <v-flex xs12>
-        <v-toolbar color="blue-grey" dense card>
-          <v-toolbar-title class="white--text">PREDIÇÕES</v-toolbar-title>
-        </v-toolbar>
-        <v-card class="px-0 pb-0 pt-1" color="white">
-          <v-layout row justify-space-between class="pt-2 pb-4">
-            <v-flex xs2 class="ml-4">
-              <v-menu lazy v-model="menu" transition="scale-transition" offset-y full-width v-bind:nudge-right="40" max-width="290px" min-width="290px">
-                <v-text-field slot="activator" label="Data" v-model="formattedDate" prepend-icon="event" readonly></v-text-field>
-                <v-date-picker v-model="date" locale="pt-br" no-title scrollable actions></v-date-picker>
-              </v-menu>
-            </v-flex>
-            <v-flex xs4>
-              <v-text-field append-icon="search" label="Busca" single-line hide-details v-model="search"></v-text-field>
-            </v-flex>
-          </v-layout>
-          <v-layout row wrap>
-            <v-predicoes-table v-bind:predicoes="predicoes" v-bind:search="search" v-bind:isLoading="!isReady"></v-predicoes-table>
-          </v-layout>
+        <v-card color="white">
+          <v-toolbar color="blue-grey" dense card>
+            <v-toolbar-title class="white--text">PREDIÇÕES</v-toolbar-title>
+          </v-toolbar>
+          <v-container fluid class="mb-4">
+            <v-layout row justify-space-between>
+              <v-flex xs2>
+                <v-menu lazy v-model="menu" transition="scale-transition" offset-y full-width v-bind:nudge-right="40" max-width="290px" min-width="290px">
+                  <v-text-field slot="activator" label="Data" v-model="formattedDate" prepend-icon="event" readonly></v-text-field>
+                  <v-date-picker v-model="date" locale="pt-br" no-title scrollable actions></v-date-picker>
+                </v-menu>
+              </v-flex>
+              <v-flex xs4>
+                <v-text-field append-icon="search" label="Busca" single-line hide-details v-model="search"></v-text-field>
+              </v-flex>
+            </v-layout>
+          </v-container>
+          <v-predicoes-table class="fluid ma-0 pa-0" v-bind:predicoes="predicoes" v-bind:search="search" v-bind:isLoading="!isReady"></v-predicoes-table>
         </v-card>
       </v-flex>
     </v-layout>

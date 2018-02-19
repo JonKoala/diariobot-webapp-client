@@ -6,7 +6,7 @@
           <v-toolbar color="blue-grey" dense card>
             <v-toolbar-title class="white--text">FILTROS</v-toolbar-title>
           </v-toolbar>
-          <v-predicoes-table-filter class="mt-3 ml-4"
+          <v-predicoes-table-filter class="fluid"
           v-bind:tipos="tipos"
           v-bind:categorias="categorias"
           v-bind:orgaos="orgaos"
@@ -21,7 +21,7 @@
           <v-toolbar color="blue-grey" dense card>
             <v-toolbar-title class="white--text">PREDIÇÕES</v-toolbar-title>
           </v-toolbar>
-          <v-predicoes-table-advanced
+          <v-predicoes-table-advanced class="fluid ma-0 pa-0"
             v-bind:predicoes="predicoes"
             v-bind:totalItems="totalItems"
             v-bind:isLoading="!isReady"

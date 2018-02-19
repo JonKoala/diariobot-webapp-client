@@ -1,5 +1,5 @@
 <template>
-  <v-container class="container" fluid grid-list>
+  <v-container>
     <v-layout row wrap class="grey--text text--darken-2">
       <v-flex xs12>
         <span class="mr-3">tipo: <span class="content">{{publicacao.tipo}}</span></span>

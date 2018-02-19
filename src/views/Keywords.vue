@@ -2,11 +2,11 @@
   <v-container fluid grid-list-md>
     <v-layout row wrap>
       <v-flex xs4 v-for="(classe, index) in classes" v-bind:key="classe.id">
-        <v-toolbar v-bind:style="{backgroundColor: colors[index]}" dense card>
-          <v-toolbar-title style="margin:auto" class="white--text">{{ classe.nome }}</v-toolbar-title>
-        </v-toolbar>
-        <v-card class="pt-3 px-1" color="white" transition="slide-y-transition">
-          <v-list class="pb-0">
+        <v-card color="white" transition="slide-y-transition">
+          <v-toolbar v-bind:style="{backgroundColor: colors[index]}" dense card>
+            <v-toolbar-title style="margin:auto" class="white--text">{{ classe.nome }}</v-toolbar-title>
+          </v-toolbar>
+          <v-list class="mt-4 mx-1 pa-0">
             <v-list-tile v-for="(keyword, kIndex) in classe.keywords" v-bind:key="keyword.id" class="line" v-bind:style="{color: colors[index]}">
               <v-list-tile-action>
                 <v-tooltip top>

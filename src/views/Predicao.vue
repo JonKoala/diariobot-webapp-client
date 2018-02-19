@@ -2,32 +2,32 @@
   <v-container fluid grid-list-md v-if="isReady">
     <v-layout row wrap>
       <v-flex xs12>
-        <v-toolbar color="blue-grey" dense card>
-          <v-toolbar-title class="white--text">
-            <v-tooltip top>
-              <v-btn v-bind:href="linkToOriginal" target="_blank" @click="" slot="activator" class="mx-0" icon>
-                <v-icon color="white">link</v-icon>
-              </v-btn>
-              <span>Original</span>
-            </v-tooltip>
-            <v-tooltip top>
-              <v-btn v-bind:to="linkToCrowdsourcer" @click="" slot="activator" class="ml-0" icon>
-                <v-icon color="white">edit</v-icon>
-              </v-btn>
-              <span>Corrigir</span>
-            </v-tooltip>
-            <span class="ml-4">{{ predicao.materia }}</span>
-          </v-toolbar-title>
-        </v-toolbar>
-        <v-card class="pa-1" color="white">
-          <v-publicacao-viewer-header v-bind:publicacao="predicao"></v-publicacao-viewer-header>
+        <v-card color="white">
+          <v-toolbar color="blue-grey" dense card>
+            <v-toolbar-title class="white--text">
+              <v-tooltip top>
+                <v-btn v-bind:href="linkToOriginal" target="_blank" @click="" slot="activator" class="mx-0" icon>
+                  <v-icon color="white">link</v-icon>
+                </v-btn>
+                <span>Original</span>
+              </v-tooltip>
+              <v-tooltip top>
+                <v-btn v-bind:to="linkToCrowdsourcer" @click="" slot="activator" class="ml-0" icon>
+                  <v-icon color="white">edit</v-icon>
+                </v-btn>
+                <span>Corrigir</span>
+              </v-tooltip>
+              <span class="ml-4">{{ predicao.materia }}</span>
+            </v-toolbar-title>
+          </v-toolbar>
+          <v-publicacao-viewer-header class="fluid" v-bind:publicacao="predicao"></v-publicacao-viewer-header>
         </v-card>
       </v-flex>
       <v-flex xs12>
-        <v-toolbar color="blue-grey" dense card>
-          <v-toolbar-title class="white--text">CORPO DA PUBLICAÇÃO</v-toolbar-title>
-        </v-toolbar>
         <v-card>
+          <v-toolbar color="blue-grey" dense card>
+            <v-toolbar-title class="white--text">CORPO DA PUBLICAÇÃO</v-toolbar-title>
+          </v-toolbar>
           <v-publicacao-viewer-body v-bind:publicacao="predicao.corpo" highlight-monetary-value></v-publicacao-viewer-body>
         </v-card>
       </v-flex>
