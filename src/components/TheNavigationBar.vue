@@ -1,5 +1,5 @@
 <template>
-    <v-navigation-drawer clipped fixed app>
+    <v-navigation-drawer clipped fixed app width="220">
       <v-list dense>
         <template v-for="item in items">
           <v-list-group v-if="item.items" v-bind:key="item.text">
