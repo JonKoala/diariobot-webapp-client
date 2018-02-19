@@ -35,6 +35,9 @@
       <v-flex xs2 class="ml-4">
         <v-text-field v-model="inputValorMaximo" v-bind:mask="mask" return-masked-value clearable label="Valor Máximo" prepend-icon="attach_money"></v-text-field>
       </v-flex>
+      <v-flex xs2 class="ml-4">
+        <v-text-field v-model="inputCorpo" clearable label="Busca Interna" prepend-icon="search"></v-text-field>
+      </v-flex>
     </v-layout>
     <v-layout row wrap>
       <v-flex xs2>
@@ -77,18 +80,21 @@ export default {
       // used for debounce logic
       timeoutValorMinimo: null,
       timeoutValorMaximo: null,
+      timeoutCorpo: null,
       inputValorMinimo: null,
       inputValorMaximo: null,
+      inputCorpo: null,
 
       startingDate: null,
       endingDate: null,
+      valorMinimo: null,
+      valorMaximo: null,
+      corpo: null,
       tipo: null,
       categoria: null,
       orgao: null,
       suborgao: null,
-      classe: null,
-      valorMinimo: null,
-      valorMaximo: null
+      classe: null
     };
   },
   methods: {
@@ -104,13 +110,14 @@ export default {
       return {
         startingDate: this.startingDate,
         endingDate: this.endingDate,
+        valorMinimo: this.unformatNumber(this.valorMinimo),
+        valorMaximo: this.unformatNumber(this.valorMaximo),
+        corpo: this.corpo,
         tipo: this.tipo,
         categoria: this.categoria,
         orgao: this.orgao,
         suborgao: this.suborgao,
-        classe: this.classe,
-        valorMinimo: this.unformatNumber(this.valorMinimo),
-        valorMaximo: this.unformatNumber(this.valorMaximo)
+        classe: this.classe
       }
     },
     formattedStartingDate () {
@@ -133,6 +140,10 @@ export default {
     inputValorMaximo (newValue) {
       window.clearTimeout(this.timeoutValorMaximo);
       this.timeoutValorMaximo = window.setTimeout(() => {this.valorMaximo = newValue}, 500);
+    },
+    inputCorpo (newValue) {
+      window.clearTimeout(this.timeoutCorpo);
+      this.timeoutCorpo = window.setTimeout(() => {this.corpo = newValue}, 500);
     }
   }
 }

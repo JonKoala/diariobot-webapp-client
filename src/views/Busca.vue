@@ -105,13 +105,14 @@ export default {
         sortOrder: (this.pagination.descending) ? 'DESC' : 'ASC',
         filterStartingDate: this.filter.startingDate,
         filterEndingDate: this.filter.endingDate,
+        filterMinValor: this.filter.valorMinimo,
+        filterMaxValor: this.filter.valorMaximo,
+        filterCorpo: this.filter.corpo,
         filterTipo: this.filter.tipo,
         filterCategoria: this.filter.categoria,
         filterOrgao: this.filter.orgao,
         filterSuborgao: this.filter.suborgao,
-        filterClasse: this.filter.classe,
-        filterMinValor: this.filter.valorMinimo,
-        filterMaxValor: this.filter.valorMaximo
+        filterClasse: this.filter.classe
       };
     }
   },
