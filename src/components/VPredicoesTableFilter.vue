@@ -50,10 +50,15 @@
         <v-select v-bind:items="orgaos" v-model="orgao" label="Orgão" autocomplete clearable class="select" prepend-icon="tune"></v-select>
       </v-flex>
       <v-flex xs2 class="ml-4">
-        <v-select v-bind:items="suborgaos" v-model="suborgao" label="Suborgão" autocomplete clearable class="select" prepend-icon="tune"></v-select>
+        <v-select v-bind:items="suborgaos" v-model="suborgao" label="Jurisdicionado" autocomplete clearable class="select" prepend-icon="tune"></v-select>
       </v-flex>
       <v-flex xs2 class="ml-4">
         <v-select v-bind:items="classes" v-model="classe" item-text="nome" item-value="id" label="Tema" autocomplete clearable class="select" prepend-icon="tune"></v-select>
+      </v-flex>
+    </v-layout>
+    <v-layout row wrap>
+      <v-flex xs2>
+        <v-select v-bind:items="macrorregioes" v-model="macrorregiao" item-text="nome" item-value="id" label="Macrorregião" autocomplete clearable class="select" prepend-icon="tune"></v-select>
       </v-flex>
     </v-layout>
   </v-container>
@@ -69,6 +74,7 @@ export default {
     categorias: { type: Array },
     orgaos: { type: Array },
     suborgaos: { type: Array },
+    macrorregioes: { type: Array },
     classes: { type: Array }
   },
   data () {
@@ -94,6 +100,7 @@ export default {
       categoria: null,
       orgao: null,
       suborgao: null,
+      macrorregiao: null,
       classe: null
     };
   },
@@ -117,6 +124,7 @@ export default {
         categoria: this.categoria,
         orgao: this.orgao,
         suborgao: this.suborgao,
+        macrorregiao: this.macrorregiao,
         classe: this.classe
       }
     },

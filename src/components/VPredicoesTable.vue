@@ -15,6 +15,7 @@
           <td class="text-xs-right">{{ props.item.categoria }}</td>
           <td class="text-xs-right">{{ props.item.orgao }}</td>
           <td class="text-xs-right">{{ props.item.suborgao }}</td>
+          <td class="text-xs-right">{{ props.item.macrorregiao }}</td>
           <td class="text-xs-right">{{ props.item.formattedValor }}</td>
           <td class="text-xs-center white--text" v-bind:style="{backgroundColor: colors[props.item.classe_ordem]}">{{ props.item.classe }}</td>
         </tr>
@@ -71,7 +72,8 @@ export default {
         {text: 'TIPO', value: 'tipo'},
         {text: 'CATEGORIA', value: 'categoria'},
         {text: 'ORGÃO', value: 'orgao'},
-        {text: 'SUBÓRGÃO/JURISDICIONADO', value: 'suborgao'},
+        {text: 'JURISDICIONADO', value: 'suborgao'},
+        {text: 'MACRORREGIÃO', value: 'macrorregiao'},
         {text: 'VALOR', value: 'valor'},
         {text: 'PREDIÇÃO', value: 'classe'}
       ],

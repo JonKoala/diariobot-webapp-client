@@ -11,6 +11,7 @@
           v-bind:categorias="categorias"
           v-bind:orgaos="orgaos"
           v-bind:suborgaos="suborgaos"
+          v-bind:macrorregioes="macrorregioes"
           v-bind:classes="classes"
           v-on:filterChanged="filterChanged">
         </v-predicoes-table-filter>
@@ -53,6 +54,7 @@ export default {
       categorias: [],
       orgaos: [],
       suborgaos: [],
+      macrorregioes: [],
       classes: [],
 
       totalItems: 0,
@@ -67,6 +69,7 @@ export default {
     ApiService.get('publicacoes/list/categoria').then(result => this.categorias = result);
     ApiService.get('publicacoes/list/orgao').then(result => this.orgaos = result);
     ApiService.get('publicacoes/list/suborgao').then(result => this.suborgaos = result);
+    ApiService.get('macrorregioes').then(result => this.macrorregioes = result);
     ApiService.get('classes/predictable').then(result => this.classes = result);
   },
   methods: {
@@ -112,6 +115,7 @@ export default {
         filterCategoria: this.filter.categoria,
         filterOrgao: this.filter.orgao,
         filterSuborgao: this.filter.suborgao,
+        filterMacrorregiao: this.filter.macrorregiao,
         filterClasse: this.filter.classe
       };
     }
