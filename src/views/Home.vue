@@ -10,7 +10,7 @@
             <v-layout row justify-space-between>
               <v-flex xs2>
                 <v-menu lazy v-model="menu" transition="scale-transition" offset-y full-width v-bind:nudge-right="40" max-width="290px" min-width="290px">
-                  <v-text-field slot="activator" label="Data" v-model="formattedDate" prepend-icon="event" readonly></v-text-field>
+                  <v-text-field slot="activator" label="Data" v-model="formattedDate" append-icon="event" readonly></v-text-field>
                   <v-date-picker v-model="date" locale="pt-br" no-title scrollable actions></v-date-picker>
                 </v-menu>
               </v-flex>

@@ -8,7 +8,6 @@
           </v-toolbar>
           <v-predicoes-table-filter class="fluid"
           v-bind:tipos="tipos"
-          v-bind:categorias="categorias"
           v-bind:orgaos="orgaos"
           v-bind:suborgaos="suborgaos"
           v-bind:macrorregioes="macrorregioes"
@@ -51,7 +50,6 @@ export default {
     return {
       predicoes: [],
       tipos: [],
-      categorias: [],
       orgaos: [],
       suborgaos: [],
       macrorregioes: [],
@@ -66,7 +64,6 @@ export default {
   },
   created () {
     ApiService.get('publicacoes/list/tipo').then(result => this.tipos = result);
-    ApiService.get('publicacoes/list/categoria').then(result => this.categorias = result);
     ApiService.get('publicacoes/list/orgao').then(result => this.orgaos = result);
     ApiService.get('publicacoes/list/suborgao').then(result => this.suborgaos = result);
     ApiService.get('macrorregioes').then(result => this.macrorregioes = result);
@@ -112,7 +109,6 @@ export default {
         filterMaxValor: this.filter.valorMaximo,
         filterCorpo: this.filter.corpo,
         filterTipo: this.filter.tipo,
-        filterCategoria: this.filter.categoria,
         filterOrgao: this.filter.orgao,
         filterSuborgao: this.filter.suborgao,
         filterMacrorregiao: this.filter.macrorregiao,

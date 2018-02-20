@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-layout row wrap>
+    <v-layout row wrap justify-space-around>
       <v-flex xs2>
         <v-menu v-model="menuStartingDate" lazy v-bind:close-on-content-click="false" transition="scale-transition" offset-y full-width v-bind:nudge-right="40" max-width="290px" min-width="290px">
           <v-text-field slot="activator" label="Data Inicial" v-model="formattedStartingDate" append-icon="event" readonly></v-text-field>
@@ -35,16 +35,13 @@
       <v-flex xs2>
         <v-text-field v-model="inputValorMaximo" v-bind:mask="mask" return-masked-value clearable label="Valor Máximo" append-icon="attach_money"></v-text-field>
       </v-flex>
-      <v-flex xs4>
+      <v-flex xs2>
         <v-text-field v-model="inputCorpo" clearable label="Busca Interna" append-icon="search"></v-text-field>
       </v-flex>
     </v-layout>
-    <v-layout row wrap>
+    <v-layout justify-space-around row wrap>
       <v-flex xs2>
         <v-select v-bind:items="tipos" v-model="tipo" label="Tipo" autocomplete clearable class="select" append-icon="tune"></v-select>
-      </v-flex>
-      <v-flex xs2>
-        <v-select v-bind:items="categorias" v-model="categoria" label="Categoria" autocomplete clearable class="select" append-icon="tune"></v-select>
       </v-flex>
       <v-flex xs2>
         <v-select v-bind:items="orgaos" v-model="orgao" label="Orgão" autocomplete clearable class="select" append-icon="tune"></v-select>
@@ -69,7 +66,6 @@ export default {
   name: 'VPredicoesTableFilter',
   props: {
     tipos: { type: Array },
-    categorias: { type: Array },
     orgaos: { type: Array },
     suborgaos: { type: Array },
     macrorregioes: { type: Array },
@@ -95,7 +91,6 @@ export default {
       valorMaximo: null,
       corpo: null,
       tipo: null,
-      categoria: null,
       orgao: null,
       suborgao: null,
       macrorregiao: null,
@@ -119,7 +114,6 @@ export default {
         valorMaximo: this.unformatNumber(this.valorMaximo),
         corpo: this.corpo,
         tipo: this.tipo,
-        categoria: this.categoria,
         orgao: this.orgao,
         suborgao: this.suborgao,
         macrorregiao: this.macrorregiao,

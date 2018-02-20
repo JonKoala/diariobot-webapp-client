@@ -14,7 +14,6 @@
         <tr @click="showDetails(props.item)">
           <td class="text-xs-right">{{ props.item.materia }}</td>
           <td class="text-xs-right">{{ props.item.tipo }}</td>
-          <td class="text-xs-right">{{ props.item.categoria }}</td>
           <td class="text-xs-right">{{ props.item.orgao }}</td>
           <td class="text-xs-right">{{ props.item.suborgao }}</td>
           <td class="text-xs-right">{{ props.item.macrorregiao }}</td>
@@ -73,7 +72,6 @@ export default {
       headers: [
         {text: 'MATÉRIA', value: 'materia'},
         {text: 'TIPO', value: 'tipo'},
-        {text: 'CATEGORIA', value: 'categoria'},
         {text: 'ORGÃO', value: 'orgao'},
         {text: 'JURISDICIONADO', value: 'suborgao'},
         {text: 'MACRORREGIÃO', value: 'macrorregiao'},
