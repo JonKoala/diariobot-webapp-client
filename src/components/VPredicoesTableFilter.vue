@@ -15,7 +15,7 @@
           </v-date-picker>
         </v-menu>
       </v-flex>
-      <v-flex xs2 class="ml-4">
+      <v-flex xs2>
         <v-menu v-model="menuEndingDate" lazy v-bind:close-on-content-click="false" transition="scale-transition" offset-y full-width v-bind:nudge-right="40" max-width="290px" min-width="290px">
           <v-text-field slot="activator" label="Data Final" v-model="formattedEndingDate" prepend-icon="event" readonly></v-text-field>
           <v-date-picker v-model="endingDate" actions locale="pt-br" no-title scrollable>
@@ -29,13 +29,13 @@
           </v-date-picker>
         </v-menu>
       </v-flex>
-      <v-flex xs2 class="ml-4">
+      <v-flex xs2>
         <v-text-field v-model="inputValorMinimo" v-bind:mask="mask" return-masked-value clearable label="Valor Mínimo" prepend-icon="attach_money"></v-text-field>
       </v-flex>
-      <v-flex xs2 class="ml-4">
+      <v-flex xs2>
         <v-text-field v-model="inputValorMaximo" v-bind:mask="mask" return-masked-value clearable label="Valor Máximo" prepend-icon="attach_money"></v-text-field>
       </v-flex>
-      <v-flex xs2 class="ml-4">
+      <v-flex xs4>
         <v-text-field v-model="inputCorpo" clearable label="Busca Interna" prepend-icon="search"></v-text-field>
       </v-flex>
     </v-layout>
@@ -43,22 +43,20 @@
       <v-flex xs2>
         <v-select v-bind:items="tipos" v-model="tipo" label="Tipo" autocomplete clearable class="select" prepend-icon="tune"></v-select>
       </v-flex>
-      <v-flex xs2 class="ml-4">
+      <v-flex xs2>
         <v-select v-bind:items="categorias" v-model="categoria" label="Categoria" autocomplete clearable class="select" prepend-icon="tune"></v-select>
       </v-flex>
-      <v-flex xs2 class="ml-4">
+      <v-flex xs2>
         <v-select v-bind:items="orgaos" v-model="orgao" label="Orgão" autocomplete clearable class="select" prepend-icon="tune"></v-select>
       </v-flex>
-      <v-flex xs2 class="ml-4">
+      <v-flex xs2>
         <v-select v-bind:items="suborgaos" v-model="suborgao" label="Jurisdicionado" autocomplete clearable class="select" prepend-icon="tune"></v-select>
       </v-flex>
-      <v-flex xs2 class="ml-4">
-        <v-select v-bind:items="classes" v-model="classe" item-text="nome" item-value="id" label="Tema" autocomplete clearable class="select" prepend-icon="tune"></v-select>
-      </v-flex>
-    </v-layout>
-    <v-layout row wrap>
       <v-flex xs2>
         <v-select v-bind:items="macrorregioes" v-model="macrorregiao" item-text="nome" item-value="id" label="Macrorregião" autocomplete clearable class="select" prepend-icon="tune"></v-select>
+      </v-flex>
+      <v-flex xs2>
+        <v-select v-bind:items="classes" v-model="classe" item-text="nome" item-value="id" label="Tema" autocomplete clearable class="select" prepend-icon="tune"></v-select>
       </v-flex>
     </v-layout>
   </v-container>
