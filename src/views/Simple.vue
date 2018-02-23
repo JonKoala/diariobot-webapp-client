@@ -3,7 +3,7 @@
     <v-toolbar app fixed clipped-left>
       <v-tooltip bottom>
         <v-btn @click.stop="showFilter = !showFilter" slot="activator" class="mx-0" icon>
-          <v-icon>search</v-icon>
+          <v-icon>filter_list</v-icon>
         </v-btn>
         <span>Filtros</span>
       </v-tooltip>
@@ -24,7 +24,7 @@
         <v-layout justify-center align-start>
           <v-flex xs12>
             <v-card color="white">
-              <v-predicoes-table-advanced class="fluid ma-0 pa-0"
+              <v-predicoes-table-advanced class="fluid ma-0 pa-0" strip-internal-links
                 v-bind:predicoes="predicoes"
                 v-bind:totalItems="totalItems"
                 v-bind:isLoading="!isReady"
@@ -66,7 +66,7 @@ export default {
       showFilter: false,
 
       pagination: {},
-      filter: {}
+      filter: { startingDate: moment.utc().format('YYYY-MM-DD')}
     };
   },
   created () {

@@ -6,8 +6,8 @@
         <template slot-scope="{ save, cancel }">
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn flat color="primary" v-on:click="cancel">Cancelar</v-btn>
-            <v-btn flat color="primary" v-on:click="save">Salvar</v-btn>
+            <v-btn flat color="primary" v-on:click="startingDate = null; menuStartingDate = false;">Cancelar</v-btn>
+            <v-btn flat color="primary" v-on:click="menuStartingDate = false;">Salvar</v-btn>
           </v-card-actions>
         </template>
       </v-date-picker>
@@ -18,8 +18,8 @@
         <template slot-scope="{ save, cancel }">
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn flat color="primary" v-on:click="cancel">Cancelar</v-btn>
-            <v-btn flat color="primary" v-on:click="save">Salvar</v-btn>
+            <v-btn flat color="primary" v-on:click="endingDate = null; menuEndingDate = false;">Cancelar</v-btn>
+            <v-btn flat color="primary" v-on:click="menuEndingDate = false;">Salvar</v-btn>
           </v-card-actions>
         </template>
       </v-date-picker>
@@ -61,7 +61,7 @@ export default {
       inputValorMaximo: null,
       inputCorpo: null,
 
-      startingDate: null,
+      startingDate: moment.utc().format('YYYY-MM-DD'),
       endingDate: null,
       valorMinimo: null,
       valorMaximo: null,
