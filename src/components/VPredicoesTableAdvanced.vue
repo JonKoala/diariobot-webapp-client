@@ -27,17 +27,23 @@
       <v-card>
         <v-toolbar color="blue-grey" dense card>
           <v-toolbar-title class="white--text">
-            <v-tooltip top>
+            <v-tooltip top v-if="!stripInternalLinks">
               <v-btn v-bind:href="linkToPredicao(detailed.id)" target="_blank" @click="" slot="activator" class="mx-0" icon>
-                <v-icon color="white">link</v-icon>
+                <v-icon color="white">details</v-icon>
               </v-btn>
               <span>Detalhes</span>
             </v-tooltip>
-            <v-tooltip top>
+            <v-tooltip top v-if="!stripInternalLinks">
               <v-btn v-bind:href="linkToCrowdsourcer(detailed.id)" target="_blank" @click="" slot="activator" class="ml-0" icon>
                 <v-icon color="white">edit</v-icon>
               </v-btn>
               <span>Corrigir</span>
+            </v-tooltip>
+            <v-tooltip top v-if="stripInternalLinks">
+              <v-btn v-bind:href="linkToOriginal(detailed.identificador)" target="_blank" @click="" slot="activator" class="mx-0" icon>
+                <v-icon color="white">link</v-icon>
+              </v-btn>
+              <span>Original</span>
             </v-tooltip>
             <span class="ml-4" v-bind:title="detailed.materia">{{ detailed.materia }}</span>
           </v-toolbar-title>
@@ -64,7 +70,8 @@ export default {
   props: {
     predicoes: { type: Array, required: true },
     totalItems: { type: Number },
-    isLoading: { type: Boolean }
+    isLoading: { type: Boolean },
+    stripInternalLinks: { type: Boolean }
   },
   data () {
     return {
@@ -100,6 +107,9 @@ export default {
     },
     linkToCrowdsourcer(id) {
       return `crowdsourcer/${id}`
+    },
+    linkToOriginal (identificador) {
+      return `http://ioes.dio.es.gov.br/apifront/portal/edicoes/publicacoes_ver_conteudo/${identificador}`
     },
     showDetails(detailed) {
       this.detailed = detailed;
