@@ -63,13 +63,6 @@ module.exports = {
 
 if (process.env.BUILD === 'simple') {
   module.exports.entry =  './src/simple.js';
-  // module.exports.plugins = (module.exports.plugins || []).concat([
-  //   new webpack.DefinePlugin({
-  //     'process.env': {
-  //       NODE_ENV: '"development"'
-  //     }
-  //   })
-  // ]);
 }
 
 if (process.env.NODE_ENV === 'production') {
