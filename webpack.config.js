@@ -53,12 +53,23 @@ module.exports = {
     historyApiFallback: true,
     noInfo: true,
     overlay: true,
-	port: appconfig.server.port
+	  port: appconfig.server.port
   },
   performance: {
     hints: false
   },
   devtool: '#eval-source-map'
+}
+
+if (process.env.BUILD === 'simple') {
+  module.exports.entry =  './src/simple.js';
+  // module.exports.plugins = (module.exports.plugins || []).concat([
+  //   new webpack.DefinePlugin({
+  //     'process.env': {
+  //       NODE_ENV: '"development"'
+  //     }
+  //   })
+  // ]);
 }
 
 if (process.env.NODE_ENV === 'production') {
