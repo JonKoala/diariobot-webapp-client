@@ -29,8 +29,8 @@
 <script>
 import moment from 'moment'
 
-import ApiService from '../common/api.service'
-import VPredicoesTable from '../components/VPredicoesTable'
+import ApiService from 'common/api.service'
+import VPredicoesTable from 'components/VPredicoesTable'
 
 export default {
   name: 'Home',

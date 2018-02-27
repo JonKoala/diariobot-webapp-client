@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Blacklist from '../views/Blacklist'
-import Busca from '../views/Busca'
-import Crowdsourcer from '../views/Crowdsourcer'
-import Home from '../views/Home'
-import Keywords from '../views/Keywords'
-import Predicao from '../views/Predicao'
+import Blacklist from './views/Blacklist'
+import Busca from './views/Busca'
+import Crowdsourcer from './views/Crowdsourcer'
+import Home from './views/Home'
+import Keywords from './views/Keywords'
+import Predicao from './views/Predicao'
 
 
 Vue.use(VueRouter)

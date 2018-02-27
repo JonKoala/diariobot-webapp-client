@@ -6,9 +6,9 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --hot",
+    "dev": "cross-env NODE_ENV=development BUILD=main webpack-dev-server --hot",
     "dev:simple": "cross-env NODE_ENV=development BUILD=simple webpack-dev-server --hot",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
+    "build": "cross-env NODE_ENV=production BUILD=main webpack --progress --hide-modules",
     "build:simple": "cross-env NODE_ENV=production BUILD=simple webpack --progress --hide-modules",
     "start": "node app.js"
   },

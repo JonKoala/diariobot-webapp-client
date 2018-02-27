@@ -40,8 +40,8 @@
 <script>
 import moment from 'moment'
 
-import BaseDebounceInput from './BaseDebounceInput'
-import BaseDatePicker from './BaseDatePicker'
+import BaseDebounceInput from 'components/BaseDebounceInput'
+import BaseDatePicker from 'components/BaseDatePicker'
 
 export default {
   name: 'VPredicoesTableFilter',

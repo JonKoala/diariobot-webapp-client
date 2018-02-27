@@ -41,12 +41,12 @@
 </template>
 
 <script>
-import ApiService from '../common/api.service'
-import ColorScheme from '../common/color.scheme'
-import RegexCollection from '../common/regex.collection'
+import ApiService from 'common/api.service'
+import ColorScheme from 'common/color.scheme'
+import RegexCollection from 'common/regex.collection'
 
-import VPublicacaoViewerHeader from '../components/VPublicacaoViewerHeader'
-import VPublicacaoViewerBody from '../components/VPublicacaoViewerBody'
+import VPublicacaoViewerHeader from 'components/VPublicacaoViewerHeader'
+import VPublicacaoViewerBody from 'components/VPublicacaoViewerBody'
 
 export default {
   name: 'Predicao',

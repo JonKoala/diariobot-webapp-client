@@ -6,7 +6,7 @@ var fs = require('fs');
 var appconfig = yaml.safeLoad(fs.readFileSync('appconfig.yml'));
 
 module.exports = {
-  entry: './src/main.js',
+  entry: './src/packages/' + process.env.BUILD + '/' + process.env.BUILD + '.js',
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
@@ -19,15 +19,11 @@ module.exports = {
         use: [
           'vue-style-loader',
           'css-loader'
-        ],
-      },      {
+        ]
+      },
+      {
         test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          loaders: {
-          }
-          // other vue-loader options go here
-        }
+        loader: 'vue-loader'
       },
       {
         test: /\.js$/,
@@ -35,7 +31,7 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
+        test: /\.(png|jpg|gif|svg|ico)$/,
         loader: 'file-loader',
         options: {
           name: '[name].[ext]?[hash]'
@@ -45,7 +41,9 @@ module.exports = {
   },
   resolve: {
     alias: {
-      'vue$': 'vue/dist/vue.esm.js'
+      'vue$': 'vue/dist/vue.esm.js',
+      'components': path.resolve(__dirname, './src/components/'),
+      'common': path.resolve(__dirname, './src/common/')
     },
     extensions: ['*', '.js', '.vue', '.json']
   },
@@ -59,10 +57,6 @@ module.exports = {
     hints: false
   },
   devtool: '#eval-source-map'
-}
-
-if (process.env.BUILD === 'simple') {
-  module.exports.entry =  './src/simple.js';
 }
 
 if (process.env.NODE_ENV === 'production') {

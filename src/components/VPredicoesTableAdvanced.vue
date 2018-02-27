@@ -57,10 +57,11 @@
 <script>
 import moment from 'moment'
 
-import ApiService from '../common/api.service'
-import ColorScheme from '../common/color.scheme'
-import RegexCollection from '../common/regex.collection'
-import VPublicacaoViewerBody from '../components/VPublicacaoViewerBody'
+import ApiService from 'common/api.service'
+import ColorScheme from 'common/color.scheme'
+import RegexCollection from 'common/regex.collection'
+
+import VPublicacaoViewerBody from 'components/VPublicacaoViewerBody'
 
 export default {
   name: 'VPredicoesTableAdvanced',

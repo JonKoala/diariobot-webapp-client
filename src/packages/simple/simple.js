@@ -3,12 +3,12 @@ import Vuetify from 'vuetify'
 
 import 'vuetify/dist/vuetify.css'
 
-import Simple from './views/Simple'
+import App from './App'
 
 Vue.use(Vuetify)
 
 new Vue({
   el: '#app',
-  template: '<Simple/>',
-  components: { Simple }
+  template: '<App/>',
+  components: { App }
 })

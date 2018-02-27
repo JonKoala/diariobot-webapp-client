@@ -41,11 +41,11 @@
 </template>
 
 <script>
-import ApiService from '../common/api.service'
+import ApiService from 'common/api.service'
 
-import VPublicacaoViewerHeader from '../components/VPublicacaoViewerHeader'
-import VPublicacaoViewerBody from '../components/VPublicacaoViewerBody'
-import VDynamicButtonsArea from '../components/VDynamicButtonsArea'
+import VPublicacaoViewerHeader from 'components/VPublicacaoViewerHeader'
+import VPublicacaoViewerBody from 'components/VPublicacaoViewerBody'
+import VDynamicButtonsArea from 'components/VDynamicButtonsArea'
 
 export default {
   name: 'Crowdsourcer',

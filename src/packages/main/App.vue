@@ -23,12 +23,12 @@
 </template>
 
 <script>
-  import TheNavigationBar from './components/TheNavigationBar'
+import TheNavigationBar from './components/TheNavigationBar'
 
-  export default {
-    name: 'App',
-    components: {
-      TheNavigationBar
-    },
-  }
+export default {
+  name: 'App',
+  components: {
+    TheNavigationBar
+  },
+}
 </script>

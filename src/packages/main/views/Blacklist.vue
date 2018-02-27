@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import ApiService from '../common/api.service'
+import ApiService from 'common/api.service'
 
 export default {
   name: 'Blacklist',

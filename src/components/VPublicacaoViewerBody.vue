@@ -9,7 +9,7 @@
 <script>
 import moment from 'moment'
 
-import RegexCollection from '../common/regex.collection'
+import RegexCollection from 'common/regex.collection'
 
 export default {
   name: 'VPublicacaoViewerBody',

@@ -36,9 +36,10 @@
 <script>
 import moment from 'moment'
 
-import ApiService from '../common/api.service'
-import VPredicoesTableAdvanced from '../components/VPredicoesTableAdvanced'
-import VPredicoesTableFilter from '../components/VPredicoesTableFilter'
+import ApiService from 'common/api.service'
+
+import VPredicoesTableAdvanced from 'components/VPredicoesTableAdvanced'
+import VPredicoesTableFilter from 'components/VPredicoesTableFilter'
 
 export default {
   name: 'Busca',

@@ -41,13 +41,13 @@
 <script>
 import moment from 'moment'
 
-import ApiService from '../common/api.service'
+import ApiService from 'common/api.service'
 
-import ThePredicoesTableVerticalFilter from '../components/ThePredicoesTableVerticalFilter'
-import VPredicoesTableAdvanced from '../components/VPredicoesTableAdvanced'
+import ThePredicoesTableVerticalFilter from './components/ThePredicoesTableVerticalFilter'
+import VPredicoesTableAdvanced from 'components/VPredicoesTableAdvanced'
 
 export default {
-  name: 'Simple',
+  name: 'App',
   components: {
     ThePredicoesTableVerticalFilter,
     VPredicoesTableAdvanced

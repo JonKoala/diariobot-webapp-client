@@ -32,8 +32,8 @@
 </template>
 
 <script>
-  import ApiService from '../common/api.service'
-  import ColorScheme from '../common/color.scheme'
+  import ApiService from 'common/api.service'
+  import ColorScheme from 'common/color.scheme'
 
   export default {
     name: 'Keywords',
