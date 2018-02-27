@@ -48,7 +48,7 @@
             <span class="ml-4" v-bind:title="detailed.materia">{{ detailed.materia }}</span>
           </v-toolbar-title>
         </v-toolbar>
-        <v-publicacao-viewer-body v-bind:publicacao="detailed.corpo" highlight-monetary-value></v-publicacao-viewer-body>
+        <publicacao-viewer-body v-bind:publicacao="detailed.corpo" highlight-monetary-value></publicacao-viewer-body>
       </v-card>
     </v-dialog>
   </v-container>
@@ -61,12 +61,12 @@ import ApiService from 'common/api.service'
 import ColorScheme from 'common/color.scheme'
 import RegexCollection from 'common/regex.collection'
 
-import VPublicacaoViewerBody from 'components/VPublicacaoViewerBody'
+import PublicacaoViewerBody from 'components/PublicacaoViewerBody'
 
 export default {
-  name: 'VPredicoesTableAdvanced',
+  name: 'PredicoesTableAdvanced',
   components: {
-    VPublicacaoViewerBody
+    PublicacaoViewerBody
   },
   props: {
     predicoes: { type: Array, required: true },

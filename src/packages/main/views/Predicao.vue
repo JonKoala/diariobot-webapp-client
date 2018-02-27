@@ -20,7 +20,7 @@
               <span class="ml-4">{{ predicao.materia }}</span>
             </v-toolbar-title>
           </v-toolbar>
-          <v-publicacao-viewer-header class="fluid" v-bind:publicacao="predicao"></v-publicacao-viewer-header>
+          <publicacao-viewer-header class="fluid" v-bind:publicacao="predicao"></publicacao-viewer-header>
         </v-card>
       </v-flex>
       <v-flex xs12>
@@ -28,7 +28,7 @@
           <v-toolbar color="blue-grey" dense card>
             <v-toolbar-title class="white--text">CORPO DA PUBLICAÇÃO</v-toolbar-title>
           </v-toolbar>
-          <v-publicacao-viewer-body v-bind:publicacao="predicao.corpo" highlight-monetary-value></v-publicacao-viewer-body>
+          <publicacao-viewer-body v-bind:publicacao="predicao.corpo" highlight-monetary-value></publicacao-viewer-body>
         </v-card>
       </v-flex>
       <v-flex xs2>
@@ -45,14 +45,14 @@ import ApiService from 'common/api.service'
 import ColorScheme from 'common/color.scheme'
 import RegexCollection from 'common/regex.collection'
 
-import VPublicacaoViewerHeader from 'components/VPublicacaoViewerHeader'
-import VPublicacaoViewerBody from 'components/VPublicacaoViewerBody'
+import PublicacaoViewerBody from 'components/PublicacaoViewerBody'
+import PublicacaoViewerHeader from 'components/PublicacaoViewerHeader'
 
 export default {
   name: 'Predicao',
   components: {
-    VPublicacaoViewerHeader,
-    VPublicacaoViewerBody
+    PublicacaoViewerBody,
+    PublicacaoViewerHeader
   },
   data () {
     return {

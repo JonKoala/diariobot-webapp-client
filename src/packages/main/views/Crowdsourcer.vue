@@ -21,7 +21,7 @@
                 <span class="ml-4" v-bind:title="publicacao.materia">{{ publicacao.materia }}</span>
               </v-toolbar-title>
             </v-toolbar>
-            <v-publicacao-viewer-header class="fluid" v-bind:publicacao="publicacao"></v-publicacao-viewer-header>
+            <publicacao-viewer-header class="fluid" v-bind:publicacao="publicacao"></publicacao-viewer-header>
           </v-card>
         </v-flex>
         <v-flex xs12>
@@ -29,11 +29,11 @@
             <v-toolbar color="blue-grey" dense card>
               <v-toolbar-title class="white--text">CORPO DA PUBLICAÇÃO</v-toolbar-title>
             </v-toolbar>
-            <v-publicacao-viewer-body v-bind:publicacao="publicacao.corpo"></v-publicacao-viewer-body>
+            <publicacao-viewer-body v-bind:publicacao="publicacao.corpo"></publicacao-viewer-body>
           </v-card>
         </v-flex>
         <v-flex xs12>
-          <v-dynamic-buttons-area v-bind:entries="computedClasses" v-on:click="classClicked" ></v-dynamic-buttons-area>
+          <dynamic-buttons-area v-bind:entries="computedClasses" v-on:click="classClicked" ></dynamic-buttons-area>
         </v-flex>
       </v-layout>
     </v-slide-x-transition>
@@ -43,16 +43,16 @@
 <script>
 import ApiService from 'common/api.service'
 
-import VPublicacaoViewerHeader from 'components/VPublicacaoViewerHeader'
-import VPublicacaoViewerBody from 'components/VPublicacaoViewerBody'
-import VDynamicButtonsArea from 'components/VDynamicButtonsArea'
+import DynamicButtonsArea from 'components/DynamicButtonsArea'
+import PublicacaoViewerBody from 'components/PublicacaoViewerBody'
+import PublicacaoViewerHeader from 'components/PublicacaoViewerHeader'
 
 export default {
   name: 'Crowdsourcer',
   components: {
-    VPublicacaoViewerHeader,
-    VPublicacaoViewerBody,
-    VDynamicButtonsArea
+    DynamicButtonsArea,
+    PublicacaoViewerBody,
+    PublicacaoViewerHeader
   },
   data () {
     return {

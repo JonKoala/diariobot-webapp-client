@@ -13,7 +13,7 @@ import ApiService from 'common/api.service'
 import ColorScheme from 'common/color.scheme'
 
 export default {
-  name: 'VDynamicButtonsArea',
+  name: 'DynamicButtonsArea',
   data() {
     return {
       colors: ColorScheme.classes

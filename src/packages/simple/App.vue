@@ -24,12 +24,12 @@
         <v-layout justify-center align-start>
           <v-flex xs12>
             <v-card color="white">
-              <v-predicoes-table-advanced class="fluid ma-0 pa-0" strip-internal-links
+              <predicoes-table-advanced class="fluid ma-0 pa-0" strip-internal-links
                 v-bind:predicoes="predicoes"
                 v-bind:totalItems="totalItems"
                 v-bind:isLoading="!isReady"
                 v-on:paginationChanged="paginationChanged">
-              </v-predicoes-table-advanced>
+              </predicoes-table-advanced>
             </v-card>
           </v-flex>
         </v-layout>
@@ -44,13 +44,13 @@ import moment from 'moment'
 import ApiService from 'common/api.service'
 
 import ThePredicoesTableVerticalFilter from './components/ThePredicoesTableVerticalFilter'
-import VPredicoesTableAdvanced from 'components/VPredicoesTableAdvanced'
+import PredicoesTableAdvanced from 'components/PredicoesTableAdvanced'
 
 export default {
   name: 'App',
   components: {
     ThePredicoesTableVerticalFilter,
-    VPredicoesTableAdvanced
+    PredicoesTableAdvanced
   },
   data () {
     return {

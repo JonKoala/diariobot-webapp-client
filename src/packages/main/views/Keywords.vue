@@ -32,60 +32,60 @@
 </template>
 
 <script>
-  import ApiService from 'common/api.service'
-  import ColorScheme from 'common/color.scheme'
+import ApiService from 'common/api.service'
+import ColorScheme from 'common/color.scheme'
 
-  export default {
-    name: 'Keywords',
-    data() {
-      return {
-        classes: [],
-        colors: ColorScheme.classes,
+export default {
+  name: 'Keywords',
+  data() {
+    return {
+      classes: [],
+      colors: ColorScheme.classes,
 
-        snackbar: false,
-        snackbarMessage: ''
-      };
-    },
-    created() {
+      snackbar: false,
+      snackbarMessage: ''
+    };
+  },
+  created() {
 
-      var classes = [];
-      ApiService.get(`classes/keywords`)
-      .then(result => {
-        classes = result.filter(classe => classe.keywords.length > 0).sort((a, b) => { return a.ordem - b.ordem });
-        return ApiService.get('blacklist');
-      }).then(blacklist => {
+    var classes = [];
+    ApiService.get(`classes/keywords`)
+    .then(result => {
+      classes = result.filter(classe => classe.keywords.length > 0).sort((a, b) => { return a.ordem - b.ordem });
+      return ApiService.get('blacklist');
+    }).then(blacklist => {
 
-        // mark keywords as blacklisted
-        blacklist = blacklist.map(blacklisted => blacklisted.palavra);
-        classes.forEach(classe => {
-          classe.keywords.forEach(keyword => {
-            keyword.isBlacklisted = blacklist.includes(keyword.palavra);
-          });
+      // mark keywords as blacklisted
+      blacklist = blacklist.map(blacklisted => blacklisted.palavra);
+      classes.forEach(classe => {
+        classe.keywords.forEach(keyword => {
+          keyword.isBlacklisted = blacklist.includes(keyword.palavra);
         });
-
-        this.classes = classes;
       });
+
+      this.classes = classes;
+    });
+  },
+  methods: {
+    toggleBlacklistWord(keyword) {
+
+      keyword.isBlacklisted = !keyword.isBlacklisted
+
+      // add or remove word from blacklist
+      var methodToCall = (keyword.isBlacklisted) ? this.blacklistWord : this.unblacklistWord;
+      methodToCall.call(this, keyword.palavra);
+
+      this.snackbarMessage = `Palavra '${keyword.palavra}' ${keyword.isBlacklisted ? 'Adicionada na' : 'Removida da'} Blacklist`;
+      this.snackbar = true;
     },
-    methods: {
-      toggleBlacklistWord(keyword) {
-
-        keyword.isBlacklisted = !keyword.isBlacklisted
-
-        // add or remove word from blacklist
-        var methodToCall = (keyword.isBlacklisted) ? this.blacklistWord : this.unblacklistWord;
-        methodToCall.call(this, keyword.palavra);
-
-        this.snackbarMessage = `Palavra '${keyword.palavra}' ${keyword.isBlacklisted ? 'Adicionada na' : 'Removida da'} Blacklist`;
-        this.snackbar = true;
-      },
-      blacklistWord(word) {
-        ApiService.post('blacklist', { palavra: word });
-      },
-      unblacklistWord(word) {
-        ApiService.delete('blacklist', { params: { palavra: word } });
-      }
+    blacklistWord(word) {
+      ApiService.post('blacklist', { palavra: word });
+    },
+    unblacklistWord(word) {
+      ApiService.delete('blacklist', { params: { palavra: word } });
     }
   }
+}
 </script>
 
 <style scoped>

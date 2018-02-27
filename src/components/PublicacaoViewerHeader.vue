@@ -15,7 +15,7 @@
 import moment from 'moment'
 
 export default {
-  name: 'VPublicacaoViewerHeader',
+  name: 'PublicacaoViewerHeader',
   props: {
     publicacao: { type: Object, required: true }
   },

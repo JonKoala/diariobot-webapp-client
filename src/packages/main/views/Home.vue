@@ -19,7 +19,7 @@
               </v-flex>
             </v-layout>
           </v-container>
-          <v-predicoes-table class="fluid ma-0 pa-0" v-bind:predicoes="predicoes" v-bind:search="search" v-bind:isLoading="!isReady"></v-predicoes-table>
+          <predicoes-table class="fluid ma-0 pa-0" v-bind:predicoes="predicoes" v-bind:search="search" v-bind:isLoading="!isReady"></predicoes-table>
         </v-card>
       </v-flex>
     </v-layout>
@@ -30,12 +30,13 @@
 import moment from 'moment'
 
 import ApiService from 'common/api.service'
-import VPredicoesTable from 'components/VPredicoesTable'
+
+import PredicoesTable from 'components/PredicoesTable'
 
 export default {
   name: 'Home',
   components: {
-    VPredicoesTable
+    PredicoesTable
   },
   data () {
     return {

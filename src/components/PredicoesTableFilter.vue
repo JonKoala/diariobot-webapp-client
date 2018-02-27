@@ -44,7 +44,7 @@ import BaseDebounceInput from 'components/BaseDebounceInput'
 import BaseDatePicker from 'components/BaseDatePicker'
 
 export default {
-  name: 'VPredicoesTableFilter',
+  name: 'PredicoesTableFilter',
   components: {
     BaseDatePicker,
     BaseDebounceInput

@@ -6,14 +6,14 @@
           <v-toolbar color="blue-grey" dense card>
             <v-toolbar-title class="white--text">FILTROS</v-toolbar-title>
           </v-toolbar>
-          <v-predicoes-table-filter class="fluid"
+          <predicoes-table-filter class="fluid"
           v-bind:tipos="tipos"
           v-bind:orgaos="orgaos"
           v-bind:suborgaos="suborgaos"
           v-bind:macrorregioes="macrorregioes"
           v-bind:classes="classes"
           v-on:filterChanged="filterChanged">
-        </v-predicoes-table-filter>
+        </predicoes-table-filter>
         </v-card>
       </v-flex>
       <v-flex xs12>
@@ -21,12 +21,12 @@
           <v-toolbar color="blue-grey" dense card>
             <v-toolbar-title class="white--text">PREDIÇÕES</v-toolbar-title>
           </v-toolbar>
-          <v-predicoes-table-advanced class="fluid ma-0 pa-0"
+          <predicoes-table-advanced class="fluid ma-0 pa-0"
             v-bind:predicoes="predicoes"
             v-bind:totalItems="totalItems"
             v-bind:isLoading="!isReady"
             v-on:paginationChanged="paginationChanged">
-          </v-predicoes-table-advanced>
+          </predicoes-table-advanced>
         </v-card>
       </v-flex>
     </v-layout>
@@ -38,14 +38,14 @@ import moment from 'moment'
 
 import ApiService from 'common/api.service'
 
-import VPredicoesTableAdvanced from 'components/VPredicoesTableAdvanced'
-import VPredicoesTableFilter from 'components/VPredicoesTableFilter'
+import PredicoesTableAdvanced from 'components/PredicoesTableAdvanced'
+import PredicoesTableFilter from 'components/PredicoesTableFilter'
 
 export default {
   name: 'Busca',
   components: {
-    VPredicoesTableAdvanced,
-    VPredicoesTableFilter
+    PredicoesTableAdvanced,
+    PredicoesTableFilter
   },
   data () {
     return {

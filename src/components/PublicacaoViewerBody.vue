@@ -12,7 +12,7 @@ import moment from 'moment'
 import RegexCollection from 'common/regex.collection'
 
 export default {
-  name: 'VPublicacaoViewerBody',
+  name: 'PublicacaoViewerBody',
   props: {
     publicacao: { type: String },
     highlightMonetaryValue: { type: Boolean }
