@@ -6,14 +6,14 @@
           <v-toolbar color="blue-grey" dense card>
             <v-toolbar-title class="white--text">FILTROS</v-toolbar-title>
           </v-toolbar>
-          <predicoes-table-filter class="fluid"
+          <predicoes-table-filters class="fluid"
           v-bind:tipos="tipos"
           v-bind:orgaos="orgaos"
           v-bind:suborgaos="suborgaos"
           v-bind:macrorregioes="macrorregioes"
           v-bind:classes="classes"
           v-on:filterChanged="filterChanged">
-        </predicoes-table-filter>
+        </predicoes-table-filters>
         </v-card>
       </v-flex>
       <v-flex xs12>
@@ -34,93 +34,17 @@
 </template>
 
 <script>
-import moment from 'moment'
-
-import ApiService from 'common/api.service'
-
 import PredicoesTableAdvanced from 'components/PredicoesTableAdvanced'
-import PredicoesTableFilter from 'components/PredicoesTableFilter'
+import PredicoesTableFilters from 'components/PredicoesTableFilters'
+
+import PredicoesTableFilteringBehaviour from 'mixins/PredicoesTableFilteringBehaviour'
 
 export default {
   name: 'Busca',
   components: {
     PredicoesTableAdvanced,
-    PredicoesTableFilter
+    PredicoesTableFilters
   },
-  data () {
-    return {
-      predicoes: [],
-      tipos: [],
-      orgaos: [],
-      suborgaos: [],
-      macrorregioes: [],
-      classes: [],
-
-      totalItems: 0,
-      isReady: false,
-
-      pagination: {},
-      filter: {}
-    };
-  },
-  created () {
-    ApiService.get('publicacoes/list/tipo').then(result => this.tipos = result);
-    ApiService.get('publicacoes/list/orgao').then(result => this.orgaos = result);
-    ApiService.get('publicacoes/list/suborgao').then(result => this.suborgaos = result);
-    ApiService.get('macrorregioes').then(result => this.macrorregioes = result);
-    ApiService.get('classes/predictable').then(result => this.classes = result);
-  },
-  methods: {
-    paginationChanged (pagination) {
-      this.pagination = pagination;
-    },
-    filterChanged (filter) {
-      this.filter = filter;
-    },
-    queryPredicoes (queryArguments) {
-      this.isReady = false;
-      this.predicoes = [];
-      window.scrollTo(0, 0);
-
-      ApiService.get('predicoes/paginable', {params: queryArguments}).then(result => {
-
-        this.totalItems = result.count;
-        var predicoes = result.rows;
-
-        predicoes.forEach(predicao => {
-          predicao.formattedValor = (predicao.valor) ? predicao.valor.toLocaleString('pt-br', { style: 'currency', currency: 'BRL'}).substr(2) : null;
-          predicao.formattedData = moment.utc(predicao.data).format('DD/MM/YYYY');
-        });
-
-        this.predicoes = predicoes;
-        this.isReady = true;
-      });
-    }
-  },
-  computed: {
-    queryArguments () {
-      return {
-        itemsPerPage: this.pagination.rowsPerPage,
-        page: this.pagination.page - 1,
-        sortBy: this.pagination.sortBy,
-        sortOrder: (this.pagination.descending) ? 'DESC' : 'ASC',
-        filterStartingDate: this.filter.startingDate,
-        filterEndingDate: this.filter.endingDate,
-        filterMinValor: this.filter.valorMinimo,
-        filterMaxValor: this.filter.valorMaximo,
-        filterCorpo: this.filter.corpo,
-        filterTipo: this.filter.tipo,
-        filterOrgao: this.filter.orgao,
-        filterSuborgao: this.filter.suborgao,
-        filterMacrorregiao: this.filter.macrorregiao,
-        filterClasse: this.filter.classe
-      };
-    }
-  },
-  watch: {
-    queryArguments (args) {
-      this.queryPredicoes(args);
-    }
-  }
+  mixins: [PredicoesTableFilteringBehaviour]
 }
 </script>
