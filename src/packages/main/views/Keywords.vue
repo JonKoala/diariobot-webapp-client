@@ -97,6 +97,10 @@ export default {
 
   .line >>> .list__tile {
     padding-right: 0px;
+    -webkit-user-select: initial !important;
+    -moz-user-select: initial !important;
+    -ms-user-select: initial !important;
+    user-select: initial !important;
   }
 
 </style>

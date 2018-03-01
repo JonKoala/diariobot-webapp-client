@@ -82,4 +82,11 @@ export default {
     border-bottom-width: thin;
   }
 
+  .line >>> .list__tile {
+    -webkit-user-select: initial !important;
+    -moz-user-select: initial !important;
+    -ms-user-select: initial !important;
+    user-select: initial !important;
+  }
+
 </style>
