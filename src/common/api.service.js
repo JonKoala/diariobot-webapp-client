@@ -1,4 +1,4 @@
-import getConfig from './appconfig'
+import appconfig from '~/appconfig.yml'
 
 import Vue from 'vue'
 import axios from 'axios'
@@ -13,25 +13,19 @@ function formatUrl(url) {
 export default {
   get(service, config) {
     service = formatUrl(service);
-    return getConfig.then(appconfig => {
-      return Vue.axios.get(`${appconfig['url']['api']}/${service}`, config)
-        .then(response => {
-          return response.data;
-        }).catch(err => {
-          throw new Error(`ApiService error: ${err}`);
-        });
-    });
+    return Vue.axios.get(`${appconfig['url']['api']}/${service}`, config)
+      .then(response => {
+        return response.data;
+      }).catch(err => {
+        throw new Error(`ApiService error: ${err}`);
+      });
   },
   post(service, data) {
     service = formatUrl(service);
-    return getConfig.then(appconfig => {
-      return Vue.axios.post(`${appconfig['url']['api']}/${service}`, data);
-    });
+    return Vue.axios.post(`${appconfig['url']['api']}/${service}`, data);
   },
   delete(service, config) {
     service = formatUrl(service);
-    return getConfig.then(appconfig => {
-      return Vue.axios.delete(`${appconfig['url']['api']}/${service}`, config);
-    });
+    return Vue.axios.delete(`${appconfig['url']['api']}/${service}`, config);
   }
 };

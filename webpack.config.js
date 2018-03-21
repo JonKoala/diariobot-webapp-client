@@ -1,25 +1,23 @@
-var path = require('path')
-var webpack = require('webpack')
+const path = require('path')
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-var yaml = require('js-yaml');
-var fs = require('fs');
-var appconfig = yaml.safeLoad(fs.readFileSync('appconfig.yml'));
+const yaml = require('js-yaml');
+const fs = require('fs');
+const appconfig = yaml.safeLoad(fs.readFileSync('appconfig.yml'));
 
 module.exports = {
   entry: './src/packages/' + process.env.BUILD + '/' + process.env.BUILD + '.js',
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
+    publicPath: '/',
     filename: 'build.js'
   },
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: [
-          'vue-style-loader',
-          'css-loader'
-        ]
+        use: ['vue-style-loader', 'css-loader']
       },
       {
         test: /\.vue$/,
@@ -29,6 +27,10 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel-loader',
         exclude: /node_modules/
+      },
+      {
+        test: /\.(yml|yaml)$/,
+        loader: 'js-yaml-loader'
       },
       {
         test: /\.(png|jpg|gif|svg|ico)$/,
@@ -44,7 +46,8 @@ module.exports = {
       'vue$': 'vue/dist/vue.esm.js',
       'common': path.resolve(__dirname, './src/common/'),
       'components': path.resolve(__dirname, './src/components/'),
-      'mixins': path.resolve(__dirname, './src/mixins/')
+      'mixins': path.resolve(__dirname, './src/mixins/'),
+      '~': __dirname
     },
     extensions: ['*', '.js', '.vue', '.json']
   },
@@ -52,6 +55,7 @@ module.exports = {
     historyApiFallback: true,
     noInfo: true,
     overlay: true,
+    contentBase: './dist',
 	  port: appconfig.server.port
   },
   performance: {
@@ -77,6 +81,10 @@ if (process.env.NODE_ENV === 'production') {
     }),
     new webpack.LoaderOptionsPlugin({
       minimize: true
+    }),
+    new HtmlWebpackPlugin({
+      template: 'index.html',
+      favicon: path.resolve(__dirname, './images/favicon.ico')
     })
   ])
 }

@@ -1,11 +1,12 @@
-var express = require('express');
+const path = require('path')
+const express = require('express');
 var app = express();
 
-var yaml = require('js-yaml');
-var fs = require('fs');
-var appconfig = yaml.safeLoad(fs.readFileSync('appconfig.yml'));
+const yaml = require('js-yaml');
+const fs = require('fs');
+const appconfig = yaml.safeLoad(fs.readFileSync('appconfig.yml'));
 
-app.use(express.static(__dirname));
+app.use(express.static('dist'));
 
 app.get(/.+\.\w+$/, function(req, res) {
   //requesting an unexisting file
@@ -13,7 +14,7 @@ app.get(/.+\.\w+$/, function(req, res) {
 });
 
 app.get('*', function(req, res) {
-  res.sendFile('index.html', { root : __dirname});
+  res.sendFile('index.html');
 });
 
 var port = appconfig.server.port;
