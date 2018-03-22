@@ -1,11 +1,9 @@
 const path = require('path')
 const express = require('express');
+
+const appconfig = require('./appconfig')
+
 var app = express();
-
-const yaml = require('js-yaml');
-const fs = require('fs');
-const appconfig = yaml.safeLoad(fs.readFileSync('appconfig.yml'));
-
 app.use(express.static('dist'));
 
 app.get(/.+\.\w+$/, function(req, res) {

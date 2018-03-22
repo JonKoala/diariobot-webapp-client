@@ -6,10 +6,10 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development BUILD=main webpack-dev-server --hot",
-    "dev:simple": "cross-env NODE_ENV=development BUILD=simple webpack-dev-server --hot",
-    "build": "cross-env NODE_ENV=production BUILD=main webpack --progress --hide-modules",
-    "build:simple": "cross-env NODE_ENV=production BUILD=simple webpack --progress --hide-modules",
+    "dev": "cross-env BUILD=main webpack-dev-server --hot --config build/webpack.dev.config.js",
+    "dev:simple": "cross-env BUILD=simple webpack-dev-server --hot --config build/webpack.dev.config.js",
+    "build": "cross-env BUILD=main webpack --progress --hide-modules --config build/webpack.prod.config.js",
+    "build:simple": "cross-env BUILD=simple webpack --progress --hide-modules --config build/webpack.prod.config.js",
     "start": "node app.js"
   },
   "dependencies": {
@@ -40,6 +40,7 @@
     "vue-loader": "^13.0.5",
     "vue-template-compiler": "^2.4.4",
     "webpack": "^3.6.0",
-    "webpack-dev-server": "^2.9.1"
+    "webpack-dev-server": "^2.9.1",
+    "webpack-merge": "^4.1.2"
   }
 }
