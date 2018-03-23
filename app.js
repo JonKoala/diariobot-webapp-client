@@ -12,7 +12,7 @@ app.get(/.+\.\w+$/, function(req, res) {
 });
 
 app.get('*', function(req, res) {
-  res.sendFile('index.html');
+  res.sendFile('index.html', { root: './dist'});
 });
 
 var port = appconfig.server.port;
