@@ -1,5 +1,5 @@
-# DIARIOBOT-CLIENT
-Clientes para as aplicações web do DIARIOBOT.
+# diariobot-webapp-client
+Client para as aplicações web do diariobot.
 
 ### Requisitos
  - [Node](https://nodejs.org) >= 6.9
@@ -8,8 +8,8 @@ Clientes para as aplicações web do DIARIOBOT.
 ### Instalação
 Clone o projeto para a sua máquina e acesse o diretório do mesmo.
 ``` bash
-git clone https://github.com/JonKoala/DIOES-crowd-client.git
-cd DIOES-crowd-client
+git clone https://github.com/JonKoala/diariobot-webapp-client.git
+cd diariobot-webapp-client
 ```
 Instale as dependências.
 ``` bash
@@ -29,7 +29,7 @@ server:
 ```
 
 ### Execução
-O DIARIOBOT possui duas aplicações web:
+O diariobot possui duas aplicações web:
  - __Crowdsourcer__: Interface para a classificação manual de publicações do diário e visualização dos resultados do sistema.
  - __Simple__: Visualização simplificada dos resultados do sistema.
 
