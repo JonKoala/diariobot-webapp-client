@@ -7,7 +7,7 @@
         </v-btn>
         <span>Home</span>
       </v-tooltip>
-      <v-toolbar-title>DIOES</v-toolbar-title>
+      <v-toolbar-title>DIARIOBOT</v-toolbar-title>
     </v-toolbar>
     <the-navigation-bar></the-navigation-bar>
     <v-content>

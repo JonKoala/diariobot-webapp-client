@@ -7,7 +7,7 @@
         </v-btn>
         <span>Filtros</span>
       </v-tooltip>
-      <v-toolbar-title>DIOES BOT</v-toolbar-title>
+      <v-toolbar-title>DIARIOBOT</v-toolbar-title>
     </v-toolbar>
     <v-navigation-drawer clipped fixed app absolute temporary v-model="showFilter" class="px-3 pt-3 pb-0">
       <the-predicoes-table-vertical-filters
