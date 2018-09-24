@@ -70,7 +70,7 @@ export default {
       headers: [
         {text: 'MATÉRIA', value: 'materia'},
         {text: 'TIPO', value: 'tipo'},
-        {text: 'ORGÃO', value: 'orgao'},
+        {text: 'ÓRGÃO', value: 'orgao'},
         {text: 'JURISDICIONADO', value: 'suborgao'},
         {text: 'MACRORREGIÃO', value: 'macrorregiao'},
         {text: 'VALOR', value: 'valor'},
