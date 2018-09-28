@@ -6,6 +6,9 @@ import VueAxios from 'vue-axios'
 
 Vue.use(VueAxios, axios)
 
+// define if the configurations are coming from appconfig or from env variables
+const apiUrl = process.env['DIARIOBOT_API_URL'] || appconfig['url']['api'];
+
 function formatUrl(url) {
   return url.startsWith('/') ? url.slice(1) : url;
 }
@@ -13,7 +16,7 @@ function formatUrl(url) {
 export default {
   get(service, config) {
     service = formatUrl(service);
-    return Vue.axios.get(`${appconfig['url']['api']}/${service}`, config)
+    return Vue.axios.get(`${apiUrl}/${service}`, config)
       .then(response => {
         return response.data;
       }).catch(err => {
@@ -22,10 +25,10 @@ export default {
   },
   post(service, data) {
     service = formatUrl(service);
-    return Vue.axios.post(`${appconfig['url']['api']}/${service}`, data);
+    return Vue.axios.post(`${apiUrl}/${service}`, data);
   },
   delete(service, config) {
     service = formatUrl(service);
-    return Vue.axios.delete(`${appconfig['url']['api']}/${service}`, config);
+    return Vue.axios.delete(`${apiUrl}/${service}`, config);
   }
 };
