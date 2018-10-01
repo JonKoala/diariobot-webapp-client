@@ -85,7 +85,7 @@ export default {
         {text: 'MACRORREGIÃO', value: 'macrorregiao'},
         {text: 'DATA', value: 'data'},
         {text: 'VALOR', value: 'valor'},
-        {text: 'PREDIÇÃO', value: 'classe'}
+        {text: 'TEMA', value: 'classe', align: 'center'}
       ],
       isShowingDetail: false,
       detailed: {},

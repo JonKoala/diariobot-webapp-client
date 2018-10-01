@@ -20,11 +20,11 @@ export default {
     };
   },
   created () {
-    ApiService.get('publicacoes/list/tipo').then(result => this.tipos = result);
-    ApiService.get('publicacoes/list/orgao').then(result => this.orgaos = result);
-    ApiService.get('publicacoes/list/suborgao').then(result => this.suborgaos = result);
-    ApiService.get('macrorregioes').then(result => this.macrorregioes = result);
-    ApiService.get('classes/predictable').then(result => this.classes = result);
+    ApiService.get('publicacoes/list/tipo').then(result => this.tipos = result.sort());
+    ApiService.get('publicacoes/list/orgao').then(result => this.orgaos = result.sort());
+    ApiService.get('publicacoes/list/suborgao').then(result => this.suborgaos = result.sort());
+    ApiService.get('macrorregioes').then(result => this.macrorregioes = result.sort());
+    ApiService.get('classes/predictable').then(result => this.classes = result.sort());
   },
   methods: {
     paginationChanged (pagination) {
