@@ -10,7 +10,7 @@
       <v-toolbar-title>DIARIOBOT</v-toolbar-title>
       <v-spacer></v-spacer>
       <div>
-        <p class="mb-0">O <b>DIARIOBOT</b> é um robô que usa inteligência artificial para classificar publicações feitas no diário oficial.</p>
+        <p class="mb-0">O <b>DIARIOBOT</b> é um robô que usa inteligência artificial para classificar publicações feitas no Diário Oficial do Espírito Santo.</p>
         <p class="mb-0">Quer saber mais sobre ele?<v-btn flat small class="ma-0 pb-1" @click.stop="showDialog = true">clique aqui</v-btn></p>
       </div>
     </v-toolbar>
@@ -41,7 +41,7 @@
         </v-layout>
       </v-container>
     </v-content>
-    <v-dialog v-model="showDialog" width="50vw" scrollable>
+    <v-dialog v-model="showDialog" width="45vw" scrollable>
       <informativo-dialog-content v-bind:temas="classes"></informativo-dialog-content>
     </v-dialog>
   </v-app>
