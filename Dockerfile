@@ -1,10 +1,13 @@
 FROM node:8.12
 
-WORKDIR /app
+WORKDIR /usr/src/app
 
-ADD . /app
+COPY package*.json ./
+RUN npm config set registry http://registry.npmjs.org/ && npm install
 
-RUN npm install
+COPY . .
+
+COPY docker-entrypoint.sh /usr/local/bin/
+ENTRYPOINT ["docker-entrypoint.sh"]
 
 EXPOSE 8080
-CMD [ "bash", "npm_start.sh" ]
