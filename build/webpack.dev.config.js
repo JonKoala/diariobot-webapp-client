@@ -1,6 +1,5 @@
 const merge = require('webpack-merge')
 
-const appconfig = require('../appconfig')
 const base = require('./webpack.base.config.js')
 
 module.exports = merge(base, {
@@ -9,9 +8,13 @@ module.exports = merge(base, {
     historyApiFallback: true,
     noInfo: true,
     overlay: true,
-	  port: appconfig.server.port
+	  port: process.env['DIARIOBOT_CLIENT_PORT'],
+    host: '0.0.0.0'
   },
   performance: {
     hints: false
+  },
+  watchOptions: {
+    poll: true
   }
 })

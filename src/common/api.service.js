@@ -1,13 +1,10 @@
-import appconfig from '~/appconfig.yml'
-
 import Vue from 'vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
 Vue.use(VueAxios, axios)
 
-// define if the configurations are coming from appconfig or from env variables
-const apiUrl = process.env['DIARIOBOT_API_URL'] || appconfig['url']['api'];
+const apiUrl = process.env['DIARIOBOT_API_URL'];
 
 function formatUrl(url) {
   return url.startsWith('/') ? url.slice(1) : url;

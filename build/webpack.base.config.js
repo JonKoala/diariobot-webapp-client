@@ -27,10 +27,6 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.(yml|yaml)$/,
-        loader: 'js-yaml-loader'
-      },
-      {
         test: /\.(png|jpg|gif|svg|ico)$/,
         loader: 'file-loader'
       }
