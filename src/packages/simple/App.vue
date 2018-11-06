@@ -1,5 +1,18 @@
 <template>
   <v-app id="app" light>
+
+    <v-navigation-drawer v-model="showFilter" fixed app clipped floating class="grey lighten-5">
+      <the-predicoes-table-vertical-filters
+        v-bind:defaultStartingDate="filter.startingDate"
+        v-bind:tipos="tipos"
+        v-bind:orgaos="orgaos"
+        v-bind:suborgaos="suborgaos"
+        v-bind:macrorregioes="macrorregioes"
+        v-bind:classes="classes"
+        v-on:filterChanged="filterChanged">
+      </the-predicoes-table-vertical-filters>
+    </v-navigation-drawer>
+
     <v-toolbar app fixed clipped-left>
       <v-tooltip bottom>
         <v-btn @click.stop="showFilter = !showFilter" slot="activator" class="mx-0" icon>
@@ -14,17 +27,7 @@
         <p class="mb-0">Quer saber mais sobre ele?<v-btn flat small class="ma-0 pb-1" @click.stop="showDialog = true">clique aqui</v-btn></p>
       </div>
     </v-toolbar>
-    <v-navigation-drawer clipped fixed app absolute temporary v-model="showFilter" class="px-3 pt-3 pb-0">
-      <the-predicoes-table-vertical-filters
-        v-bind:defaultStartingDate="filter.startingDate"
-        v-bind:tipos="tipos"
-        v-bind:orgaos="orgaos"
-        v-bind:suborgaos="suborgaos"
-        v-bind:macrorregioes="macrorregioes"
-        v-bind:classes="classes"
-        v-on:filterChanged="filterChanged">
-      </the-predicoes-table-vertical-filters>
-    </v-navigation-drawer>
+
     <v-content>
       <v-container fluid fill-height>
         <v-layout justify-center align-start>
@@ -41,9 +44,11 @@
         </v-layout>
       </v-container>
     </v-content>
+
     <v-dialog v-model="showDialog" width="45vw" scrollable>
       <informativo-dialog-content v-bind:temas="classes"></informativo-dialog-content>
     </v-dialog>
+
   </v-app>
 </template>
 

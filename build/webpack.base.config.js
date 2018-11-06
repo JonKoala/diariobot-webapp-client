@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const webpack = require('webpack')
 
 const __root = path.resolve(__dirname, '../');
@@ -47,6 +48,7 @@ module.exports = {
       template: 'index.html',
       favicon: path.resolve(__root, './images/favicon.ico')
     }),
+    new VueLoaderPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         'DIARIOBOT_API_URL': JSON.stringify(process.env['DIARIOBOT_API_URL'])
