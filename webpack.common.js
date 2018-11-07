@@ -1,14 +1,11 @@
-const CompressionPlugin = require('compression-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
 const webpack = require('webpack')
 
-const __root = path.resolve(__dirname, '../');
-
 module.exports = {
-  entry: path.resolve(__root, './src/packages/' + process.env.BUILD + '/' + process.env.BUILD + '.js'),
+  entry: path.resolve(__dirname, './src/packages/' + process.env.BUILD + '/' + process.env.BUILD + '.js'),
   output: {
     publicPath: '/'
   },
@@ -40,20 +37,17 @@ module.exports = {
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
-      'common': path.resolve(__root, './src/common'),
-      'components': path.resolve(__root, './src/components'),
-      'mixins': path.resolve(__root, './src/mixins'),
-      '~': __root
+      'common': path.resolve(__dirname, './src/common'),
+      'components': path.resolve(__dirname, './src/components'),
+      'mixins': path.resolve(__dirname, './src/mixins'),
+      '~': __dirname
     },
     extensions: ['*', '.js', '.vue', '.json']
   },
   plugins: [
-    new CompressionPlugin({
-      test: /\.js(\?.*)?$/i
-    }),
     new HtmlWebpackPlugin({
       template: 'index.html',
-      favicon: path.resolve(__root, './images/favicon.ico')
+      favicon: path.resolve(__dirname, './images/favicon.ico')
     }),
     new VueLoaderPlugin(),
     new VuetifyLoaderPlugin(),

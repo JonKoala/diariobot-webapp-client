@@ -6,10 +6,10 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "cross-env BUILD=main webpack-dev-server --hot --config build/webpack.dev.config.js",
-    "dev:simple": "cross-env BUILD=simple webpack-dev-server --hot --config build/webpack.dev.config.js",
-    "build": "cross-env BUILD=main webpack --progress --hide-modules --config build/webpack.prod.config.js",
-    "build:simple": "cross-env BUILD=simple webpack --progress --hide-modules --config build/webpack.prod.config.js"
+    "dev": "cross-env BUILD=main webpack-dev-server --hot --config webpack.dev.js",
+    "dev:simple": "cross-env BUILD=simple webpack-dev-server --hot --config webpack.dev.js",
+    "build": "cross-env BUILD=main webpack --progress --hide-modules --config webpack.prod.js",
+    "build:simple": "cross-env BUILD=simple webpack --progress --hide-modules --config webpack.prod.js"
   },
   "dependencies": {
     "axios": "^0.18.0",
