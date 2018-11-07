@@ -1,6 +1,8 @@
+const CompressionPlugin = require('compression-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
 const webpack = require('webpack')
 
 const __root = path.resolve(__dirname, '../');
@@ -8,15 +10,17 @@ const __root = path.resolve(__dirname, '../');
 module.exports = {
   entry: path.resolve(__root, './src/packages/' + process.env.BUILD + '/' + process.env.BUILD + '.js'),
   output: {
-    path: path.resolve(__root, './dist'),
-    publicPath: '/',
-    filename: 'build.js'
+    publicPath: '/'
   },
   module: {
     rules: [
       {
         test: /\.css$/,
         use: ['vue-style-loader', 'css-loader']
+      },
+      {
+        test: /\.styl$/,
+        loader: ['style-loader', 'css-loader', 'stylus-loader']
       },
       {
         test: /\.vue$/,
@@ -44,11 +48,15 @@ module.exports = {
     extensions: ['*', '.js', '.vue', '.json']
   },
   plugins: [
+    new CompressionPlugin({
+      test: /\.js(\?.*)?$/i
+    }),
     new HtmlWebpackPlugin({
       template: 'index.html',
       favicon: path.resolve(__root, './images/favicon.ico')
     }),
     new VueLoaderPlugin(),
+    new VuetifyLoaderPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         'DIARIOBOT_API_URL': JSON.stringify(process.env['DIARIOBOT_API_URL'])

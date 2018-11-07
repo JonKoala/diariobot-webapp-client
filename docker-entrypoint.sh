@@ -1,4 +1,4 @@
 #!/bin/bash
 
 npm run build:simple
-npm start
+http-server dist -g -p $DIARIOBOT_CLIENT_PORT
