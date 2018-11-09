@@ -11,7 +11,7 @@
       v-bind:rows-per-page-items="itemsPerPageOptions"
       v-bind:rows-per-page-text="'Linhas por página'">
       <template slot="items" slot-scope="props">
-        <tr @click="showDetails(props.item)">
+        <tr @click="showDetails(props.item)" style="cursor:pointer">
           <td class="text-xs-right">{{ props.item.materia }}</td>
           <td class="text-xs-right">{{ props.item.tipo }}</td>
           <td class="text-xs-right">{{ props.item.orgao }}</td>
