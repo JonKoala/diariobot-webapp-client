@@ -4,14 +4,15 @@
       <v-flex>
         <v-expansion-panel v-model="showingFilter" expand class="elevation-0">
           <v-expansion-panel-content class="grey lighten-5">
-            <predicoes-table-filters class="fluid pa-0"
+            <home-filters class="fluid pa-0"
+            v-bind:defaultStartingDate="filter.startingDate"
             v-bind:tipos="tipos"
             v-bind:orgaos="orgaos"
             v-bind:suborgaos="suborgaos"
             v-bind:macrorregioes="macrorregioes"
             v-bind:classes="classes"
             v-on:filterChanged="filterChanged">
-            </predicoes-table-filters>
+            </home-filters>
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-flex>
@@ -39,15 +40,15 @@ import moment from 'moment'
 import Vue from 'vue'
 
 import PredicoesTableAdvanced from 'components/PredicoesTableAdvanced'
-import PredicoesTableFilters from 'components/PredicoesTableFilters'
+import HomeFilters from '../components/HomeFilters'
 
 import PredicoesTableFilteringBehaviour from 'mixins/PredicoesTableFilteringBehaviour'
 
 export default {
-  name: 'Home',
+  name: 'ViewHome',
   components: {
     PredicoesTableAdvanced,
-    PredicoesTableFilters
+    HomeFilters
   },
   data () {
     return {

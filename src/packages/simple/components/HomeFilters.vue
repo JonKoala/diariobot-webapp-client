@@ -44,11 +44,19 @@ import BaseDatePicker from 'components/BaseDatePicker'
 import PredicoesTableFiltersBehaviour from 'mixins/PredicoesTableFiltersBehaviour'
 
 export default {
-  name: 'PredicoesTableFilters',
+  name: 'HomeFilters',
   components: {
     BaseDatePicker,
     BaseDebounceInput
   },
-  mixins: [PredicoesTableFiltersBehaviour]
+  mixins: [PredicoesTableFiltersBehaviour],
+  props: {
+    defaultStartingDate: { type: String, default: null }
+  },
+  data () {
+    return {
+      startingDate: this.defaultStartingDate
+    }
+  }
 }
 </script>

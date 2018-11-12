@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Home from './views/Home'
+import ViewHome from './views/ViewHome'
 
 
 Vue.use(VueRouter)
@@ -11,7 +11,7 @@ export default new VueRouter({
     {
       name: 'home',
       path: '/',
-      component: Home
+      component: ViewHome
     }
   ],
   mode: 'history'
