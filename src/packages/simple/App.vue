@@ -6,7 +6,7 @@
       <v-spacer></v-spacer>
       <div>
         <p class="mb-0">O <b>DIARIOBOT</b> é um robô que usa inteligência artificial para classificar publicações feitas no Diário Oficial do Espírito Santo.</p>
-        <p class="mb-0">Quer saber mais sobre ele?<v-btn @click.stop="showDialog = true" flat small class="ma-0 pb-1">clique aqui</v-btn></p>
+        <p class="mb-0">Quer saber mais sobre ele?<v-btn @click.stop="isShowingDialog = true" flat small class="ma-0 pb-1">clique aqui</v-btn></p>
       </div>
     </v-toolbar>
 
@@ -16,7 +16,7 @@
       </v-slide-x-transition>
     </v-content>
 
-    <v-dialog v-model="showDialog" width="45vw" scrollable>
+    <v-dialog v-model="isShowingDialog" width="45vw" scrollable>
       <informativo-dialog-content v-bind:temas="classes"></informativo-dialog-content>
     </v-dialog>
 
@@ -24,20 +24,28 @@
 </template>
 
 <script>
-import InformativoDialogContent from './components/InformativoDialogContent'
+import { mapGetters } from 'vuex'
 
-import PredicoesTableFilteringBehaviour from 'mixins/PredicoesTableFilteringBehaviour'
+import { FETCH_CONSTANTS } from 'store/action.types'
+
+import InformativoDialogContent from './components/InformativoDialogContent'
 
 export default {
   name: 'App',
   components: {
     InformativoDialogContent
   },
-  mixins: [PredicoesTableFilteringBehaviour],
   data () {
     return {
-      showDialog: false
+      isShowingDialog: false
     }
+  },computed: {
+    ...mapGetters([
+      'classes'
+    ])
+  },
+  created () {
+    this.$store.dispatch(FETCH_CONSTANTS)
   }
 }
 </script>

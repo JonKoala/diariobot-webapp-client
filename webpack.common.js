@@ -40,6 +40,8 @@ module.exports = {
       'common': path.resolve(__dirname, './src/common'),
       'components': path.resolve(__dirname, './src/components'),
       'mixins': path.resolve(__dirname, './src/mixins'),
+      'services': path.resolve(__dirname, './src/services'),
+      'store': path.resolve(__dirname, './src/store'),
       '~': __dirname
     },
     extensions: ['*', '.js', '.vue', '.json']

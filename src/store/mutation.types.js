@@ -1,0 +1,6 @@
+export const RESET_STATE = 'resetState'
+export const SET_CLASSES = 'setClasses'
+export const SET_MACRORREGIOES = 'setMacrorregioes'
+export const SET_ORGAOS = 'setOrgaos'
+export const SET_SUBORGAOS = 'setSuborgaos'
+export const SET_TIPOS = 'setTipos'
