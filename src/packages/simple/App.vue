@@ -39,7 +39,8 @@ export default {
     return {
       isShowingDialog: false
     }
-  },computed: {
+  },
+  computed: {
     ...mapGetters([
       'classes'
     ])
