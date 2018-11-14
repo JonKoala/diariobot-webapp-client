@@ -30,6 +30,9 @@ const getters = {
   },
   totalItems (state) {
     return state.totalItems
+  },
+  totalPages (state, getters) {
+    return (state.totalItems > 0) ? Math.ceil(state.totalItems / getters[`${QUERY}/itemsPerPage`]) : 0
   }
 
 }

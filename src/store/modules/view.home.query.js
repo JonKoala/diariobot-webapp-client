@@ -8,8 +8,8 @@ import {
 function getInitialState () {
   return {
     pagination: {
-      itemsPerPage: null,
-      page: null,
+      itemsPerPage: 30,
+      page: 0,
       sortBy: null,
       sortOrder: null
     },
