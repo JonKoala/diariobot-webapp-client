@@ -77,7 +77,7 @@ export default {
       set (value) { this.setValue(SET_CORPO, value) }
     },
     dataEnd: {
-      get () { return this.getValue('dataEn') },
+      get () { return this.getValue('dataEnd') },
       set (value) { this.setValue(SET_DATA_END, value) }
     },
     dataStart: {

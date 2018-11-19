@@ -11,21 +11,23 @@
       </v-flex>
 
       <v-btn @click.stop="toggleFilter" flat fab small>
-        <v-icon>{{ (isShowingFilters[0]) ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</v-icon>
+        <v-icon>{{ isShowingFilters[0] ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</v-icon>
       </v-btn>
 
-      <v-flex xs12>
-        <v-card ref="tableContainer" v-show="isShowingTable" color="white" class="scrollable-container elevation-10" v-bind:height="isShowingTableAlert ? 60 : '100%'">
-          <div class="scrollable-content">
+      <v-flex ref="resultsContainer" v-resize:debounce="updateResultsContainerHeight" xs12>
+        <v-card ref="tableContainer" v-show="isShowingTable" color="white" class="scrollable-container elevation-10"
+          v-bind:height="tableContainerHeight" v-bind:style="{ overflowY: isShowingTableContainerOverflow ? 'scroll' : 'hidden' }">
+          <div ref="tableContent" class="scrollable-content" v-resize:debounce="updateTableContentHeight">
             <base-data-table class="fluid ma-0 pa-0"
             v-bind:lines="formattedPredicoes"
+            v-bind:headers="headers"
             v-bind:isLoading="isLoading"
             v-on:input="paginationChanged">
               <template slot="items" slot-scope="props">
                 <tr style="cursor:pointer">
-                  <td v-for="key in Object.keys(props.item).filter(key => key != 'tema')" class="text-xs-center">{{ props.item[key] }}</td>
-                  <td class="text-xs-center white--text" v-bind:style="{backgroundColor: colors[temaOrdemMapping[props.item.tema]]}">
-                    {{ props.item['tema'] }}
+                  <td v-for="key in Object.keys(props.item).filter(key => key != 'classe')" class="text-xs-center">{{ props.item[key] }}</td>
+                  <td class="text-xs-center white--text" v-bind:style="{backgroundColor: colors[temaOrdemMapping[props.item.classe]]}">
+                    {{ props.item['classe'] }}
                   </td>
                 </tr>
               </template>
@@ -43,7 +45,9 @@
 
 <script>
 import moment from 'moment'
+import resize from 'vue-resize-directive'
 import Vue from 'vue'
+import VueScrollTo from 'vue-scrollto'
 import { mapGetters } from 'vuex'
 
 import ColorScheme from 'services/color.scheme'
@@ -58,6 +62,9 @@ import PredicoesTableAdvanced from 'components/PredicoesTableAdvanced'
 
 export default {
   name: 'ViewHome',
+  directives: {
+      resize,
+  },
   components: {
     BaseDataTable,
     HomeFilters,
@@ -66,9 +73,21 @@ export default {
   data () {
     return {
       colors: ColorScheme.classes,
+      headers: [
+        { text: 'MATÉRIA', value: 'materia', align: 'center', width: '20%' },
+        { text: 'TIPO', value: 'tipo', align: 'center',  width: '10%' },
+        { text: 'ORGÃO', value: 'orgao', align: 'center', width: '15%' },
+        { text: 'JURISDICIONADO', value: 'suborgao', align: 'center', width: '15%' },
+        { text: 'MACRORREGIÃO', value: 'macrorregiao', align: 'center', width: '12%' },
+        { text: 'DATA', value: 'data', align: 'center', width: '8%' },
+        { text: 'VALOR (R$)', value: 'valor', align: 'center', width: '8%' },
+        { text: 'TEMA', value: 'classe', align: 'center', width: '12%' }
+      ],
 
       isShowingFilters: [true],
-      isShowingTable: false
+      isShowingTable: false,
+      resultsContainerHeight: null,
+      tableContentHeight: null
     }
   },
   computed: {
@@ -84,14 +103,14 @@ export default {
     formattedPredicoes () {
       return this.predicoes.map(predicao => {
         return {
-          'matéria': predicao.materia,
-          'tipo': predicao.tipo,
-          'orgão': predicao.orgao,
-          'jurisdicionado': predicao.suborgao,
-          'macrorregiao': predicao.macrorregiao,
-          'data': moment.utc(predicao.data).format('DD/MM/YYYY'),
-          'valor': (predicao.valor) ? predicao.valor.toLocaleString('pt-br', { style: 'currency', currency: 'BRL'}).substr(2) : null,
-          'tema': predicao.classe
+          materia: predicao.materia,
+          tipo: predicao.tipo,
+          orgao: predicao.orgao,
+          suborgao: predicao.suborgao,
+          macrorregiao: predicao.macrorregiao,
+          data: moment.utc(predicao.data).format('DD/MM/YYYY'),
+          valor: (predicao.valor) ? predicao.valor.toLocaleString('pt-br', { style: 'currency', currency: 'BRL'}).substr(3) : null,
+          classe: predicao.classe
         }
       })
     },
@@ -101,6 +120,9 @@ export default {
     isShowingTableAlert () {
       return this.predicoes.length === 0
     },
+    isShowingTableContainerOverflow () {
+      return this.tableContentHeight > this.resultsContainerHeight
+    },
     page: {
       get () { return this.$store.getters[`${VIEW_HOME}/${QUERY}/page`] + 1 },
       set (value) {
@@ -108,6 +130,12 @@ export default {
         this.$store.dispatch(`${VIEW_HOME}/${FETCH_PREDICOES}`)
         this.scrollTableToTop()
       }
+    },
+    tableContainerHeight () {
+      if (this.tableContentHeight > this.resultsContainerHeight)
+        return '100%'
+      return this.tableContentHeight
+
     },
     temaOrdemMapping () {
       var dictionary = {}
@@ -122,18 +150,27 @@ export default {
       this.scrollTableToTop()
     },
     async paginationChanged (pagination) {
+      this.$store.commit(`${VIEW_HOME}/${QUERY}/${SET_PAGE}`, 0) // reset page
       this.$store.commit(`${VIEW_HOME}/${QUERY}/${SET_SORT_BY}`, pagination.sortBy)
       this.$store.commit(`${VIEW_HOME}/${QUERY}/${SET_SORT_ORDER}`, (pagination.descending) ? 'DESC' : 'ASC')
 
       await this.$store.dispatch(`${VIEW_HOME}/${FETCH_PREDICOES}`)
       this.isShowingTable = true
     },
-    async scrollTableToTop () {
-      await Vue.nextTick()
-      this.$refs.tableContainer.$el.scrollTo(0, 0)
+    scrollTableToTop () {
+      VueScrollTo.scrollTo('.scrollable-content', 500, { container: '.scrollable-container' })
     },
     toggleFilter () {
       Vue.set(this.isShowingFilters, 0, !this.isShowingFilters[0])
+    },
+    updateResultsContainerHeight (element) {
+      var resultsContainerStyle = window.getComputedStyle(this.$refs.resultsContainer, null)
+      var padding = parseInt(resultsContainerStyle.getPropertyValue('padding-top') + resultsContainerStyle.getPropertyValue('padding-bottom'))
+
+      this.resultsContainerHeight = element.clientHeight - padding
+    },
+    updateTableContentHeight (element) {
+      this.tableContentHeight = element.clientHeight
     }
   }
 }

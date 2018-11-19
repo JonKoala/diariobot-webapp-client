@@ -3,9 +3,9 @@
     <v-data-table
       v-show="showTable"
       v-bind:loading="showLoadingBar"
-      v-bind:items="items"
-      v-bind:headers="headers"
-      v-bind:total-items="items.length"
+      v-bind:items="_lines"
+      v-bind:headers="_headers"
+      v-bind:total-items="_lines.length"
       v-bind:disable-initial-sort="true"
       v-on:update:pagination="onChangePagination"
       hide-actions>
@@ -29,6 +29,7 @@ export default {
   name: 'BaseDataTable',
   props: {
     error: { type: String },
+    headers: { type: Array },
     isLoading: { type: Boolean },
     lines: { type: Array },
     value: { type: Object }
@@ -54,16 +55,18 @@ export default {
       return !this.error && this.isEmpty
     },
 
-    items () {
+    _lines () {
       return (this.isNull) ? [] : this.lines
     },
-    headers () {
+    _headers () {
       if (this.isNull || this.isEmpty)
         return []
+      if (this.headers)
+        return this.headers
 
       var sample = this.lines[0]
       return Object.keys(sample).map(label => {
-        return { text: label.toUpperCase(), value: label, align: 'center' }
+        return { text: label.toUpperCase(), value: label }
       });
     }
   },
