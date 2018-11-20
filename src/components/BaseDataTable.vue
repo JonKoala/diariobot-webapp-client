@@ -1,13 +1,13 @@
 <template>
   <v-container>
     <v-data-table
-      v-show="showTable"
-      v-bind:loading="showLoadingBar"
+      v-show="isShowingTable"
+      v-bind:loading="isShowingLoadingBar"
       v-bind:items="_lines"
       v-bind:headers="_headers"
       v-bind:total-items="_lines.length"
       v-bind:disable-initial-sort="true"
-      v-on:update:pagination="onChangePagination"
+      v-on:update:pagination="updatePagination"
       hide-actions>
       <v-progress-linear slot="progress" color="blue" indeterminate></v-progress-linear>
       <template slot="items" slot-scope="props">
@@ -18,8 +18,8 @@
         </slot>
       </template>
     </v-data-table>
-    <v-alert v-bind:value="showEmptyDataAlert" class="my-0" color="warning" icon="priority_high">Nenhum dado encontrado</v-alert>
-    <v-alert v-bind:value="showErrorAlert" class="my-0" color="error" icon="warning">{{ error }}</v-alert>
+    <v-alert v-bind:value="isShowingEmptyDataAlert" class="my-0" color="warning" icon="priority_high">Nenhum dado encontrado</v-alert>
+    <v-alert v-bind:value="isShowingErrorAlert" class="my-0" color="error" icon="warning">{{ error }}</v-alert>
   </v-container>
 </template>
 
@@ -42,16 +42,16 @@ export default {
       return this.lines instanceof Array && this.lines.length === 0
     },
 
-    showTable () {
+    isShowingTable () {
       return !this.error && !this.isNull && !this.isEmpty
     },
-    showLoadingBar () {
+    isShowingLoadingBar () {
       return this.isLoading
     },
-    showErrorAlert () {
+    isShowingErrorAlert () {
       return Boolean(this.error)
     },
-    showEmptyDataAlert () {
+    isShowingEmptyDataAlert () {
       return !this.error && this.isEmpty
     },
 
@@ -71,7 +71,7 @@ export default {
     }
   },
   methods: {
-    onChangePagination (pagination) {
+    updatePagination (pagination) {
       var newSortObj = { descending: pagination.descending, sortBy: pagination.sortBy }
       if (JSON.stringify(newSortObj) != JSON.stringify(this.value))
         this.$emit('input', newSortObj)

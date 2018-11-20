@@ -14,163 +14,49 @@
         <v-icon>{{ isShowingFilters[0] ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</v-icon>
       </v-btn>
 
-      <v-flex ref="resultsContainer" v-resize:debounce="updateResultsContainerHeight" xs12>
-        <v-card ref="tableContainer" v-show="isShowingTable" color="white" class="scrollable-container elevation-10"
-          v-bind:height="tableContainerHeight" v-bind:style="{ overflowY: isShowingTableContainerOverflow ? 'scroll' : 'hidden' }">
-          <div ref="tableContent" class="scrollable-content" v-resize:debounce="updateTableContentHeight">
-            <base-data-table class="fluid ma-0 pa-0"
-            v-bind:lines="formattedPredicoes"
-            v-bind:headers="headers"
-            v-bind:isLoading="isLoading"
-            v-on:input="paginationChanged">
-              <template slot="items" slot-scope="props">
-                <tr style="cursor:pointer">
-                  <td v-for="key in Object.keys(props.item).filter(key => key != 'classe')" class="text-xs-center">{{ props.item[key] }}</td>
-                  <td class="text-xs-center white--text" v-bind:style="{backgroundColor: colors[temaOrdemMapping[props.item.classe]]}">
-                    {{ props.item['classe'] }}
-                  </td>
-                </tr>
-              </template>
-            </base-data-table>
-            <v-divider v-if="isShowingPagination"></v-divider>
-            <div v-if="isShowingPagination" class="text-xs-center pt-3 pb-2">
-              <v-pagination v-model="page" v-bind:length="totalPages" v-bind:total-visible="20"></v-pagination>
-            </div>
-          </div>
-        </v-card>
+      <v-flex xs12>
+        <home-results v-show="isShowingTable" v-bind:bus="bus" v-on:sort-change="updateResults" v-on:page-change="updateResults"></home-results>
       </v-flex>
+
     </v-layout>
   </v-container>
 </template>
 
 <script>
-import moment from 'moment'
-import resize from 'vue-resize-directive'
 import Vue from 'vue'
-import VueScrollTo from 'vue-scrollto'
-import { mapGetters } from 'vuex'
-
-import ColorScheme from 'services/color.scheme'
 
 import { QUERY, VIEW_HOME } from 'store/namespaces'
-import { SET_ITEMS_PER_PAGE, SET_PAGE, SET_SORT_BY, SET_SORT_ORDER } from 'store/mutation.types'
+import { SET_PAGE } from 'store/mutation.types'
 import { FETCH_PREDICOES } from 'store/action.types'
 
-import BaseDataTable from 'components/BaseDataTable'
 import HomeFilters from 'components/HomeFilters'
-import PredicoesTableAdvanced from 'components/PredicoesTableAdvanced'
+import HomeResults from 'components/HomeResults'
 
 export default {
   name: 'ViewHome',
-  directives: {
-      resize,
-  },
   components: {
-    BaseDataTable,
     HomeFilters,
-    PredicoesTableAdvanced
+    HomeResults
   },
   data () {
     return {
-      colors: ColorScheme.classes,
-      headers: [
-        { text: 'MATÉRIA', value: 'materia', align: 'center', width: '20%' },
-        { text: 'TIPO', value: 'tipo', align: 'center',  width: '10%' },
-        { text: 'ORGÃO', value: 'orgao', align: 'center', width: '15%' },
-        { text: 'JURISDICIONADO', value: 'suborgao', align: 'center', width: '15%' },
-        { text: 'MACRORREGIÃO', value: 'macrorregiao', align: 'center', width: '12%' },
-        { text: 'DATA', value: 'data', align: 'center', width: '8%' },
-        { text: 'VALOR (R$)', value: 'valor', align: 'center', width: '8%' },
-        { text: 'TEMA', value: 'classe', align: 'center', width: '12%' }
-      ],
-
+      bus: new Vue(),
       isShowingFilters: [true],
-      isShowingTable: false,
-      resultsContainerHeight: null,
-      tableContentHeight: null
-    }
-  },
-  computed: {
-    ...mapGetters([
-      'classes'
-    ]),
-    ...mapGetters(VIEW_HOME, [
-      'isLoading',
-      'predicoes',
-      'totalItems',
-      'totalPages'
-    ]),
-    formattedPredicoes () {
-      return this.predicoes.map(predicao => {
-        return {
-          materia: predicao.materia,
-          tipo: predicao.tipo,
-          orgao: predicao.orgao,
-          suborgao: predicao.suborgao,
-          macrorregiao: predicao.macrorregiao,
-          data: moment.utc(predicao.data).format('DD/MM/YYYY'),
-          valor: (predicao.valor) ? predicao.valor.toLocaleString('pt-br', { style: 'currency', currency: 'BRL'}).substr(3) : null,
-          classe: predicao.classe
-        }
-      })
-    },
-    isShowingPagination () {
-      return this.totalPages > 1
-    },
-    isShowingTableAlert () {
-      return this.predicoes.length === 0
-    },
-    isShowingTableContainerOverflow () {
-      return this.tableContentHeight > this.resultsContainerHeight
-    },
-    page: {
-      get () { return this.$store.getters[`${VIEW_HOME}/${QUERY}/page`] + 1 },
-      set (value) {
-        this.$store.commit(`${VIEW_HOME}/${QUERY}/${SET_PAGE}`, value - 1)
-        this.$store.dispatch(`${VIEW_HOME}/${FETCH_PREDICOES}`)
-        this.scrollTableToTop()
-      }
-    },
-    tableContainerHeight () {
-      if (this.tableContentHeight > this.resultsContainerHeight)
-        return '100%'
-      return this.tableContentHeight
-
-    },
-    temaOrdemMapping () {
-      var dictionary = {}
-      this.classes.forEach(entry => { dictionary[entry['nome']] = entry['ordem'] })
-      return dictionary
+      isShowingTable: false
     }
   },
   methods: {
     filterChanged () {
-      this.$store.commit(`${VIEW_HOME}/${QUERY}/${SET_PAGE}`, 0) // reset page
-      this.$store.dispatch(`${VIEW_HOME}/${FETCH_PREDICOES}`)
-      this.scrollTableToTop()
-    },
-    async paginationChanged (pagination) {
-      this.$store.commit(`${VIEW_HOME}/${QUERY}/${SET_PAGE}`, 0) // reset page
-      this.$store.commit(`${VIEW_HOME}/${QUERY}/${SET_SORT_BY}`, pagination.sortBy)
-      this.$store.commit(`${VIEW_HOME}/${QUERY}/${SET_SORT_ORDER}`, (pagination.descending) ? 'DESC' : 'ASC')
-
-      await this.$store.dispatch(`${VIEW_HOME}/${FETCH_PREDICOES}`)
-      this.isShowingTable = true
-    },
-    scrollTableToTop () {
-      VueScrollTo.scrollTo('.scrollable-content', 500, { container: '.scrollable-container' })
+      this.$store.commit(`${VIEW_HOME}/${QUERY}/${SET_PAGE}`, 0)
+      this.updateResults()
     },
     toggleFilter () {
       Vue.set(this.isShowingFilters, 0, !this.isShowingFilters[0])
     },
-    updateResultsContainerHeight (element) {
-      var resultsContainerStyle = window.getComputedStyle(this.$refs.resultsContainer, null)
-      var padding = parseInt(resultsContainerStyle.getPropertyValue('padding-top') + resultsContainerStyle.getPropertyValue('padding-bottom'))
-
-      this.resultsContainerHeight = element.clientHeight - padding
-    },
-    updateTableContentHeight (element) {
-      this.tableContentHeight = element.clientHeight
+    async updateResults () {
+      this.bus.$emit('reset-results-scroll')
+      await this.$store.dispatch(`${VIEW_HOME}/${FETCH_PREDICOES}`)
+      this.isShowingTable = true
     }
   }
 }
