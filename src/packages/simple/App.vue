@@ -17,33 +17,26 @@
     </v-content>
 
     <v-dialog v-model="isShowingDialog" width="45vw" scrollable>
-      <informativo-dialog-content v-bind:temas="classes"></informativo-dialog-content>
+      <app-informativo-dialog-content></app-informativo-dialog-content>
     </v-dialog>
 
   </v-app>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
 import { FETCH_CONSTANTS } from 'store/action.types'
 
-import InformativoDialogContent from './components/InformativoDialogContent'
+import AppInformativoDialogContent from 'components/AppInformativoDialogContent'
 
 export default {
   name: 'App',
   components: {
-    InformativoDialogContent
+    AppInformativoDialogContent
   },
   data () {
     return {
       isShowingDialog: false
     }
-  },
-  computed: {
-    ...mapGetters([
-      'classes'
-    ])
   },
   created () {
     this.$store.dispatch(FETCH_CONSTANTS)

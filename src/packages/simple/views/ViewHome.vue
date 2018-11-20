@@ -10,9 +10,7 @@
         </v-expansion-panel>
       </v-flex>
 
-      <v-btn @click.stop="toggleFilter" flat fab small>
-        <v-icon>{{ isShowingFilters[0] ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</v-icon>
-      </v-btn>
+      <base-icon-button v-on:click.stop="toggleFilter" flat>{{ isShowingFilters[0] ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</base-icon-button>
 
       <v-flex xs12>
         <home-results v-show="isShowingTable" v-bind:bus="bus" v-on:sort-change="updateResults" v-on:page-change="updateResults"></home-results>
@@ -29,12 +27,14 @@ import { QUERY, VIEW_HOME } from 'store/namespaces'
 import { SET_PAGE } from 'store/mutation.types'
 import { FETCH_PREDICOES } from 'store/action.types'
 
+import BaseIconButton from 'components/BaseIconButton'
 import HomeFilters from 'components/HomeFilters'
 import HomeResults from 'components/HomeResults'
 
 export default {
   name: 'ViewHome',
   components: {
+    BaseIconButton,
     HomeFilters,
     HomeResults
   },

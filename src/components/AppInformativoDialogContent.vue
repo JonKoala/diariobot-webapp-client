@@ -18,7 +18,7 @@
         Desenvolvido inicialmente no NTI (Núcleo de Tecnologia da Informação),
         o projeto atualmente está disponível a toda a Corte e conta com algoritmos que aprendem como um humano classificaria a temática das publicações,
         entre:
-        <template v-for="tema in temasStylized">
+        <template v-for="tema in temas">
           <span class="px-1 lowercase white--text" v-bind:style="{backgroundColor: tema.color}">{{ tema.text }}</span>{{ tema.append }}
         </template>
         Assim,
@@ -38,25 +38,22 @@
 </template>
 
 <script>
-import ColorScheme from 'common/color.scheme'
+import ColorScheme from 'services/color.scheme'
 
 export default {
-  name: 'InformativoDialogContent',
-  props: {
-    temas: { type: Array, required: true }
-  },
+  name: 'AppInformativoDialogContent',
   computed: {
-    temasStylized () {
-      return this.temas
+    temas () {
+      return this.$store.getters['classes']
       .sort((a, b) => { return a.ordem - b.ordem })
-      .map((tema, index, original) => {
-        let append = '.';
+      .map((classe, index, original) => {
+        let append = '.'
         if (index < original.length - 2)
           append = ', '
         else if (index == original.length - 2)
           append = ' e '
 
-        return { text: tema.nome, append: append, color: ColorScheme.classes[tema.ordem] }
+        return { text: classe.nome, append: append, color: ColorScheme.classes[classe.ordem] }
       })
     }
   }
