@@ -1,6 +1,7 @@
 <template>
   <div v-resize:debounce="updateComponentHeight" style="height: 100%">
-    <v-card color="white" class="scrollable-container elevation-10" v-bind:style="scrollableContainerStyle">
+
+    <v-card class="scrollable-container elevation-10" v-bind:style="scrollableContainerStyle">
       <div class="scrollable-content" v-resize:debounce="updateScrollableContentHeight">
         <base-data-table class="fluid ma-0 pa-0"
           v-bind:lines="formattedPredicoes"
@@ -8,10 +9,10 @@
           v-bind:isLoading="isLoading"
           v-on:input="updateSort">
           <template slot="items" slot-scope="props">
-            <tr style="cursor:pointer">
-              <td v-for="key in Object.keys(props.item).filter(key => key != 'classe')" class="text-xs-center">{{ props.item[key] }}</td>
-              <td class="text-xs-center white--text" v-bind:style="{backgroundColor: colors[temaOrdemMapping[props.item.classe]]}">
-                {{ props.item['classe'] }}
+            <tr v-on:click="selectPredicao(props.item)" style="cursor:pointer">
+              <td v-for="key in Object.keys(props.item).filter(key => !key.startsWith('_'))" class="text-xs-center">{{ props.item[key] }}</td>
+              <td class="text-xs-center white--text" v-bind:style="{backgroundColor: colors[temaOrdemMapping[props.item._classe]]}">
+                {{ props.item._classe }}
               </td>
             </tr>
           </template>
@@ -22,6 +23,19 @@
         </div>
       </div>
     </v-card>
+
+    <v-dialog v-model="isShowingSelectedPredicao" width="75vw" scrollable>
+      <v-card>
+        <v-toolbar color="blue-grey" dense card>
+          <v-toolbar-title class="white--text">
+            <base-icon-button v-bind:href="selectedPredicao.linkToOriginal" target="_blank" tooltip="Original" top color="white">link</base-icon-button>
+            <span class="ml-4" v-bind:title="selectedPredicao.materia">{{ selectedPredicao.materia }}</span>
+          </v-toolbar-title>
+        </v-toolbar>
+        <base-scrollable-text v-bind:text="(isShowingSelectedPredicao) ? selectedPredicao.formattedCorpo : ''"></base-scrollable-text>
+      </v-card>
+    </v-dialog>
+
   </div>
 </template>
 
@@ -32,11 +46,14 @@ import VueScrollTo from 'vue-scrollto'
 import { mapGetters } from 'vuex'
 
 import ColorScheme from 'services/color.scheme'
+import RegexCollection from 'services/regex.collection'
 
 import { QUERY, VIEW_HOME } from 'store/namespaces'
 import { SET_PAGE, SET_SORT_BY, SET_SORT_ORDER } from 'store/mutation.types'
 
 import BaseDataTable from 'components/BaseDataTable'
+import BaseIconButton from 'components/BaseIconButton'
+import BaseScrollableText from 'components/BaseScrollableText'
 
 export default {
   name: 'HomeResults',
@@ -47,7 +64,9 @@ export default {
       resize
   },
   components: {
-    BaseDataTable
+    BaseDataTable,
+    BaseIconButton,
+    BaseScrollableText
   },
   data () {
     return {
@@ -64,7 +83,10 @@ export default {
       ],
 
       componentHeight: null,
-      scrollableContentHeight: null
+      scrollableContentHeight: null,
+
+      isShowingSelectedPredicao: false,
+      selectedPredicao: {}
     }
   },
   computed: {
@@ -80,14 +102,17 @@ export default {
     formattedPredicoes () {
       return this.predicoes.map(predicao => {
         return {
+          _classe: predicao.classe,
+          _corpo: predicao.corpo,
+          _identificador: predicao.identificador,
+
           materia: predicao.materia,
           tipo: predicao.tipo,
           orgao: predicao.orgao,
           suborgao: predicao.suborgao,
           macrorregiao: predicao.macrorregiao,
           data: moment.utc(predicao.data).format('DD/MM/YYYY'),
-          valor: (predicao.valor) ? predicao.valor.toLocaleString('pt-br', { style: 'currency', currency: 'BRL'}).substr(3) : null,
-          classe: predicao.classe
+          valor: (predicao.valor) ? predicao.valor.toLocaleString('pt-br', { style: 'currency', currency: 'BRL'}).substr(3) : null
         }
       })
     },
@@ -116,6 +141,14 @@ export default {
     scrollToTop () {
       VueScrollTo.scrollTo('.scrollable-content', 500, { container: '.scrollable-container' })
     },
+    selectPredicao (predicao) {
+      this.isShowingSelectedPredicao = true
+      this.selectedPredicao = {
+        ...predicao,
+        linkToOriginal: `http://ioes.dio.es.gov.br/apifront/portal/edicoes/publicacoes_ver_conteudo/${predicao._identificador}`,
+        formattedCorpo: predicao._corpo.replace(RegexCollection.monetaryGlobal, (match) => { return '<span class="highlighted">' + match + '</span>' })
+      }
+    },
     updateComponentHeight (element) {
       this.componentHeight = element.clientHeight
     },
@@ -134,3 +167,13 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+
+  .content-block >>> .highlighted {
+    color: black;
+    font-weight: 700;
+    text-decoration: underline;
+  }
+
+</style>

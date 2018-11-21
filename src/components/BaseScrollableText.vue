@@ -1,30 +1,16 @@
 <template>
   <div class="content-block white blue-grey--text text--darken-3">
     <div class="centered">
-      <pre v-html="formattedPublicacao"></pre>
+      <pre v-html="text"></pre>
     </div>
   </div>
 </template>
 
 <script>
-import moment from 'moment'
-
-import RegexCollection from 'common/regex.collection'
-
 export default {
-  name: 'PublicacaoViewerBody',
+  name: 'BaseScrollableText',
   props: {
-    publicacao: { type: String },
-    highlightMonetaryValue: { type: Boolean }
-  },
-  computed: {
-    formattedPublicacao () {
-      if (this.highlightMonetaryValue && this.publicacao)
-        return this.publicacao.replace(RegexCollection.monetaryGlobal, function(match) {
-          return '<b style="color:black;text-decoration:underline;">' + match + '</b>'
-        });
-      return this.publicacao;
-    }
+    text: { type: String, required: true }
   }
 }
 </script>
