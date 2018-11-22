@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    <v-progress-linear v-show="!isShowingTable && isShowingLoadingBar" indeterminate color="blue" class="ma-0"></v-progress-linear>
     <v-data-table
       v-show="isShowingTable"
       v-bind:loading="isShowingLoadingBar"
@@ -9,7 +10,7 @@
       v-bind:disable-initial-sort="true"
       v-on:update:pagination="updatePagination"
       hide-actions>
-      <v-progress-linear slot="progress" color="blue" indeterminate></v-progress-linear>
+      <v-progress-linear slot="progress" indeterminate color="blue"></v-progress-linear>
       <template slot="items" slot-scope="props">
         <slot name="items" v-bind="props">
           <tr>

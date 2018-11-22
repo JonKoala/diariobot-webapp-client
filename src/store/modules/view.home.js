@@ -3,12 +3,13 @@ import ApiService from 'services/api.service'
 import query from 'store/modules/view.home.query'
 
 import { QUERY } from 'store/namespaces'
-import { END_LOADING, RESET_STATE, SET_PREDICOES, SET_TOTAL_ITEMS, START_LOADING } from 'store/mutation.types'
+import { END_LOADING, RESET_STATE, SET_ERROR, SET_PREDICOES, SET_TOTAL_ITEMS, START_LOADING } from 'store/mutation.types'
 import { FETCH_PREDICOES } from 'store/action.types'
 
 
 function getInitialState () {
   return {
+    error: null,
     isLoading: false,
     predicoes: [],
     totalItems: null
@@ -22,6 +23,9 @@ const modules = {
 
 const getters = {
 
+  error (state) {
+    return state.error
+  },
   isLoading (state) {
     return state.isLoading
   },
@@ -41,6 +45,9 @@ const mutations = {
 
   [END_LOADING] (state) {
     state.isLoading = false
+  },
+  [SET_ERROR] (state, error) {
+    state.error = error
   },
   [SET_PREDICOES] (state, predicoes) {
     state.predicoes = predicoes
@@ -63,12 +70,13 @@ const actions = {
   async [FETCH_PREDICOES] ({ commit, getters }) {
     commit(START_LOADING)
     try {
-      var response = await ApiService.get('predicoes/paginable', {params: getters[`${QUERY}/params`]})
+      var response = await ApiService.get('predicoes/paginable', { params: getters[`${QUERY}/params`] })
       commit(RESET_STATE)
       commit(SET_PREDICOES, response.rows)
       commit(SET_TOTAL_ITEMS, response.count)
     } catch(err) {
-      throw err
+      commit(RESET_STATE)
+      commit(SET_ERROR, (err.response) ? err.response.data : err.message)
     } finally {
       commit(END_LOADING)
     }

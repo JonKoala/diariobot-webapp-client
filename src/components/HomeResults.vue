@@ -4,7 +4,8 @@
     <v-card class="scrollable-container elevation-10" v-bind:style="scrollableContainerStyle">
       <div class="scrollable-content" v-resize:debounce="updateScrollableContentHeight">
         <base-data-table class="fluid ma-0 pa-0"
-          v-bind:lines="formattedPredicoes"
+          v-bind:error="error"
+          v-bind:lines="predicoes"
           v-bind:headers="headers"
           v-bind:isLoading="isLoading"
           v-on:input="updateSort">
@@ -95,12 +96,25 @@ export default {
     ]),
     ...mapGetters(VIEW_HOME, [
       'isLoading',
-      'predicoes',
       'totalItems',
       'totalPages'
     ]),
-    formattedPredicoes () {
-      return this.predicoes.map(predicao => {
+    error () {
+      if (this.$store.getters[`${VIEW_HOME}/error`])
+        return 'Ocorreu um erro ao realizar a busca: ' + this.$store.getters[`${VIEW_HOME}/error`]
+    },
+    isShowingPagination () {
+      return this.totalPages > 1
+    },
+    page: {
+      get () { return this.$store.getters[`${VIEW_HOME}/${QUERY}/page`] + 1 },
+      set (value) {
+        this.$store.commit(`${VIEW_HOME}/${QUERY}/${SET_PAGE}`, value - 1)
+        this.$emit('page-change')
+      }
+    },
+    predicoes () {
+      return this.$store.getters[`${VIEW_HOME}/predicoes`].map(predicao => {
         return {
           _classe: predicao.classe,
           _corpo: predicao.corpo,
@@ -115,16 +129,6 @@ export default {
           valor: (predicao.valor) ? predicao.valor.toLocaleString('pt-br', { style: 'currency', currency: 'BRL'}).substr(3) : null
         }
       })
-    },
-    isShowingPagination () {
-      return this.totalPages > 1
-    },
-    page: {
-      get () { return this.$store.getters[`${VIEW_HOME}/${QUERY}/page`] + 1 },
-      set (value) {
-        this.$store.commit(`${VIEW_HOME}/${QUERY}/${SET_PAGE}`, value - 1)
-        this.$emit('page-change')
-      }
     },
     scrollableContainerStyle () {
       if (this.scrollableContentHeight > this.componentHeight)
