@@ -9,7 +9,7 @@ export default {
   props: {
     value: String,
     milliseconds: { type: Number, default: 500 },
-    
+
     returnMaskedValue: { type: Boolean },
     clearable: { type: Boolean },
     label: { type: String },
@@ -25,11 +25,11 @@ export default {
   },
   methods: {
     updateValue (newValue) {
-      window.clearTimeout(this.timeout);
-      this.timeout = window.setTimeout(this.emitValue.bind(this, newValue), this.milliseconds);
+      window.clearTimeout(this.timeout)
+      this.timeout = window.setTimeout(this.emitValue.bind(this, newValue), this.milliseconds)
     },
     emitValue (newValue) {
-      this.$emit('input', newValue);
+      this.$emit('input', newValue)
     }
   }
 }

@@ -5,7 +5,6 @@ const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
 const webpack = require('webpack')
 
 module.exports = {
-  entry: path.resolve(__dirname, './src/packages/' + process.env.BUILD + '/' + process.env.BUILD + '.js'),
   output: {
     publicPath: '/'
   },
@@ -37,10 +36,10 @@ module.exports = {
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
-      'common': path.resolve(__dirname, './src/common'),
       'components': path.resolve(__dirname, './src/components'),
       'services': path.resolve(__dirname, './src/services'),
       'store': path.resolve(__dirname, './src/store'),
+      'views': path.resolve(__dirname, './src/views'),
       '~': __dirname
     },
     extensions: ['*', '.js', '.vue', '.json']

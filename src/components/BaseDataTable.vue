@@ -67,7 +67,7 @@ export default {
       var sample = this.lines[0]
       return Object.keys(sample).map(label => {
         return { text: label.toUpperCase(), value: label }
-      });
+      })
     }
   },
   methods: {

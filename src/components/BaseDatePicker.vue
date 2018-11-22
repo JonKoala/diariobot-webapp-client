@@ -30,19 +30,19 @@ export default {
   },
   methods: {
     updateValue (newValue) {
-      this.$emit('input', newValue);
+      this.$emit('input', newValue)
     },
     cancelPicker () {
-      this.updateValue(null);
-      this.closePicker();
+      this.updateValue(null)
+      this.closePicker()
     },
     closePicker() {
-      this.isExpanded = false;
+      this.isExpanded = false
     },
   },
   computed: {
     presentableDate () {
-      return (this.value) ? moment.utc(this.value).format('DD/MM/YYYY') : null;
+      return (this.value) ? moment.utc(this.value).format('DD/MM/YYYY') : null
     }
   }
 }

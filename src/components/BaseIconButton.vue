@@ -29,7 +29,7 @@ export default {
   },
   computed: {
     hasTooltip () {
-      return Boolean(this.tooltip);
+      return Boolean(this.tooltip)
     }
   }
 }

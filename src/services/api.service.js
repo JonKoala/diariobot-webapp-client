@@ -28,4 +28,4 @@ export default {
     service = formatUrl(service)
     return await Vue.axios.put(`${apiUrl}/${service}`, data)
   }
-};
+}
