@@ -1,3 +1,5 @@
+export const CANCEL_REQUEST = 'cancelRequest'
+export const CREATE_CANCEL_TOKEN = 'createCancelToken'
 export const END_LOADING = 'endLoading'
 export const RESET_STATE = 'resetState'
 export const START_LOADING = 'startLoading'

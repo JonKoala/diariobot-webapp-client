@@ -13,6 +13,7 @@ function getInitialState () {
     tipos: []
   }
 }
+const initialState = getInitialState()
 const state = getInitialState
 
 const getters = {
@@ -53,7 +54,6 @@ const mutations = {
     state.tipos = tipos
   },
   [RESET_STATE] (state) {
-    const initialState = getInitialState()
     Object.keys(initialState).forEach(key => { state[key] = initialState[key] })
   }
 
@@ -63,7 +63,6 @@ const actions = {
 
   [FETCH_CONSTANTS] ({ commit }) {
     commit(RESET_STATE)
-
     ApiService.get('classes/predictable').then(result => commit(SET_CLASSES, result.sort()))
     ApiService.get('macrorregioes').then(result => commit(SET_MACRORREGIOES, result.sort()))
     ApiService.get('publicacoes/list/orgao').then(result => commit(SET_ORGAOS, result.sort()))

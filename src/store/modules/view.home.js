@@ -1,24 +1,24 @@
-import ApiService from 'services/api.service'
-
 import query from 'store/modules/view.home.query'
+import request from 'store/modules/request'
 
-import { QUERY } from 'store/namespaces'
-import { END_LOADING, RESET_STATE, SET_ERROR, SET_PREDICOES, SET_TOTAL_ITEMS, START_LOADING } from 'store/mutation.types'
-import { FETCH_PREDICOES } from 'store/action.types'
+import { QUERY, REQUEST } from 'store/namespaces'
+import { RESET_STATE, SET_ERROR, SET_PREDICOES, SET_TOTAL_ITEMS } from 'store/mutation.types'
+import { FETCH_PREDICOES, MAKE_REQUEST } from 'store/action.types'
 
 
 function getInitialState () {
   return {
     error: null,
-    isLoading: false,
     predicoes: [],
     totalItems: null
   }
 }
+const initialState = getInitialState()
 const state = getInitialState
 
 const modules = {
-  [QUERY]: query
+  [QUERY]: query,
+  [REQUEST]: request
 }
 
 const getters = {
@@ -26,8 +26,8 @@ const getters = {
   error (state) {
     return state.error
   },
-  isLoading (state) {
-    return state.isLoading
+  isLoading (state, getters) {
+    return getters[`${REQUEST}/isLoading`]
   },
   predicoes (state) {
     return state.predicoes
@@ -43,9 +43,6 @@ const getters = {
 
 const mutations = {
 
-  [END_LOADING] (state) {
-    state.isLoading = false
-  },
   [SET_ERROR] (state, error) {
     state.error = error
   },
@@ -55,11 +52,7 @@ const mutations = {
   [SET_TOTAL_ITEMS] (state, totalItems) {
     state.totalItems = totalItems
   },
-  [START_LOADING] (state) {
-    state.isLoading = true
-  },
   [RESET_STATE] (state) {
-    const initialState = getInitialState()
     Object.keys(initialState).forEach(key => { state[key] = initialState[key] })
   }
 
@@ -67,21 +60,20 @@ const mutations = {
 
 const actions = {
 
-  async [FETCH_PREDICOES] ({ commit, getters }) {
-    commit(START_LOADING)
+  async [FETCH_PREDICOES] ({ commit, dispatch, getters }) {
+
     try {
-      var response = await ApiService.get('predicoes/paginable', { params: getters[`${QUERY}/params`] })
-      commit(RESET_STATE)
-      commit(SET_PREDICOES, response.rows)
-      commit(SET_TOTAL_ITEMS, response.count)
-    } catch(err) {
+      var response = await dispatch(`${REQUEST}/${MAKE_REQUEST}`, { service: 'predicoes/paginable', config: { params: getters[`${QUERY}/params`] } })
+      if (response != null) {
+        commit(RESET_STATE)
+        commit(SET_PREDICOES, response.rows)
+        commit(SET_TOTAL_ITEMS, response.count)
+      }
+    } catch (err) {
       commit(RESET_STATE)
       commit(SET_ERROR, (err.response) ? err.response.data : err.message)
-    } finally {
-      commit(END_LOADING)
     }
   }
-
 }
 
 export default {

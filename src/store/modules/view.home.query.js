@@ -1,7 +1,7 @@
 import moment from 'moment'
 
 import {
-  RESET_STATE, SET_CLASSE, SET_CORPO, SET_DATA_END, SET_DATA_START, SET_ITEMS_PER_PAGE, SET_MACRORREGIAO,
+  SET_CLASSE, SET_CORPO, SET_DATA_END, SET_DATA_START, SET_ITEMS_PER_PAGE, SET_MACRORREGIAO,
   SET_ORGAO, SET_PAGE, SET_SORT_BY, SET_SORT_ORDER, SET_SUBORGAO, SET_TIPO, SET_VALOR_MAX, SET_VALOR_MIN
 } from 'store/mutation.types'
 
@@ -135,10 +135,6 @@ const mutations = {
   },
   [SET_VALOR_MIN] (state, valorMin) {
     state.filter.valorMin = valorMin
-  },
-  [RESET_STATE] (state) {
-    const initialState = getInitialState()
-    Object.keys(initialState).forEach(key => { state[key] = initialState[key] })
   }
 
 }
