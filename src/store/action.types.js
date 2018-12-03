@@ -1,3 +1,5 @@
 export const FETCH_CONSTANTS = 'fetchConstants'
 export const FETCH_PREDICOES = 'fetchPredicoes'
+export const LOGIN = 'login'
 export const MAKE_REQUEST = 'makeRequest'
+export const START_VIEW = 'startView'

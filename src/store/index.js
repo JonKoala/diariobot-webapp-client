@@ -3,7 +3,8 @@ import Vuex from 'vuex'
 
 import constants from 'store/modules/constants'
 import home from 'store/modules/view.home'
-import { VIEW_HOME } from 'store/namespaces'
+import login from 'store/modules/view.login'
+import { VIEW_HOME, VIEW_LOGIN } from 'store/namespaces'
 
 
 Vue.use(Vuex)
@@ -11,6 +12,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   modules: {
     constants,
-    [VIEW_HOME]: home
+    [VIEW_HOME]: home,
+    [VIEW_LOGIN]: login
   }
 })
