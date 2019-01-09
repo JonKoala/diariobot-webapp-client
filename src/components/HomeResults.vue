@@ -126,7 +126,7 @@ export default {
           suborgao: predicao.suborgao,
           macrorregiao: predicao.macrorregiao,
           data: moment.utc(predicao.data).format('DD/MM/YYYY'),
-          valor: (predicao.valor) ? predicao.valor.toLocaleString('pt-br', { style: 'currency', currency: 'BRL'}).substr(3) : null
+          valor: (predicao.valor) ? predicao.valor.toLocaleString('pt-br', { minimumFractionDigits: 2 }) : null
         }
       })
     },
