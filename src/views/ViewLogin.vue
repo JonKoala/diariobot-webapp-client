@@ -9,10 +9,10 @@
           <v-progress-linear v-bind:active="isLoading" class="my-0" color="blue" indeterminate></v-progress-linear>
           <v-layout row wrap class="pa-2">
             <v-flex xs12>
-              <v-text-field v-model="username" v-bind:disabled="isLoading" label="Usuário"></v-text-field>
+              <v-text-field v-model="username" v-on:keyup.enter.native="login" v-bind:disabled="isLoading" label="Usuário"></v-text-field>
             </v-flex>
             <v-flex xs12>
-              <v-text-field v-model="password" v-bind:disabled="isLoading" type="password" label="Senha"></v-text-field>
+              <v-text-field v-model="password" v-on:keyup.enter.native="login" v-bind:disabled="isLoading" type="password" label="Senha"></v-text-field>
             </v-flex>
             <v-btn v-on:click="login" v-bind:disabled="isLoading" color="blue" class="ml-0 mt-2 white--text">
               <v-icon left>vpn_key</v-icon>entrar
@@ -21,6 +21,7 @@
         </v-card>
       </v-flex>
     </v-layout>
+    <v-snackbar v-model="isShowingNotification" bottom right>Falha ao realizar o login</v-snackbar>
   </v-container>
 </template>
 
@@ -33,6 +34,11 @@ import { LOGIN } from 'store/action.types'
 
 export default {
   name: 'ViewLogin',
+  data () {
+    return {
+      isShowingNotification: false
+    }
+  },
   computed: {
     ...mapGetters(VIEW_LOGIN, [
       'isLoading'
@@ -47,8 +53,13 @@ export default {
     }
   },
   methods: {
-    login () {
-      this.$store.dispatch(`${VIEW_LOGIN}/${LOGIN}`)
+    async login () {
+      try {
+        await this.$store.dispatch(`${VIEW_LOGIN}/${LOGIN}`)
+      } catch (err) {
+        this.isShowingNotification = true
+        console.log(err)
+      }
     }
   }
 }

@@ -1,6 +1,7 @@
 import ApiService from 'services/api.service'
 
-import { END_LOADING, RESET_STATE, SET_PASSWORD, SET_USERNAME, START_LOADING } from 'store/mutation.types'
+import { USER } from 'store/namespaces'
+import { END_LOADING, RESET_STATE, SET_PASSWORD, SET_TOKEN, SET_USERNAME, START_LOADING } from 'store/mutation.types'
 import { LOGIN, START_VIEW } from 'store/action.types'
 
 
@@ -58,7 +59,7 @@ const actions = {
     commit(START_LOADING)
     try {
       var response = await ApiService.post('usuarios/login', { username: getters.username, password: getters.password })
-      //TODO: save the token (its in 'response.data')
+      commit(`${USER}/${SET_TOKEN}`, response.data, { root: true })
     } catch (err) {
       throw err
     } finally {
