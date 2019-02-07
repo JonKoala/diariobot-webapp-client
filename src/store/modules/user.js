@@ -24,6 +24,9 @@ const getters = {
   name (state, getters) {
     return getters.payload.name
   },
+  registry (state, getters) {
+    return getters.payload.registry
+  },
   username (state, getters) {
     return getters.payload.username
   }
