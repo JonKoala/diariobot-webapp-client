@@ -29,7 +29,7 @@
 import { mapGetters } from 'vuex'
 
 import { VIEW_LOGIN } from 'store/namespaces'
-import { SET_PASSWORD, SET_USERNAME } from 'store/mutation.types'
+import { RESET_STATE, SET_PASSWORD, SET_USERNAME } from 'store/mutation.types'
 import { LOGIN } from 'store/action.types'
 
 export default {
@@ -56,6 +56,8 @@ export default {
     async login () {
       try {
         await this.$store.dispatch(`${VIEW_LOGIN}/${LOGIN}`)
+        this.$store.commit(`${VIEW_LOGIN}/${RESET_STATE}`)
+        this.$router.push({ name: 'home' })
       } catch (err) {
         this.isShowingNotification = true
         console.log(err)

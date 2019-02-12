@@ -3,14 +3,14 @@
     <v-layout column>
 
       <v-flex>
-        <v-expansion-panel v-model="isShowingFilters" expand class="elevation-0">
+        <v-expansion-panel v-model="expansionPanelModel" expand class="elevation-0">
           <v-expansion-panel-content class="grey lighten-5">
             <home-filters v-on:input="filterChanged" class="fluid pa-0"></home-filters>
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-flex>
 
-      <base-icon-button v-on:click.stop="toggleFilter" flat>{{ isShowingFilters[0] ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</base-icon-button>
+      <base-icon-button v-on:click.stop="toggleFilter" flat>{{ isShowingFilters ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</base-icon-button>
 
       <v-flex xs12>
         <home-results v-show="isShowingTable" v-bind:bus="bus" v-on:sort-change="updateResults" v-on:page-change="updateResults"></home-results>
@@ -41,8 +41,13 @@ export default {
   data () {
     return {
       bus: new Vue(),
-      isShowingFilters: [true],
+      isShowingFilters: true,
       isShowingTable: false
+    }
+  },
+  computed: {
+    expansionPanelModel () {
+      return [this.isShowingFilters]
     }
   },
   methods: {
@@ -51,7 +56,7 @@ export default {
       this.updateResults()
     },
     toggleFilter () {
-      Vue.set(this.isShowingFilters, 0, !this.isShowingFilters[0])
+      this.isShowingFilters = !this.isShowingFilters
     },
     async updateResults () {
       this.bus.$emit('reset-results-scroll')
