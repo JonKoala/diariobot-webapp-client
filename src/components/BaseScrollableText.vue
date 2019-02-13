@@ -10,7 +10,7 @@
 export default {
   name: 'BaseScrollableText',
   props: {
-    text: { type: String, required: true }
+    text: { type: String }
   }
 }
 </script>

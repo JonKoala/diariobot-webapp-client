@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+import ViewPredicao from 'views/ViewPredicao'
 import ViewHome from 'views/ViewHome'
 import ViewLogin from 'views/ViewLogin'
 
@@ -18,7 +19,12 @@ export default new VueRouter({
       name: 'login',
       path: '/login',
       component: ViewLogin
-    }
+    },
+    {
+      name: 'predicao',
+      path: '/predicao/:id',
+      component: ViewPredicao
+    },
   ],
   mode: 'history'
 })

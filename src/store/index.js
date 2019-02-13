@@ -7,8 +7,9 @@ import constants from 'store/modules/constants'
 import user from 'store/modules/user'
 import home from 'store/modules/view.home'
 import login from 'store/modules/view.login'
+import predicao from 'store/modules/view.predicao'
 import { USER } from 'store/namespaces'
-import { VIEW_HOME, VIEW_LOGIN } from 'store/namespaces'
+import { VIEW_HOME, VIEW_LOGIN, VIEW_PREDICAO } from 'store/namespaces'
 
 
 Vue.use(Vuex)
@@ -19,7 +20,8 @@ export default new Vuex.Store({
     constants,
     [USER]: user,
     [VIEW_HOME]: home,
-    [VIEW_LOGIN]: login
+    [VIEW_LOGIN]: login,
+    [VIEW_PREDICAO]: predicao
   },
 
   plugins: [createPersistedState({

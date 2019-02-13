@@ -29,7 +29,7 @@
       <v-card>
         <v-toolbar color="blue-grey" dense card>
           <v-toolbar-title class="white--text">
-            <base-icon-button v-bind:href="selectedPredicao.linkToOriginal" target="_blank" tooltip="Original" top color="white">link</base-icon-button>
+            <base-icon-button v-bind:href="selectedPredicao.linkToDetails" tooltip="Detalhes" top color="white">details</base-icon-button>
             <span class="ml-4" v-bind:title="selectedPredicao.materia">{{ selectedPredicao.materia }}</span>
           </v-toolbar-title>
         </v-toolbar>
@@ -118,7 +118,7 @@ export default {
         return {
           _classe: predicao.classe,
           _corpo: predicao.corpo,
-          _identificador: predicao.identificador,
+          _id: predicao.id,
 
           materia: predicao.materia,
           tipo: predicao.tipo,
@@ -149,7 +149,7 @@ export default {
       this.isShowingSelectedPredicao = true
       this.selectedPredicao = {
         ...predicao,
-        linkToOriginal: `http://ioes.dio.es.gov.br/apifront/portal/edicoes/publicacoes_ver_conteudo/${predicao._identificador}`,
+        linkToDetails: `predicao/${predicao._id}`,
         formattedCorpo: predicao._corpo.replace(RegexCollection.monetaryGlobal, (match) => { return '<span class="highlighted">' + match + '</span>' })
       }
     },
