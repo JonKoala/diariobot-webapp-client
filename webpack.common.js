@@ -49,6 +49,11 @@ module.exports = {
       template: 'index.html',
       favicon: path.resolve(__dirname, './images/favicon.ico')
     }),
+    new HtmlWebpackPlugin({
+      template: 'index.html',
+      filename: '404.html',
+      favicon: path.resolve(__dirname, './images/favicon.ico')
+    }),
     new VueLoaderPlugin(),
     new VuetifyLoaderPlugin(),
     new webpack.DefinePlugin({
