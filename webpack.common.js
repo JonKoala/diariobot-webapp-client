@@ -4,6 +4,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
 const webpack = require('webpack')
 
+
 module.exports = {
   output: {
     publicPath: '/'
@@ -47,11 +48,6 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: 'index.html',
-      favicon: path.resolve(__dirname, './images/favicon.ico')
-    }),
-    new HtmlWebpackPlugin({
-      template: 'index.html',
-      filename: '404.html',
       favicon: path.resolve(__dirname, './images/favicon.ico')
     }),
     new VueLoaderPlugin(),

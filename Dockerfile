@@ -18,4 +18,5 @@ RUN dos2unix docker-entrypoint.sh
 COPY docker-entrypoint.sh /usr/local/bin/
 ENTRYPOINT ["sh", "docker-entrypoint.sh"]
 
-EXPOSE 8080
+ARG DIARIOBOT_CLIENT_PORT
+EXPOSE $DIARIOBOT_CLIENT_PORT

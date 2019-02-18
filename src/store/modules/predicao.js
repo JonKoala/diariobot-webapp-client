@@ -1,4 +1,4 @@
-import _ from 'lodash/core'
+import pick from 'lodash.pick'
 
 import {
   RESET_STATE, SET_CLASSE, SET_CORPO, SET_DATA, SET_ID, SET_IDENTIFICADOR,
@@ -72,7 +72,7 @@ const getters = {
 const mutations = {
 
   [SET_CLASSE] (state, classe) {
-    state.classe = _.pick(classe, ['id', 'nome', 'ordem'])
+    state.classe = pick(classe, ['id', 'nome', 'ordem'])
   },
   [SET_CORPO] (state, corpo) {
     state.corpo = corpo
@@ -87,7 +87,7 @@ const mutations = {
     state.identificador = identificador
   },
   [SET_MACRORREGIAO] (state, macrorregiao) {
-    state.macrorregiao = _.pick(macrorregiao, ['id', 'nome'])
+    state.macrorregiao = pick(macrorregiao, ['id', 'nome'])
   },
   [SET_MATERIA] (state, materia) {
     state.materia = materia
