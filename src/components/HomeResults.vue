@@ -29,7 +29,7 @@
       <v-card>
         <v-toolbar color="blue-grey" dense card>
           <v-toolbar-title class="white--text">
-            <base-icon-button v-bind:href="selectedPredicao.linkToDetails" tooltip="Detalhes" top color="white">details</base-icon-button>
+            <base-icon-button v-bind:to="selectedPredicao.linkToDetails" tooltip="Detalhes" top color="white">details</base-icon-button>
             <span class="ml-4" v-bind:title="selectedPredicao.materia">{{ selectedPredicao.materia }}</span>
           </v-toolbar-title>
         </v-toolbar>
@@ -149,7 +149,7 @@ export default {
       this.isShowingSelectedPredicao = true
       this.selectedPredicao = {
         ...predicao,
-        linkToDetails: `predicao/${predicao._id}`,
+        linkToDetails: `/predicao/${predicao._id}`,
         formattedCorpo: predicao._corpo.replace(RegexCollection.monetaryGlobal, (match) => { return '<span class="highlighted">' + match + '</span>' })
       }
     },
