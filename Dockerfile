@@ -1,4 +1,4 @@
-FROM node:8.12-alpine
+FROM node:8.15-alpine
 
 # install global dependencies
 RUN npm config set registry http://registry.npmjs.org/
@@ -17,6 +17,3 @@ COPY . .
 RUN dos2unix docker-entrypoint.sh
 COPY docker-entrypoint.sh /usr/local/bin/
 ENTRYPOINT ["sh", "docker-entrypoint.sh"]
-
-ARG DIARIOBOT_CLIENT_PORT
-EXPOSE $DIARIOBOT_CLIENT_PORT
