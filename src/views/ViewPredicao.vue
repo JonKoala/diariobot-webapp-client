@@ -7,7 +7,7 @@
 
           <v-toolbar color="blue-grey" dense card>
             <v-toolbar-title class="white--text">
-              <base-icon-button v-bind:href="linkToOriginal" target="_blank" tooltip="Original" top color="white">link</base-icon-button>
+              <!-- <base-icon-button v-bind:href="linkToOriginal" target="_blank" tooltip="Original" top color="white">link</base-icon-button> -->
               <span class="ml-4" v-bind:title="materia">{{ materia }}</span>
             </v-toolbar-title>
           </v-toolbar>
