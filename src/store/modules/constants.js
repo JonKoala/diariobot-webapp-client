@@ -1,13 +1,13 @@
 import ApiService from 'services/api.service'
 
-import { RESET_STATE, SET_CLASSES, SET_MACRORREGIOES, SET_ORGAOS, SET_SUBORGAOS, SET_TIPOS } from 'store/mutation.types'
+import { RESET_STATE, SET_CLASSES, SET_FONTES, SET_ORGAOS, SET_SUBORGAOS, SET_TIPOS } from 'store/mutation.types'
 import { FETCH_CONSTANTS } from 'store/action.types'
 
 
 function getInitialState () {
   return {
     classes: [],
-    macrorregioes: [],
+    fontes: [],
     orgaos: [],
     suborgaos: [],
     tipos: []
@@ -21,8 +21,8 @@ const getters = {
   classes (state) {
     return state.classes
   },
-  macrorregioes (state) {
-    return state.macrorregioes
+  fontes (state) {
+    return state.fontes
   },
   orgaos (state) {
     return state.orgaos
@@ -41,8 +41,8 @@ const mutations = {
   [SET_CLASSES] (state, classes) {
     state.classes = classes
   },
-  [SET_MACRORREGIOES] (state, macrorregioes) {
-    state.macrorregioes = macrorregioes
+  [SET_FONTES] (state, fontes) {
+    state.fontes = fontes
   },
   [SET_ORGAOS] (state, orgaos) {
     state.orgaos = orgaos
@@ -64,7 +64,7 @@ const actions = {
   [FETCH_CONSTANTS] ({ commit }) {
     commit(RESET_STATE)
     ApiService.get('classes/predictable').then(result => commit(SET_CLASSES, result.sort()))
-    ApiService.get('macrorregioes').then(result => commit(SET_MACRORREGIOES, result.sort()))
+    ApiService.get('publicacoes/list/fonte').then(result => commit(SET_FONTES, result.sort().map(r => r.toUpperCase())))
     ApiService.get('publicacoes/list/orgao').then(result => commit(SET_ORGAOS, result.sort()))
     ApiService.get('publicacoes/list/suborgao').then(result => commit(SET_SUBORGAOS, result.sort()))
     ApiService.get('publicacoes/list/tipo').then(result => commit(SET_TIPOS, result.sort()))

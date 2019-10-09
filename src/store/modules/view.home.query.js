@@ -1,8 +1,8 @@
 import moment from 'moment'
 
 import {
-  SET_CLASSE, SET_CORPO, SET_DATA_END, SET_DATA_START, SET_ITEMS_PER_PAGE, SET_MACRORREGIAO,
-  SET_ORGAO, SET_PAGE, SET_SORT_BY, SET_SORT_ORDER, SET_SUBORGAO, SET_TIPO, SET_VALOR_MAX, SET_VALOR_MIN
+  SET_CLASSE, SET_CORPO, SET_DATA_END, SET_DATA_START, SET_FONTE, SET_ITEMS_PER_PAGE, SET_ORGAO,
+  SET_PAGE, SET_SORT_BY, SET_SORT_ORDER, SET_SUBORGAO, SET_TIPO, SET_VALOR_MAX, SET_VALOR_MIN
 } from 'store/mutation.types'
 
 function getInitialState () {
@@ -18,7 +18,7 @@ function getInitialState () {
       corpo: null,
       dataEnd: null,
       dataStart: moment.utc().format('YYYY-MM-DD'),
-      macrorregiao: null,
+      fonte: null,
       orgao: null,
       suborgao: null,
       tipo: null,
@@ -42,7 +42,7 @@ const getters = {
       filterTipo: getters.tipo,
       filterOrgao: getters.orgao,
       filterSuborgao: getters.suborgao,
-      filterMacrorregiao: getters.macrorregiao,
+      filterFonte: getters.fonte,
       filterClasse: getters.classe
     }
   },
@@ -59,11 +59,11 @@ const getters = {
   dataStart (state) {
     return state.filter.dataStart
   },
+  fonte (state) {
+    return state.filter.fonte
+  },
   itemsPerPage (state) {
     return state.pagination.itemsPerPage
-  },
-  macrorregiao (state) {
-    return state.filter.macrorregiao
   },
   orgao (state) {
     return state.filter.orgao
@@ -106,11 +106,11 @@ const mutations = {
   [SET_DATA_START] (state, dataStart) {
     state.filter.dataStart = dataStart
   },
+  [SET_FONTE] (state, fonte) {
+    state.filter.fonte = fonte
+  },
   [SET_ITEMS_PER_PAGE] (state, itemsPerPage) {
     state.pagination.itemsPerPage = itemsPerPage
-  },
-  [SET_MACRORREGIAO] (state, macrorregiao) {
-    state.filter.macrorregiao = macrorregiao
   },
   [SET_ORGAO] (state, orgao) {
     state.filter.orgao = orgao

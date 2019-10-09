@@ -77,9 +77,9 @@ export default {
         { text: 'TIPO', value: 'tipo', align: 'center',  width: '10%' },
         { text: 'ORGÃO', value: 'orgao', align: 'center', width: '15%' },
         { text: 'JURISDICIONADO', value: 'suborgao', align: 'center', width: '15%' },
-        { text: 'MACRORREGIÃO', value: 'macrorregiao', align: 'center', width: '12%' },
         { text: 'DATA', value: 'data', align: 'center', width: '8%' },
         { text: 'VALOR (R$)', value: 'valor', align: 'center', width: '8%' },
+        { text: 'FONTE', value: 'fonte', align: 'center', width: '12%' },
         { text: 'TEMA', value: 'classe', align: 'center', width: '12%' }
       ],
 
@@ -124,9 +124,9 @@ export default {
           tipo: predicao.tipo,
           orgao: predicao.orgao,
           suborgao: predicao.suborgao,
-          macrorregiao: predicao.macrorregiao,
           data: moment.utc(predicao.data).format('DD/MM/YYYY'),
-          valor: (predicao.valor) ? predicao.valor.toLocaleString('pt-br', { minimumFractionDigits: 2 }) : null
+          valor: (predicao.valor) ? predicao.valor.toLocaleString('pt-br', { minimumFractionDigits: 2 }) : null,
+          fonte: predicao.fonte.toUpperCase()
         }
       })
     },

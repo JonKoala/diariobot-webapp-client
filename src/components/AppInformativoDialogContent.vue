@@ -7,6 +7,8 @@
       <p>
         O <span class="bold uppercase">diariobot</span> é um robô que coleta publicações do
         <a href="http://ioes.dio.es.gov.br/portal/visualizacoes/diario_oficial" target="_blank" class="uppercase">Diário Oficial do Espírito Santo</a>
+        e do
+        <a href="https://diariomunicipal.es.gov.br/" target="_blank" class="uppercase">Diário Oficial dos Municípios do Espírito Santo</a>
         e aplica técnicas de
         <a href="https://pt.wikipedia.org/wiki/Aprendizado_de_m%C3%A1quina" target="_blank" class="italic">machine learning</a>
         a fim de tentar prever a qual tema essa publicação pertence, de acordo com as especialidades das unidades técnicas do TCE-ES.

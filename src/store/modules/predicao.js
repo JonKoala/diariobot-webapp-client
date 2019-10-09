@@ -1,8 +1,8 @@
 import pick from 'lodash.pick'
 
 import {
-  RESET_STATE, SET_CLASSE, SET_CORPO, SET_DATA, SET_ID, SET_IDENTIFICADOR,
-  SET_MACRORREGIAO, SET_MATERIA, SET_ORGAO, SET_SUBORGAO, SET_TIPO, SET_VALOR
+  RESET_STATE, SET_CLASSE, SET_CORPO, SET_DATA, SET_FONTE, SET_ID,
+  SET_IDENTIFICADOR, SET_MATERIA, SET_ORGAO, SET_SUBORGAO, SET_TIPO, SET_VALOR
 } from 'store/mutation.types'
 
 
@@ -10,6 +10,7 @@ function getInitialState () {
   return {
     corpo: null,
     data: null,
+    fonte: null,
     id: null,
     identificador: null,
     materia: null,
@@ -21,10 +22,6 @@ function getInitialState () {
       id: null,
       nome: null,
       ordem: null
-    },
-    macrorregiao: {
-      id: null,
-      nome: null
     }
   }
 }
@@ -42,14 +39,14 @@ const getters = {
   data (state) {
     return state.data
   },
+  fonte (state) {
+    return state.fonte
+  },
   id (state) {
     return state.id
   },
   identificador (state) {
     return state.identificador
-  },
-  macrorregiao (state) {
-    return state.macrorregiao
   },
   materia (state) {
     return state.materia
@@ -80,14 +77,14 @@ const mutations = {
   [SET_DATA] (state, data) {
     state.data = data
   },
+  [SET_FONTE] (state, fonte) {
+    state.fonte = fonte
+  },
   [SET_ID] (state, id) {
     state.id = id
   },
   [SET_IDENTIFICADOR] (state, identificador) {
     state.identificador = identificador
-  },
-  [SET_MACRORREGIAO] (state, macrorregiao) {
-    state.macrorregiao = pick(macrorregiao, ['id', 'nome'])
   },
   [SET_MATERIA] (state, materia) {
     state.materia = materia

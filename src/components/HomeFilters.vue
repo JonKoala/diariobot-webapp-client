@@ -28,7 +28,7 @@
         <v-autocomplete v-model="suborgao" v-bind:items="suborgaos" label="Jurisdicionado" clearable append-icon="tune" hide-details></v-autocomplete>
       </v-flex>
       <v-flex xs2>
-        <v-autocomplete v-model="macrorregiao" v-bind:items="macrorregioes" item-text="nome" item-value="id" label="Macrorregião" clearable append-icon="tune" hide-details></v-autocomplete>
+        <v-autocomplete v-model="fonte" v-bind:items="fontes" label="Fonte" clearable append-icon="tune" hide-details></v-autocomplete>
       </v-flex>
       <v-flex xs2>
         <v-autocomplete v-model="classe" v-bind:items="classes" item-text="nome" item-value="id" label="Tema" clearable append-icon="tune" hide-details></v-autocomplete>
@@ -42,7 +42,7 @@ import { mapGetters } from 'vuex'
 
 import { QUERY, VIEW_HOME } from 'store/namespaces'
 import {
-  SET_CLASSE, SET_CORPO, SET_DATA_END, SET_DATA_START, SET_MACRORREGIAO,
+  SET_CLASSE, SET_CORPO, SET_DATA_END, SET_DATA_START, SET_FONTE,
   SET_ORGAO, SET_SUBORGAO, SET_TIPO, SET_VALOR_MAX, SET_VALOR_MIN
 } from 'store/mutation.types'
 
@@ -63,7 +63,7 @@ export default {
   computed: {
     ...mapGetters([
       'classes',
-      'macrorregioes',
+      'fontes',
       'orgaos',
       'suborgaos',
       'tipos'
@@ -84,9 +84,9 @@ export default {
       get () { return this.getValue('dataStart') },
       set (value) { this.setValue(SET_DATA_START, value) }
     },
-    macrorregiao: {
-      get () { return this.getValue('macrorregiao') },
-      set (value) { this.setValue(SET_MACRORREGIAO, value) }
+    fonte: {
+      get () { return this.getValue('fonte') },
+      set (value) { this.setValue(SET_FONTE, value) }
     },
     orgao: {
       get () { return this.getValue('orgao') },
