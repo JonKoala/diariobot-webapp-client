@@ -47,6 +47,7 @@ import VueScrollTo from 'vue-scrollto'
 import { mapGetters } from 'vuex'
 
 import ColorScheme from 'services/color.scheme'
+import PublicacaoFonteSchema from 'services/publicacao.fonte.schema'
 import RegexCollection from 'services/regex.collection'
 
 import { QUERY, VIEW_HOME } from 'store/namespaces'
@@ -126,7 +127,7 @@ export default {
           suborgao: predicao.suborgao,
           data: moment.utc(predicao.data).format('DD/MM/YYYY'),
           valor: (predicao.valor) ? predicao.valor.toLocaleString('pt-br', { minimumFractionDigits: 2 }) : null,
-          fonte: predicao.fonte.toUpperCase()
+          fonte: PublicacaoFonteSchema[predicao.fonte]
         }
       })
     },

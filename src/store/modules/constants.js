@@ -64,7 +64,7 @@ const actions = {
   [FETCH_CONSTANTS] ({ commit }) {
     commit(RESET_STATE)
     ApiService.get('classes/predictable').then(result => commit(SET_CLASSES, result.sort()))
-    ApiService.get('publicacoes/list/fonte').then(result => commit(SET_FONTES, result.sort().map(r => r.toUpperCase())))
+    ApiService.get('publicacoes/list/fonte').then(result => commit(SET_FONTES, result.sort()))
     ApiService.get('publicacoes/list/orgao').then(result => commit(SET_ORGAOS, result.sort()))
     ApiService.get('publicacoes/list/suborgao').then(result => commit(SET_SUBORGAOS, result.sort()))
     ApiService.get('publicacoes/list/tipo').then(result => commit(SET_TIPOS, result.sort()))

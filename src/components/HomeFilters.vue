@@ -40,6 +40,8 @@
 <script>
 import { mapGetters } from 'vuex'
 
+import PublicacaoFonteSchema from 'services/publicacao.fonte.schema'
+
 import { QUERY, VIEW_HOME } from 'store/namespaces'
 import {
   SET_CLASSE, SET_CORPO, SET_DATA_END, SET_DATA_START, SET_FONTE,
@@ -63,7 +65,6 @@ export default {
   computed: {
     ...mapGetters([
       'classes',
-      'fontes',
       'orgaos',
       'suborgaos',
       'tipos'
@@ -87,6 +88,9 @@ export default {
     fonte: {
       get () { return this.getValue('fonte') },
       set (value) { this.setValue(SET_FONTE, value) }
+    },
+    fontes () {
+      return this.$store.getters['fontes'].map(f => { return { text: PublicacaoFonteSchema[f], value: f } })
     },
     orgao: {
       get () { return this.getValue('orgao') },
