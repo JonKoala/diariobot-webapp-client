@@ -7,7 +7,7 @@
 
           <v-toolbar color="blue-grey" dense card>
             <v-toolbar-title class="white--text">
-              <!-- <base-icon-button v-bind:href="linkToOriginal" target="_blank" tooltip="Original" top color="white">link</base-icon-button> -->
+              <base-icon-button v-bind:href="linkToOriginal" target="_blank" tooltip="Original" top color="white">link</base-icon-button>
               <span class="ml-4" v-bind:title="materia">{{ materia }}</span>
             </v-toolbar-title>
           </v-toolbar>
@@ -71,6 +71,7 @@ export default {
       'corpo',
       'classe',
       'data',
+      'fonte',
       'identificador',
       'materia',
       'orgao',
@@ -89,7 +90,12 @@ export default {
       return (this.corpo) ? this.corpo.replace(RegexCollection.monetaryGlobal, (match) => { return '<span class="highlighted">' + match + '</span>' }) : null
     },
     linkToOriginal () {
-      return `http://ioes.dio.es.gov.br/apifront/portal/edicoes/publicacoes_ver_conteudo/${this.identificador}`
+      switch (this.fonte) {
+        case 'amunes':
+          return `https://www.diariomunicipal.es.gov.br/?q=id:${this.identificador}`
+        case 'ioes':
+          return `http://ioes.dio.es.gov.br/apifront/portal/edicoes/publicacoes_ver_conteudo/${this.identificador}`
+      }
     }
   },
   created () {
