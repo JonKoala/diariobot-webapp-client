@@ -101,8 +101,12 @@ export default {
       'totalPages'
     ]),
     error () {
-      if (this.$store.getters[`${VIEW_HOME}/error`])
-        return 'Ocorreu um erro ao realizar a busca: ' + this.$store.getters[`${VIEW_HOME}/error`]
+      if (this.$store.getters[`${VIEW_HOME}/error`]) {
+        var err = 'Ocorreu um erro ao realizar a busca: ' + this.$store.getters[`${VIEW_HOME}/error`]
+        err = (err.includes('Timeout')) ? 'A busca excedeu o tempo limite. Tente manter as datas inicial e final em um intervalo de até 3 meses.' : err
+
+        return err
+      }
     },
     isShowingPagination () {
       return this.totalPages > 1

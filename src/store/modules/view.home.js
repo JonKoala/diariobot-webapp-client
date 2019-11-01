@@ -71,7 +71,7 @@ const actions = {
       }
     } catch (err) {
       commit(RESET_STATE)
-      commit(SET_ERROR, (err.response) ? err.response.data : err.message)
+      commit(SET_ERROR, (err.response && err.response.data) ? err.response.data.message : err.message)
     }
   }
 }
