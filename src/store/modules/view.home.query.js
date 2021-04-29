@@ -33,7 +33,6 @@ const getters = {
 
   params (state, getters) {
     return {
-      ...state.pagination,
       filterStartingDate: getters.dataStart,
       filterEndingDate: getters.dataEnd,
       filterMinValor: getters.valorMin,
@@ -44,6 +43,13 @@ const getters = {
       filterSuborgao: getters.suborgao,
       filterFonte: getters.fonte,
       filterClasse: getters.classe
+    }
+  },
+
+  paginatedParams (state, getters) {
+    return {
+      ...state.pagination,
+      ...getters.params
     }
   },
 

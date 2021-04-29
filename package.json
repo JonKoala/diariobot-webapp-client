@@ -16,6 +16,7 @@
     "lodash.pick": "^4.4.0",
     "moment": "^2.24.0",
     "vue": "^2.6.6",
+    "vue-json-excel": "^0.3.0",
     "vue-resize-directive": "^1.1.4",
     "vue-router": "^3.0.2",
     "vue-scrollto": "^2.13.0",

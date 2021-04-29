@@ -10,7 +10,10 @@
         </v-expansion-panel>
       </v-flex>
 
-      <base-icon-button v-on:click.stop="toggleFilter" flat>{{ isShowingFilters ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</base-icon-button>
+      <v-layout row justify-space-between>
+        <base-icon-button v-on:click.stop="toggleFilter" flat>{{ isShowingFilters ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</base-icon-button>
+        <home-button-download></home-button-download>
+      </v-layout>
 
       <v-flex xs12>
         <home-results v-show="isShowingTable" v-bind:bus="bus" v-on:sort-change="updateResults" v-on:page-change="updateResults"></home-results>
@@ -28,6 +31,7 @@ import { SET_PAGE } from 'store/mutation.types'
 import { FETCH_PREDICOES } from 'store/action.types'
 
 import BaseIconButton from 'components/BaseIconButton'
+import HomeButtonDownload from 'components/HomeButtonDownload'
 import HomeFilters from 'components/HomeFilters'
 import HomeResults from 'components/HomeResults'
 
@@ -35,6 +39,7 @@ export default {
   name: 'ViewHome',
   components: {
     BaseIconButton,
+    HomeButtonDownload,
     HomeFilters,
     HomeResults
   },

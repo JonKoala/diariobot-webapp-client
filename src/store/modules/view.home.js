@@ -63,7 +63,7 @@ const actions = {
   async [FETCH_PREDICOES] ({ commit, dispatch, getters }) {
 
     try {
-      var response = await dispatch(`${REQUEST}/${MAKE_REQUEST}`, { service: 'predicoes/paginable', config: { params: getters[`${QUERY}/params`] } })
+      var response = await dispatch(`${REQUEST}/${MAKE_REQUEST}`, { service: 'predicoes/paginable', config: { params: getters[`${QUERY}/paginatedParams`] } })
       if (response != null) {
         commit(RESET_STATE)
         commit(SET_PREDICOES, response.rows)
