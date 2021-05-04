@@ -1,4 +1,4 @@
-FROM node:8.15-alpine
+FROM node:14-alpine
 
 # install global dependencies
 RUN npm config set registry http://registry.npmjs.org/
