@@ -1,6 +1,6 @@
 <template>
   <v-tooltip v-bind="{top, right, bottom, left}" v-bind:disabled="!hasTooltip">
-    <v-btn v-on="$listeners" v-bind="{disabled, flat, href, target, to}" slot="activator" class="ma-0" icon>
+    <v-btn v-on="$listeners" v-bind="{disabled, flat, href, target, to}" slot="activator" class="ma-0" v-bind:style="{ cursor: cursor }" icon>
       <v-icon v-bind="{color}"><slot></slot></v-icon>
     </v-btn>
     <span>{{ tooltip }}</span>
@@ -11,6 +11,7 @@
 export default {
   name: 'BaseIconButton',
   props: {
+    cursor: { type: String, default: 'pointer' },
     disabled: { type: Boolean },
     color: { type: String },
     flat: { type: Boolean },
@@ -30,6 +31,9 @@ export default {
   computed: {
     hasTooltip () {
       return Boolean(this.tooltip)
+    },
+    style () {
+      return { cursor: this.cursor }
     }
   }
 }

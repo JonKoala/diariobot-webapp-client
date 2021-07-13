@@ -1,5 +1,7 @@
 import moment from 'moment'
 
+import Constants from 'services/constants.service'
+
 import {
   SET_CLASSE, SET_CORPO, SET_DATA_END, SET_DATA_START, SET_FONTE, SET_ITEMS_PER_PAGE, SET_ORGAO,
   SET_PAGE, SET_SORT_BY, SET_SORT_ORDER, SET_SUBORGAO, SET_TIPO, SET_VALOR_MAX, SET_VALOR_MIN
@@ -37,7 +39,7 @@ const getters = {
       filterEndingDate: getters.dataEnd,
       filterMinValor: getters.valorMin,
       filterMaxValor: getters.valorMax,
-      filterCorpo: getters.corpo,
+      filterCorpo: getters.isWithinDateLimit ? getters.corpo : null,
       filterTipo: getters.tipo,
       filterOrgao: getters.orgao,
       filterSuborgao: getters.suborgao,
@@ -51,6 +53,12 @@ const getters = {
       ...state.pagination,
       ...getters.params
     }
+  },
+  isWithinDateLimit (state, getters) {
+    let dateStart = moment(getters.dataStart, 'YYYY-MM-DD')
+    let dateEnd = getters.dataEnd ? moment(getters.dataEnd, 'YYYY-MM-DD') : moment()
+    dateEnd.add(1, 'day')
+    return dateEnd.diff(dateStart, 'days') <= Constants.DateLimitForTextualSearch
   },
 
   classe (state) {

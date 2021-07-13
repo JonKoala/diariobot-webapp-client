@@ -8,7 +8,14 @@
         <base-date-picker v-model="dataEnd" label="Data Final" hide-details></base-date-picker>
       </v-flex>
       <v-flex xs2>
-        <base-debounce-input v-model="corpo" clearable label="Busca Interna" append-icon="search" hide-details></base-debounce-input>
+        <v-layout row>
+          <v-flex>
+            <base-debounce-input v-model="corpo" v-bind:disabled="!isWithinDateLimit" clearable label="Busca Interna" append-icon="search" hide-details></base-debounce-input>
+          </v-flex>
+          <base-icon-button v-show="!isWithinDateLimit" v-bind:tooltip="`Período acima dos ${DateLimitForTextualSearch} dias permitidos para busca textual`" cursor="default" color="red darken-4" top flat>
+            error_outline
+          </base-icon-button>
+        </v-layout>
       </v-flex>
       <v-flex xs2>
         <base-debounce-input v-model="valorMin" v-bind:mask="moneyMask" return-masked-value clearable label="Valor Mínimo" append-icon="attach_money" hide-details></base-debounce-input>
@@ -40,6 +47,7 @@
 <script>
 import { mapGetters } from 'vuex'
 
+import Constants from 'services/constants.service'
 import PublicacaoFonteSchema from 'services/publicacao.fonte.schema'
 
 import { QUERY, VIEW_HOME } from 'store/namespaces'
@@ -50,12 +58,14 @@ import {
 
 import BaseDebounceInput from 'components/BaseDebounceInput'
 import BaseDatePicker from 'components/BaseDatePicker'
+import BaseIconButton from 'components/BaseIconButton'
 
 export default {
   name: 'HomeFilters',
   components: {
     BaseDatePicker,
-    BaseDebounceInput
+    BaseDebounceInput,
+    BaseIconButton
   },
   data () {
     return {
@@ -68,6 +78,9 @@ export default {
       'orgaos',
       'suborgaos',
       'tipos'
+    ]),
+    ...mapGetters(`${VIEW_HOME}/${QUERY}`, [
+      'isWithinDateLimit'
     ]),
     classe: {
       get () { return this.getValue('classe') },
@@ -111,6 +124,9 @@ export default {
     valorMin: {
       get () { return this.castString(this.getValue('valorMin')) },
       set (value) { this.setValue(SET_VALOR_MIN, this.castNumber(value)) }
+    },
+    DateLimitForTextualSearch () {
+      return Constants.DateLimitForTextualSearch
     }
   },
   methods: {

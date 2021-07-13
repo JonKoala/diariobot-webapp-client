@@ -1,5 +1,5 @@
 <template>
-    <v-text-field v-bind:value="value" v-on:input="updateValue" v-bind="{returnMaskedValue, mask, clearable, label, appendIcon, hideDetails}" ></v-text-field>
+    <v-text-field v-bind:value="value" v-on:input="updateValue" v-bind="{disabled, returnMaskedValue, mask, clearable, label, appendIcon, hideDetails}" ></v-text-field>
 </template>
 
 <script>
@@ -10,6 +10,7 @@ export default {
     value: String,
     milliseconds: { type: Number, default: 500 },
 
+    disabled: { type: Boolean },
     returnMaskedValue: { type: Boolean },
     clearable: { type: Boolean },
     label: { type: String },
